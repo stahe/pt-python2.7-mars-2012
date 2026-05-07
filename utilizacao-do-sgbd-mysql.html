@@ -1,0 +1,1981 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Introdução ao Python 2.7 através de exemplos">
+      
+      
+        <meta name="author" content="Serge Tahé">
+      
+      
+        <link rel="canonical" href="https://stahe.github.io/pt-python2.7-mars-2012/utilizacao-do-sgbd-mysql.html">
+      
+      
+        <link rel="prev" href="exercicio-de-aplicacao---calculo-de-impostos-com-uma-arquitetura-em-camadas-.html">
+      
+      
+        <link rel="next" href="exercicio-calculo-de-impostos-com-mysql.html">
+      
+      
+        
+      
+      
+      <link rel="icon" href="assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.0">
+    
+    
+      
+        <title>9. Utilização do SGBD MySQL - Introdução ao Python 2.7 através de exemplos</title>
+      
+    
+    
+      <link rel="stylesheet" href="assets/stylesheets/main.618322db.min.css">
+      
+        
+        <link rel="stylesheet" href="assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="stylesheets/focus.css">
+    
+    <script>__md_scope=new URL(".",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-EBZC3JVJNR"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    var siteName = "Introdução ao Python 2.7 através de exemplos";
+    gtag('config', 'G-EBZC3JVJNR', {
+        'page_title': siteName
+    });
+  </script>
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="blue" data-md-color-accent="purple">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#9-utilizacao-do-sgbd-mysql" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="index.html" title="Introdução ao Python 2.7 através de exemplos" class="md-header__button md-logo" aria-label="Introdução ao Python 2.7 através de exemplos" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Introdução ao Python 2.7 através de exemplos
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              9. Utilização do SGBD MySQL
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="blue" data-md-color-accent="purple"  aria-label="Mudar para o modo escuro"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Mudar para o modo escuro" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="blue" data-md-color-accent="purple"  aria-label="Mudar para o modo claro"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Mudar para o modo claro" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://stahe.github.io/pt-python2.7-mars-2012" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+  
+
+<nav class="md-nav md-nav--primary md-nav--integrated" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="index.html" title="Introdução ao Python 2.7 através de exemplos" class="md-nav__button md-logo" aria-label="Introdução ao Python 2.7 através de exemplos" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Introdução ao Python 2.7 através de exemplos
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://stahe.github.io/pt-python2.7-mars-2012" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="index.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Bem-vindos
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="prefacio.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    1. Prefácio
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="instalacao-de-um-interpretador-python.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2. Instalação de um interpretador Python
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="o-basico.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    3. O básico
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="exercicio-pratico---calculo-de-impostos.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    4. Exercício Prático – [Cálculo de Impostos]
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="classes-e-objetos.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    5. Classes e objetos
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="excecoes.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    6. Exceções
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="arquitetura-em-camadas-e-programacao-baseada-em-interfaces.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    7. Arquitetura em camadas e programação baseada em interfaces
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="exercicio-de-aplicacao---calculo-de-impostos-com-uma-arquitetura-em-camadas-.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    8. Exercício de aplicação – [Cálculo de impostos] com uma arquitetura em camadas 
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    9. Utilização do SGBD MySQL
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="utilizacao-do-sgbd-mysql.html" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    9. Utilização do SGBD MySQL
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#91-instalacao-do-modulo-mysqldb" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9.1. Instalação do módulo MySQLdb
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#92-instalacao-do-mysql" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9.2. Instalação do MySQL
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#93-ligar-se-a-uma-base-de-dados-mysql-1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9.3. Ligar-se a uma base de dados MySQL - 1
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#94-ligar-a-uma-base-de-dados-mysql-2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9.4. Ligar a uma base de dados MySQL - 2
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#95-criacao-de-uma-tabela-mysql" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9.5. Criação de uma tabela MySQL
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#96-preenchimento-da-tabela-people" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9.6. Preenchimento da tabela [people]
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#97-execucao-de-consultas-sql-arbitrarias" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9.7. Execução de consultas SQL arbitrárias
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="exercicio-calculo-de-impostos-com-mysql.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    10. Exercício [Cálculo de impostos] com MySQL
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="funcoes-de-rede-do-python.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    11. Funções de rede do Python
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="servicos-web-em-python.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    12. Serviços Web em Python
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="exercicio-calculo-de-impostos-com-um-servico-web.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    13. Exercício [Cálculo de impostos] com um serviço web
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="processamento-de-documentos-xml.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    14. Processamento de documentos XML
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="exercicio-calculo-de-impostos-com-xml.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    15. Exercício [Cálculo de impostos] com XML
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<p><a id="refheading382942423505"></a></p>
+<h1 id="9-utilizacao-do-sgbd-mysql">9. <span style="color: #365f91">Utilização do SGBD MySQL</span></h1>
+<table class="odt-table" style="border-collapse: collapse; width: 100%; margin-bottom: 1em;"><tr><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><img src="images/10000000000000C2000001536E9533D1.png" width="136" height="237" style="display:inline-block; margin:4px;width:3.59cm;height:6.272cm;" class="odt-zoomable" data-zoom-src="images/10000000000000C2000001536E9533D1.png" /></td></tr></table>
+
+<p><a id="refheading382962423505"></a></p>
+<h2 id="91-instalacao-do-modulo-mysqldb">9.1. <span style="color: #4f81bd">Instalação do módulo MySQLdb</span></h2>
+<p>Vamos escrever scripts utilizando uma base de dados MySQL:</p>
+<table class="odt-table" style="border-collapse: collapse; width: 100%; margin-bottom: 1em;"><tr><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><img src="images/10000000000004C1000000DC6EAE0E8B.png" width="609" height="110" style="display:inline-block; margin:4px;width:16.101cm;height:2.91cm;" class="odt-zoomable" data-zoom-src="images/10000000000004C1000000DC6EAE0E8B.png" /></td></tr></table>
+
+<p>As funções Python para gerir uma base de dados MySQL estão encapsuladas num módulo MySQLdb que não está incluído na distribuição inicial do Python. Por isso, terá de descarregar e instalar o módulo. Aqui está uma forma de o fazer:</p>
+<table class="odt-table" style="border-collapse: collapse; width: 100%; margin-bottom: 1em;"><tr><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><img src="images/10000000000005D5000001116A57DFD9.png" width="680" height="124" style="display:inline-block; margin:4px;width:17.997cm;height:3.291cm;" class="odt-zoomable" data-zoom-src="images/10000000000005D5000001116A57DFD9.png" /></td></tr></table>
+
+<ul>
+<li>No menu Programas, selecione [1] o gestor de pacotes do Python. A janela de comandos [2] irá então aparecer.</li>
+</ul>
+<p>Procure a palavra-chave <em>mysql</em> nos pacotes:</p>
+<div class="odt-code-rich" data-linenums="true" style="counter-reset: odtline 0;"><pre><code class="language-python">
+<span class="odt-code-line"><span class="odt-code-line-content">C:\Documents and Settings\st&gt;<span style="font-weight:bold">pypm search mysql</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">Get: [pypm-be.activestate.com] :repository-index:</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">Get: [pypm-free.activestate.com] :repository-index:</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">autosync: synced 2 repositories</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">  chartio                    Setup wizard and connection client for connecting</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">  chartio-setup              Setup wizard and connection client for connecting</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">  cns.recipe.zmysqlda        Recipe for installing ZMySQLDA</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">  collective.recipe.zmysqlda Recipe for installing ZMySQLDA</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">  django-mysql-manager       DESCRIPTION_DESCRIPTION_DESCRIPTION</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">  jaraco.mysql               MySQLDB-compatible MySQL wrapper by Jason R. Coomb</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">  lovely.testlayers          mysql, postgres nginx, memcached cassandra test la</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">  mtstat-mysql               MySQL Plugins for mtstat</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">  mysql-autodoc              Generate HTML documentation from a mysql database</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">  mysql-python               Python interface to MySQL</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">  mysqldbda                  MySQL Database adapter</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">  products.zmysqlda          MySQL Zope2 adapter.</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">  pymysql                    Pure Python MySQL Driver</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">  pymysql-sa                 PyMySQL dialect for SQLAlchemy.</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">  pymysql3                   Pure Python MySQL Driver</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">  sa-mysql-dt                Alternative implementation of DateTime column for</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">  schemaobject               Iterate over a MySQL database schema as a Python o</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">  schemasync                 A MySQL Schema Synchronization Utility</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">  simplestore                A datastore layer built on top of MySQL in Python.</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">  sqlbean                    A auto maping ORM for MYSQL and can bind with memc</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">  sqlwitch                   sqlwitch offers idiomatic SQL generation on top of</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">  tiddlywebplugins.mysql     MySQL-based store for tiddlyweb</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">  tiddlywebplugins.mysql2    MySQL-based store for tiddlyweb</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">zest.recipe.mysql          A Buildout recipe to setup a MySQL database.</span></span>
+</code></pre></div>
+
+<p>Todos os módulos cujo nome ou descrição contém a palavra-chave <em>&quot;mysql&quot;</em> foram listados. O que nos interessa é o [mysql-python], linha 14. Vamos instalá-lo:</p>
+<div class="odt-code-rich" data-linenums="true" style="counter-reset: odtline 0;"><pre><code class="language-java">
+<span class="odt-code-line"><span class="odt-code-line-content">C:\Documents and Settings\st&gt;<span style="font-weight:bold">pypm install mysql-python</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">The following packages will be installed into &quot;%APPDATA%\Python&quot; (2.7):</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"> mysql-python-1.2.3</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">Hit: [pypm-free.activestate.com] mysql-python 1.2.3</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">Installing mysql-python-1.2.3</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"> </span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">C:\Documents and Settings\st&gt;echo %APPDATA%</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">C:\Documents and Settings\st\Application Data</span></span>
+</code></pre></div>
+
+<ul>
+<li>Linha 5: O pacote <em>mysql-python-1.2.3</em> foi instalado na pasta &quot;<em>%APPDATA%\Python</em>&quot;, onde <em>APPDATA</em> é a pasta especificada na linha 8.</li>
+</ul>
+<p>Esta operação pode falhar se:</p>
+<ul>
+<li>o interpretador Python utilizado for uma versão de 64 bits;</li>
+<li>o caminho %APPDATA% contiver caracteres acentuados.
+<a id="refheading382982423505"></a></li>
+</ul>
+<h2 id="92-instalacao-do-mysql">9.2. <span style="color: #4f81bd">Instalação do MySQL</span></h2>
+<p>Existem várias formas de instalar o SGBD MySQL. Aqui, utilizámos <em>o WampServer</em>, um pacote que combina vários componentes de software:</p>
+<ul>
+<li>um servidor web Apache. Iremos utilizá-lo para escrever scripts web em Python;</li>
+<li>o sistema de gestão de bases de dados MySQL;</li>
+<li>a linguagem de script PHP;</li>
+<li>uma ferramenta de administração de bases de dados MySQL escrita em PHP: o phpMyAdmin.</li>
+</ul>
+<p><em>O WampServer</em> pode ser descarregado (junho de 2011) no seguinte endereço:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>http://www.wampserver.com/download.php
+</code></pre></div>
+<table class="odt-table" style="border-collapse: collapse; width: 100%; margin-bottom: 1em;"><tr><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><img src="images/10000000000005DB000002104E9958E8.png" width="680" height="240" style="display:inline-block; margin:4px;width:17.997cm;height:6.339cm;" class="odt-zoomable" data-zoom-src="images/10000000000005DB000002104E9958E8.png" /></td></tr></table>
+
+<ul>
+<li>Em [1], descarregue a versão adequada do <em>WampServer</em>;</li>
+<li>em [2], uma vez instalado, inicie-o. Isto irá iniciar o servidor web Apache e o sistema de gestão de bases de dados MySQL;</li>
+<li>em [3], uma vez iniciado, <em>o WampServer</em> pode ser gerido através de um ícone [3] localizado no canto inferior direito da barra de tarefas;</li>
+<li>Em [4], inicie a ferramenta de administração do MySQL.</li>
+</ul>
+<p>Crie uma base de dados [dbpersonnes]:</p>
+<p><img src="images/10000000000002BA0000014E3D524CCA.png" width="489" height="234" style="width:12.929cm;height:6.188cm;" alt="Image" class="odt-zoomable" data-zoom-src="images/10000000000002BA0000014E3D524CCA.png" /></p>
+<p>Crie um utilizador [admpersonnes] com a palavra-passe [nobody]:</p>
+<table class="odt-table" style="border-collapse: collapse; width: 100%; margin-bottom: 1em;"><tr><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><img src="images/100000000000010500000092F3604D2B.png" width="183" height="102" style="display:inline-block; margin:4px;width:4.83cm;height:2.702cm;" class="odt-zoomable" data-zoom-src="images/100000000000010500000092F3604D2B.png" /></td><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><img src="images/100000000000010A000000A622B7594D.png" width="186" height="116" style="display:inline-block; margin:4px;width:4.93cm;height:3.076cm;" class="odt-zoomable" data-zoom-src="images/100000000000010A000000A622B7594D.png" /></td></tr></table>
+
+<table class="odt-table" style="border-collapse: collapse; width: 100%; margin-bottom: 1em;"><tr><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><img src="images/1000000000000644000004D7F9902008.png" width="680" height="525" style="display:inline-block; margin:4px;width:17.997cm;height:13.901cm;" class="odt-zoomable" data-zoom-src="images/1000000000000644000004D7F9902008.png" /></td></tr></table>
+
+<ul>
+<li>em [1], o nome de utilizador;</li>
+<li>em [2], o servidor DBMS no qual lhes concede permissões;</li>
+<li>em [3], a sua palavra-passe [nobody];</li>
+<li>em [4], o mesmo que acima;</li>
+<li>em [5], não concedemos privilégios a este utilizador;</li>
+<li>em [6], crie o utilizador.</li>
+</ul>
+<table class="odt-table" style="border-collapse: collapse; width: 100%; margin-bottom: 1em;"><tr><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><img src="images/100000000000060E000001D592CD12DA.png" width="680" height="206" style="display:inline-block; margin:4px;width:17.997cm;height:5.445cm;" class="odt-zoomable" data-zoom-src="images/100000000000060E000001D592CD12DA.png" /></td></tr></table>
+
+<ul>
+<li>em [7], volte à página inicial do phpMyAdmin;</li>
+<li>em [8], utilize o link [Privilégios] nesta página para modificar os privilégios do utilizador [admpersonnes] [9].</li>
+</ul>
+<table class="odt-table" style="border-collapse: collapse; width: 100%; margin-bottom: 1em;"><tr><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><img src="images/10000000000006460000012342BAEAFA.png" width="680" height="123" style="display:inline-block; margin:4px;width:17.997cm;height:3.261cm;" class="odt-zoomable" data-zoom-src="images/10000000000006460000012342BAEAFA.png" /></td></tr></table>
+
+<ul>
+<li>em [10], especifique que pretende conceder ao utilizador [admpersonnes] direitos sobre a base de dados [dbpersonnes];</li>
+<li>Em [11], confirme a seleção.</li>
+</ul>
+<table class="odt-table" style="border-collapse: collapse; width: 100%; margin-bottom: 1em;"><tr><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><img src="images/1000000000000646000002A496D18F90.png" width="680" height="286" style="display:inline-block; margin:4px;width:17.997cm;height:7.574cm;" class="odt-zoomable" data-zoom-src="images/1000000000000646000002A496D18F90.png" /></td></tr></table>
+
+<ul>
+<li>Utilizando o link [12] [Selecionar tudo], conceda ao utilizador [admpersonnes] todos os direitos sobre a base de dados [dbpersonnes] [13];</li>
+<li>Confirmamos em [14].</li>
+</ul>
+<p>Agora temos:</p>
+<ul>
+<li>uma base de dados MySQL [dbpersonnes];</li>
+<li>um utilizador [admpersonnes / nobody] que tem acesso total a esta base de dados.</li>
+</ul>
+<p>Vamos escrever scripts em Python para trabalhar com a base de dados.</p>
+<p><a id="refheading383002423505"></a></p>
+<h2 id="93-ligar-se-a-uma-base-de-dados-mysql-1">9.3. <span style="color: #4f81bd">Ligar-se a uma base de dados MySQL - 1</span></h2>
+<hr style="border:0; border-top:0.99pt solid #000000; margin:0.75em 0;" data-odt-border="top" />
+<div style="margin:0 0 0.75em 0; background-color:#e6e6e6; padding:0.35em 0.6em">Programa (mysqldb_01)</div>
+
+<hr style="border:0; border-top:0.99pt solid #000000; margin:0.75em 0;" data-odt-border="bottom" />
+
+<div class="odt-code-rich" data-linenums="true" style="counter-reset: odtline 0;"><pre><code class="language-java">
+<span class="odt-code-line"><span class="odt-code-line-content"># import du module MySQLdb</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"><span style="color:#0000ff">import</span> sys</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">sys<span style="color:#0000ff">.</span>path<span style="color:#0000ff">.</span>append<span style="color:#008080">(</span><span style="color:#a31515">&quot;D:\Programs\ActivePython\site-packages&quot;</span><span style="color:#008080">)</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"><span style="color:#0000ff">import</span> MySQLdb</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"> </span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"># connexion à une base MySQL</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">....</span></span>
+</code></pre></div>
+
+<p>Notas:</p>
+<ul>
+<li>Linhas 2–4: Os scripts que contêm operações com o SGBD MySQL devem importar o módulo <strong>MySQLdb.</strong> Recorde-se que instalámos este módulo na pasta [%APPDATA%\Python]. A pasta [%APPDATA%\Python] é pesquisada automaticamente quando um script Python solicita um módulo. Na verdade, todas as pastas listadas em <strong>sys.path</strong> são pesquisadas. Aqui está um exemplo que exibe essas pastas:</li>
+</ul>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-1-1">1</a></span>
+<span class="normal"><a href="#__codelineno-1-2">2</a></span>
+<span class="normal"><a href="#__codelineno-1-3">3</a></span>
+<span class="normal"><a href="#__codelineno-1-4">4</a></span>
+<span class="normal"><a href="#__codelineno-1-5">5</a></span>
+<span class="normal"><a href="#__codelineno-1-6">6</a></span>
+<span class="normal"><a href="#__codelineno-1-7">7</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1"></a><span class="c1">#    -*- coding=utf-8 -*-</span>
+<a id="__codelineno-1-2" name="__codelineno-1-2"></a>
+<a id="__codelineno-1-3" name="__codelineno-1-3"></a><span class="kn">import</span><span class="w"> </span><span class="nn">sys</span>
+<a id="__codelineno-1-4" name="__codelineno-1-4"></a>
+<a id="__codelineno-1-5" name="__codelineno-1-5"></a><span class="c1">#    display of sys.path files</span>
+<a id="__codelineno-1-6" name="__codelineno-1-6"></a><span class="k">for</span> <span class="n">dossier</span> <span class="ow">in</span> <span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="p">:</span>
+<a id="__codelineno-1-7" name="__codelineno-1-7"></a>    <span class="nb">print</span> <span class="n">dossier</span>
+</code></pre></div></td></tr></table></div>
+<p>A saída no ecrã é a seguinte:</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-2-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-2-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-2-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-2-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-2-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-2-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-2-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-2-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-2-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-2-10">10</a></span>
+<span class="normal"><a href="#__codelineno-2-11">11</a></span>
+<span class="normal"><a href="#__codelineno-2-12">12</a></span>
+<span class="normal"><a href="#__codelineno-2-13">13</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1"></a><span class="nl">D</span><span class="p">:</span><span class="err">\</span><span class="n">data</span><span class="err">\</span><span class="n">istia</span><span class="o">-</span><span class="mi">1112</span><span class="err">\</span><span class="n">python</span><span class="err">\</span><span class="n">tutoriel</span>
+<a id="__codelineno-2-2" name="__codelineno-2-2"></a><span class="nl">C</span><span class="p">:</span><span class="err">\</span><span class="n">Windows</span><span class="err">\</span><span class="n">system32</span><span class="err">\</span><span class="n">python27</span><span class="p">.</span><span class="na">zip</span>
+<a id="__codelineno-2-3" name="__codelineno-2-3"></a><span class="nl">D</span><span class="p">:</span><span class="err">\</span><span class="n">Programs</span><span class="err">\</span><span class="n">ActivePython</span><span class="err">\</span><span class="n">Python2</span><span class="mf">.7.2</span><span class="err">\</span><span class="n">DLLs</span>
+<a id="__codelineno-2-4" name="__codelineno-2-4"></a><span class="nl">D</span><span class="p">:</span><span class="err">\</span><span class="n">Programs</span><span class="err">\</span><span class="n">ActivePython</span><span class="err">\</span><span class="n">Python2</span><span class="mf">.7.2</span><span class="err">\</span><span class="n">lib</span>
+<a id="__codelineno-2-5" name="__codelineno-2-5"></a><span class="nl">D</span><span class="p">:</span><span class="err">\</span><span class="n">Programs</span><span class="err">\</span><span class="n">ActivePython</span><span class="err">\</span><span class="n">Python2</span><span class="mf">.7.2</span><span class="err">\</span><span class="n">lib</span><span class="err">\</span><span class="n">plat</span><span class="o">-</span><span class="n">win</span>
+<a id="__codelineno-2-6" name="__codelineno-2-6"></a><span class="nl">D</span><span class="p">:</span><span class="err">\</span><span class="n">Programs</span><span class="err">\</span><span class="n">ActivePython</span><span class="err">\</span><span class="n">Python2</span><span class="mf">.7.2</span><span class="err">\</span><span class="n">lib</span><span class="err">\</span><span class="n">lib</span><span class="o">-</span><span class="n">tk</span>
+<a id="__codelineno-2-7" name="__codelineno-2-7"></a><span class="nl">D</span><span class="p">:</span><span class="err">\</span><span class="n">Programs</span><span class="err">\</span><span class="n">ActivePython</span><span class="err">\</span><span class="n">Python2</span><span class="mf">.7.2</span>
+<a id="__codelineno-2-8" name="__codelineno-2-8"></a><span class="nl">C</span><span class="p">:</span><span class="err">\</span><span class="n">Users</span><span class="err">\</span><span class="n">Serge</span><span class="w"> </span><span class="n">TahÚ</span><span class="err">\</span><span class="n">AppData</span><span class="err">\</span><span class="n">Roaming</span><span class="err">\</span><span class="n">Python</span><span class="err">\</span><span class="n">Python27</span><span class="err">\</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span>
+<a id="__codelineno-2-9" name="__codelineno-2-9"></a><span class="nl">D</span><span class="p">:</span><span class="err">\</span><span class="n">Programs</span><span class="err">\</span><span class="n">ActivePython</span><span class="err">\</span><span class="n">Python2</span><span class="mf">.7.2</span><span class="err">\</span><span class="n">lib</span><span class="err">\</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span>
+<a id="__codelineno-2-10" name="__codelineno-2-10"></a><span class="nl">D</span><span class="p">:</span><span class="err">\</span><span class="n">Programs</span><span class="err">\</span><span class="n">ActivePython</span><span class="err">\</span><span class="n">Python2</span><span class="mf">.7.2</span><span class="err">\</span><span class="n">lib</span><span class="err">\</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span><span class="err">\</span><span class="n">win32</span>
+<a id="__codelineno-2-11" name="__codelineno-2-11"></a><span class="nl">D</span><span class="p">:</span><span class="err">\</span><span class="n">Programs</span><span class="err">\</span><span class="n">ActivePython</span><span class="err">\</span><span class="n">Python2</span><span class="mf">.7.2</span><span class="err">\</span><span class="n">lib</span><span class="err">\</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span><span class="err">\</span><span class="n">win32</span><span class="err">\</span><span class="n">lib</span>
+<a id="__codelineno-2-12" name="__codelineno-2-12"></a><span class="nl">D</span><span class="p">:</span><span class="err">\</span><span class="n">Programs</span><span class="err">\</span><span class="n">ActivePython</span><span class="err">\</span><span class="n">Python2</span><span class="mf">.7.2</span><span class="err">\</span><span class="n">lib</span><span class="err">\</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span><span class="err">\</span><span class="n">Pythonwin</span>
+<a id="__codelineno-2-13" name="__codelineno-2-13"></a><span class="nl">D</span><span class="p">:</span><span class="err">\</span><span class="n">Programs</span><span class="err">\</span><span class="n">ActivePython</span><span class="err">\</span><span class="n">Python2</span><span class="mf">.7.2</span><span class="err">\</span><span class="n">lib</span><span class="err">\</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span><span class="err">\</span><span class="n">setuptools</span><span class="o">-</span><span class="mf">0.6</span><span class="n">c11</span><span class="o">-</span><span class="n">py2</span><span class="mf">.7</span><span class="p">.</span><span class="na">egg</span><span class="o">-</span><span class="n">info</span>
+</code></pre></div></td></tr></table></div>
+<p>Linha 8, a pasta [site-packages] onde o MySQLdb foi originalmente instalado. Estamos a mover a pasta [site-packages], que é onde o utilitário <em>pypm</em> instala os módulos Python. Para adicionar uma nova pasta na qual o Python irá procurar módulos, adicionamo-la à lista <em>sys.path</em>:</p>
+<div class="odt-code-rich" data-linenums="true" style="counter-reset: odtline 0;"><pre><code class="language-java">
+<span class="odt-code-line"><span class="odt-code-line-content"># import du module MySQLdb</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"><span style="color:#0000ff">import</span> sys</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">sys<span style="color:#0000ff">.</span>path<span style="color:#0000ff">.</span>append<span style="color:#008080">(</span><span style="color:#a31515">&quot;D:\Programs\ActivePython\site-packages&quot;</span><span style="color:#008080">)</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"><span style="color:#0000ff">import</span> MySQLdb</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"> </span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"># connexion à une base MySQL</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">....</span></span>
+</code></pre></div>
+
+<p>Na linha 3, adicionamos a pasta para onde o módulo MySQLdb foi movido.</p>
+<p>O código completo do exemplo é o seguinte:</p>
+<div class="odt-code-rich" data-linenums="true" style="counter-reset: odtline 0;"><pre><code class="language-java">
+<span class="odt-code-line"><span class="odt-code-line-content"># import du module MySQLdb</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"><span style="color:#0000ff">import</span> sys</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">sys<span style="color:#0000ff">.</span>path<span style="color:#0000ff">.</span>append<span style="color:#008080">(</span><span style="color:#a31515">&quot;D:\Programs\ActivePython\site-packages&quot;</span><span style="color:#008080">)</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"><span style="color:#0000ff">import</span> MySQLdb</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"> </span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"># connexion à une base MySQL</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"># l&#x27;identité de l&#x27;utilisateur est (admpersonnes,nobody)</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">user<span style="color:#008080">=</span><span style="color:#a31515">&quot;admpersonnes&quot;</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">pwd<span style="color:#008080">=</span><span style="color:#a31515">&quot;nobody&quot;</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">host<span style="color:#008080">=</span><span style="color:#a31515">&quot;localhost&quot;</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">connexion<span style="color:#008080">=</span>None</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"><span style="color:#0000ff">try</span><span style="color:#008080">:</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">    <span style="color:#0000ff">print</span> <span style="color:#a31515">&quot;connexion...&quot;</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">    <span style="color:#008000"># connexion</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">    connexion<span style="color:#008080">=</span>MySQLdb<span style="color:#0000ff">.</span>connect<span style="color:#008080">(</span>host<span style="color:#008080">=</span>host<span style="color:#008080">,</span>user<span style="color:#008080">=</span>user<span style="color:#008080">,</span>passwd<span style="color:#008080">=</span>pwd<span style="color:#008080">)</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">    <span style="color:#008000"># suivi</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">    <span style="color:#0000ff">print</span> <span style="color:#a31515">&quot;Connexion a MySQL reussie sous l&#x27;identite host={0},user={1},passwd={2}&quot;</span><span style="color:#0000ff">.</span>format<span style="color:#008080">(</span>host<span style="color:#008080">,</span>user<span style="color:#008080">,</span>pwd<span style="color:#008080">)</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"><span style="color:#0000ff">except</span> MySQLdb<span style="color:#0000ff">.</span>OperationalError<span style="color:#008080">,</span>message<span style="color:#008080">:</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">    <span style="color:#0000ff">print</span> <span style="color:#a31515">&quot;Erreur : {0}&quot;</span><span style="color:#0000ff">.</span>format<span style="color:#008080">(</span>message<span style="color:#008080">)</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"><span style="color:#0000ff">finally</span><span style="color:#008080">:</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">    <span style="color:#0000ff">try</span><span style="color:#008080">:</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">        connexion<span style="color:#0000ff">.</span>close<span style="color:#008080">()</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">    <span style="color:#0000ff">except</span><span style="color:#008080">:</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">        <span style="color:#0000ff">pass</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"> </span></span>
+</code></pre></div>
+
+<ul>
+<li>linhas 8–11: o script irá ligar (linha 15) o utilizador [admpersonnes / nobody] à base de dados MySQL na máquina [localhost]. Não se liga a uma base de dados específica;</li>
+<li>linhas 12–24: a ligação pode falhar. Por isso, está envolvida num bloco try/except/finally;</li>
+<li>linha 15: o método <em>connect</em> do módulo MySQLdb aceita vários parâmetros nomeados:<ul>
+<li><em>user</em>: o utilizador proprietário da ligação [admpersonnes];</li>
+<li><em>pwd</em>: a palavra-passe do utilizador [nobody];</li>
+<li><em>host</em>: a máquina que executa o SGBD MySQL [localhost];</li>
+<li><em>db</em>: a base de dados à qual se deve ligar. Opcional.</li>
+</ul>
+</li>
+<li>linha 18: se for lançada uma exceção, esta é do tipo [MySQLdb.OperationalError] e a mensagem de erro associada será encontrada na variável [message];</li>
+<li>linhas 20–23: na cláusula [finally], a ligação é encerrada. Se ocorrer uma exceção, esta é capturada (linha 23), mas não é tomada nenhuma ação (linha 24).</li>
+</ul>
+<hr style="border:0; border-top:0.99pt solid #000000; margin:0.75em 0;" data-odt-border="top" />
+<div style="margin:0 0 0.75em 0; background-color:#e6e6e6; padding:0.35em 0.6em">Resultados</div>
+
+<hr style="border:0; border-top:0.99pt solid #000000; margin:0.75em 0;" data-odt-border="bottom" />
+
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>connexion...
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>Connexion a MySQL reussie sous l&#39;identite host=localhost,user=admpersonnes,passwd=nobody
+</code></pre></div>
+<p><a id="refheading383022423505"></a></p>
+<h2 id="94-ligar-a-uma-base-de-dados-mysql-2">9.4. <span style="color: #4f81bd">Ligar a uma base de dados MySQL - 2</span></h2>
+<hr style="border:0; border-top:0.99pt solid #000000; margin:0.75em 0;" data-odt-border="top" />
+<div style="margin:0 0 0.75em 0; background-color:#e6e6e6; padding:0.35em 0.6em">Programa (mysqldb_02)</div>
+
+<hr style="border:0; border-top:0.99pt solid #000000; margin:0.75em 0;" data-odt-border="bottom" />
+
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-4-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-4-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-4-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-4-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-4-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-4-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-4-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-4-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-4-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-4-10">10</a></span>
+<span class="normal"><a href="#__codelineno-4-11">11</a></span>
+<span class="normal"><a href="#__codelineno-4-12">12</a></span>
+<span class="normal"><a href="#__codelineno-4-13">13</a></span>
+<span class="normal"><a href="#__codelineno-4-14">14</a></span>
+<span class="normal"><a href="#__codelineno-4-15">15</a></span>
+<span class="normal"><a href="#__codelineno-4-16">16</a></span>
+<span class="normal"><a href="#__codelineno-4-17">17</a></span>
+<span class="normal"><a href="#__codelineno-4-18">18</a></span>
+<span class="normal"><a href="#__codelineno-4-19">19</a></span>
+<span class="normal"><a href="#__codelineno-4-20">20</a></span>
+<span class="normal"><a href="#__codelineno-4-21">21</a></span>
+<span class="normal"><a href="#__codelineno-4-22">22</a></span>
+<span class="normal"><a href="#__codelineno-4-23">23</a></span>
+<span class="normal"><a href="#__codelineno-4-24">24</a></span>
+<span class="normal"><a href="#__codelineno-4-25">25</a></span>
+<span class="normal"><a href="#__codelineno-4-26">26</a></span>
+<span class="normal"><a href="#__codelineno-4-27">27</a></span>
+<span class="normal"><a href="#__codelineno-4-28">28</a></span>
+<span class="normal"><a href="#__codelineno-4-29">29</a></span>
+<span class="normal"><a href="#__codelineno-4-30">30</a></span>
+<span class="normal"><a href="#__codelineno-4-31">31</a></span>
+<span class="normal"><a href="#__codelineno-4-32">32</a></span>
+<span class="normal"><a href="#__codelineno-4-33">33</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1"></a><span class="c1">#    import module MySQLdb</span>
+<a id="__codelineno-4-2" name="__codelineno-4-2"></a><span class="kn">import</span><span class="w"> </span><span class="nn">sys</span>
+<a id="__codelineno-4-3" name="__codelineno-4-3"></a><span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;D:\Programs\ActivePython\site-packages&quot;</span><span class="p">)</span>
+<a id="__codelineno-4-4" name="__codelineno-4-4"></a><span class="kn">import</span><span class="w"> </span><span class="nn">MySQLdb</span>
+<a id="__codelineno-4-5" name="__codelineno-4-5"></a>
+<a id="__codelineno-4-6" name="__codelineno-4-6"></a><span class="c1"># ---------------------------------------------------------------------------------</span>
+<a id="__codelineno-4-7" name="__codelineno-4-7"></a><span class="k">def</span><span class="w"> </span><span class="nf">testeConnexion</span><span class="p">(</span><span class="n">hote</span><span class="p">,</span><span class="n">login</span><span class="p">,</span><span class="n">pwd</span><span class="p">):</span>
+<a id="__codelineno-4-8" name="__codelineno-4-8"></a>    <span class="c1">#  connect then disconnect (login,pwd) mysql sgbd from host server</span>
+<a id="__codelineno-4-9" name="__codelineno-4-9"></a>    <span class="c1">#    launches eception MySQLdb.operationalError</span>
+<a id="__codelineno-4-10" name="__codelineno-4-10"></a>    <span class="c1">#    connection</span>
+<a id="__codelineno-4-11" name="__codelineno-4-11"></a>    <span class="n">connexion</span><span class="o">=</span><span class="n">MySQLdb</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">host</span><span class="o">=</span><span class="n">hote</span><span class="p">,</span><span class="n">user</span><span class="o">=</span><span class="n">login</span><span class="p">,</span><span class="n">passwd</span><span class="o">=</span><span class="n">pwd</span><span class="p">)</span>
+<a id="__codelineno-4-12" name="__codelineno-4-12"></a>    <span class="nb">print</span> <span class="s2">&quot;Connexion a MySQL reussie sous l&#39;identite (</span><span class="si">%s</span><span class="s2">,</span><span class="si">%s</span><span class="s2">,</span><span class="si">%s</span><span class="s2">)&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">hote</span><span class="p">,</span><span class="n">login</span><span class="p">,</span><span class="n">passwd</span><span class="p">)</span>
+<a id="__codelineno-4-13" name="__codelineno-4-13"></a>    <span class="c1">#  close the connection</span>
+<a id="__codelineno-4-14" name="__codelineno-4-14"></a>    <span class="n">connexion</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+<a id="__codelineno-4-15" name="__codelineno-4-15"></a>    <span class="nb">print</span> <span class="s2">&quot;Fermeture connexion MySQL reussie</span><span class="se">\n</span><span class="s2">&quot;</span>
+<a id="__codelineno-4-16" name="__codelineno-4-16"></a>
+<a id="__codelineno-4-17" name="__codelineno-4-17"></a>
+<a id="__codelineno-4-18" name="__codelineno-4-18"></a><span class="c1">#    ---------------------------------------------- main</span>
+<a id="__codelineno-4-19" name="__codelineno-4-19"></a><span class="c1">#  connection to the MySQL database</span>
+<a id="__codelineno-4-20" name="__codelineno-4-20"></a><span class="c1">#    user identity</span>
+<a id="__codelineno-4-21" name="__codelineno-4-21"></a><span class="n">user</span><span class="o">=</span><span class="s2">&quot;admpersonnes&quot;</span>
+<a id="__codelineno-4-22" name="__codelineno-4-22"></a><span class="n">passwd</span><span class="o">=</span><span class="s2">&quot;nobody&quot;</span>
+<a id="__codelineno-4-23" name="__codelineno-4-23"></a><span class="n">host</span><span class="o">=</span><span class="s2">&quot;localhost&quot;</span>
+<a id="__codelineno-4-24" name="__codelineno-4-24"></a><span class="c1">#    test connection</span>
+<a id="__codelineno-4-25" name="__codelineno-4-25"></a><span class="k">try</span><span class="p">:</span>
+<a id="__codelineno-4-26" name="__codelineno-4-26"></a>    <span class="n">testeConnexion</span><span class="p">(</span><span class="n">host</span><span class="p">,</span><span class="n">user</span><span class="p">,</span><span class="n">passwd</span><span class="p">)</span>
+<a id="__codelineno-4-27" name="__codelineno-4-27"></a><span class="k">except</span> <span class="n">MySQLdb</span><span class="o">.</span><span class="n">OperationalError</span><span class="p">,</span><span class="n">message</span><span class="p">:</span>
+<a id="__codelineno-4-28" name="__codelineno-4-28"></a>    <span class="nb">print</span> <span class="n">message</span>
+<a id="__codelineno-4-29" name="__codelineno-4-29"></a><span class="c1">#  with a non-existent user</span>
+<a id="__codelineno-4-30" name="__codelineno-4-30"></a><span class="k">try</span><span class="p">:</span>
+<a id="__codelineno-4-31" name="__codelineno-4-31"></a>    <span class="n">testeConnexion</span><span class="p">(</span><span class="n">host</span><span class="p">,</span><span class="s2">&quot;xx&quot;</span><span class="p">,</span><span class="s2">&quot;xx&quot;</span><span class="p">)</span>
+<a id="__codelineno-4-32" name="__codelineno-4-32"></a><span class="k">except</span> <span class="n">MySQLdb</span><span class="o">.</span><span class="n">OperationalError</span><span class="p">,</span><span class="n">message</span><span class="p">:</span>
+<a id="__codelineno-4-33" name="__codelineno-4-33"></a>    <span class="nb">print</span> <span class="n">message</span>
+</code></pre></div></td></tr></table></div>
+<p>Notas:</p>
+<ul>
+<li>linhas 7–15: uma função que tenta ligar e, em seguida, desligar um utilizador de um SGBD MySQL. Apresenta o resultado;</li>
+<li>linhas 18–34: programa principal – chama o método <em>testConnection</em> duas vezes e exibe quaisquer exceções.</li>
+</ul>
+<hr style="border:0; border-top:0.99pt solid #000000; margin:0.75em 0;" data-odt-border="top" />
+<div style="margin:0 0 0.75em 0; background-color:#e6e6e6; padding:0.35em 0.6em">Resultados</div>
+
+<hr style="border:0; border-top:0.99pt solid #000000; margin:0.75em 0;" data-odt-border="bottom" />
+
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-5-1">1</a></span>
+<span class="normal"><a href="#__codelineno-5-2">2</a></span>
+<span class="normal"><a href="#__codelineno-5-3">3</a></span>
+<span class="normal"><a href="#__codelineno-5-4">4</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1"></a><span class="n">Connexion</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="n">MySQL</span><span class="w"> </span><span class="n">reussie</span><span class="w"> </span><span class="n">sous</span><span class="w"> </span><span class="n">l</span><span class="err">&#39;</span><span class="n">identite</span><span class="w"> </span><span class="p">(</span><span class="n">localhost</span><span class="p">,</span><span class="n">admpersonnes</span><span class="p">,</span><span class="n">nobody</span><span class="p">)</span>
+<a id="__codelineno-5-2" name="__codelineno-5-2"></a><span class="n">Fermeture</span><span class="w"> </span><span class="n">connexion</span><span class="w"> </span><span class="n">MySQL</span><span class="w"> </span><span class="n">reussie</span>
+<a id="__codelineno-5-3" name="__codelineno-5-3"></a>
+<a id="__codelineno-5-4" name="__codelineno-5-4"></a><span class="n">Echec</span><span class="w"> </span><span class="n">de</span><span class="w"> </span><span class="n">la</span><span class="w"> </span><span class="n">connexion</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="n">MySQL</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">(</span><span class="mi">1045</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Access denied for user &#39;xx&#39;@&#39;localhost&#39;(using password: YES)&quot;</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+<p><a id="refheading383042423505"></a></p>
+<h2 id="95-criacao-de-uma-tabela-mysql">9.5. <span style="color: #4f81bd">Criação de uma tabela MySQL</span></h2>
+<p>Agora que sabemos como estabelecer uma ligação com um SGBD MySQL, vamos começar a emitir comandos SQL através desta ligação. Para tal, vamos ligar-nos à base de dados criada [dbpersonnes] e utilizar a ligação para criar uma tabela na base de dados.</p>
+<hr style="border:0; border-top:0.99pt solid #000000; margin:0.75em 0;" data-odt-border="top" />
+<div style="margin:0 0 0.75em 0; background-color:#e6e6e6; padding:0.35em 0.6em">Programa (mysqldb_03)</div>
+
+<hr style="border:0; border-top:0.99pt solid #000000; margin:0.75em 0;" data-odt-border="bottom" />
+
+<div class="odt-code-rich" data-linenums="true" style="counter-reset: odtline 0;"><pre><code class="language-sql">
+<span class="odt-code-line"><span class="odt-code-line-content"># import du module MySQLdb</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"><span style="color:#0000ff">import</span> sys</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">sys<span style="color:#0000ff">.</span>path<span style="color:#0000ff">.</span>append<span style="color:#008080">(</span><span style="color:#a31515">&quot;D:\Programs\ActivePython\site-packages&quot;</span><span style="color:#008080">)</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"><span style="color:#0000ff">import</span> MySQLdb</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"> </span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"># ---------------------------------------------------------------------------------</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"><span style="color:#0000ff">def</span> executeSQL<span style="color:#008080">(</span>connexion<span style="color:#008080">,</span>update<span style="color:#008080">):</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">    <span style="color:#008000"># exécute une requête update de mise à jour sur la connexion</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">    <span style="color:#008000"># on demande un curseur</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">    curseur<span style="color:#008080">=</span>connexion<span style="color:#0000ff">.</span>cursor<span style="color:#008080">()</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">    <span style="color:#008000"># exécute la requête sql sur la connexion</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">    <span style="color:#0000ff">try</span><span style="color:#008080">:</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">        curseur<span style="color:#0000ff">.</span>execute<span style="color:#008080">(</span>update<span style="color:#008080">)</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">        connexion<span style="color:#0000ff">.</span>commit<span style="color:#008080">()</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">    <span style="color:#0000ff">except</span> Exception<span style="color:#008080">,</span> erreur<span style="color:#008080">:</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">        connexion<span style="color:#0000ff">.</span>rollback<span style="color:#008080">()</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">        <span style="color:#0000ff">raise</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">    <span style="color:#0000ff">finally</span><span style="color:#008080">:</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">        curseur<span style="color:#0000ff">.</span>close<span style="color:#008080">()</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"> </span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"># ---------------------------------------------- main</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"># connexion à la base MySQL</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"># l&#x27;identité de l&#x27;utilisateur</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">ID<span style="color:#008080">=</span><span style="color:#a31515">&quot;admpersonnes&quot;</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">PWD<span style="color:#008080">=</span><span style="color:#a31515">&quot;nobody&quot;</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"># la machine hôte du sgbd</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">HOTE<span style="color:#008080">=</span><span style="color:#a31515">&quot;localhost&quot;</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"># identité de la base</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">BASE<span style="color:#008080">=</span><span style="color:#a31515">&quot;dbpersonnes&quot;</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"># connexion</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"><span style="color:#0000ff">try</span><span style="color:#008080">:</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">    connexion<span style="color:#008080">=</span>MySQLdb<span style="color:#0000ff">.</span>connect<span style="color:#008080">(</span>host<span style="color:#008080">=</span>HOTE<span style="color:#008080">,</span>user<span style="color:#008080">=</span>ID<span style="color:#008080">,</span>passwd<span style="color:#008080">=</span>PWD<span style="color:#008080">,</span>db<span style="color:#008080">=</span>BASE<span style="color:#008080">)</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"><span style="color:#0000ff">except</span> MySQLdb<span style="color:#0000ff">.</span>OperationalError<span style="color:#008080">,</span>message<span style="color:#008080">:</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">    <span style="color:#0000ff">print</span> message</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">    sys<span style="color:#0000ff">.</span>exit<span style="color:#008080">()</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"> </span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"># suppression de la table personnes si elle existe</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"># si elle n&#x27;existe pas une erreur se produira</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"># on l&#x27;ignore</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">requete<span style="color:#008080">=</span><span style="color:#a31515">&quot;drop table personnes&quot;</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"><span style="color:#0000ff">try</span><span style="color:#008080">:</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">    executeSQL<span style="color:#008080">(</span>connexion<span style="color:#008080">,</span>requete<span style="color:#008080">)</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"><span style="color:#0000ff">except</span><span style="color:#008080">:</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">    <span style="color:#0000ff">pass</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"># création de la table personnes</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">requete<span style="color:#008080">=</span><span style="color:#a31515">&quot;create table personnes (prenom varchar(30) NOT NULL, nom varchar(30) NOT NULL, age integer NOT NULL, primary key(nom,prenom))&quot;</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"><span style="color:#0000ff">try</span><span style="color:#008080">:</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">    executeSQL<span style="color:#008080">(</span>connexion<span style="color:#008080">,</span>requete<span style="color:#008080">)</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"><span style="color:#0000ff">except</span> MySQLdb<span style="color:#0000ff">.</span>OperationalError<span style="color:#008080">,</span>message<span style="color:#008080">:</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">    <span style="color:#0000ff">print</span> message</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">    sys<span style="color:#0000ff">.</span>exit<span style="color:#008080">()</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"># on se deconnecte et on quitte</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"><span style="color:#0000ff">try</span><span style="color:#008080">:</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">    connexion<span style="color:#0000ff">.</span>close<span style="color:#008080">()</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"><span style="color:#0000ff">except</span> MySQLdb<span style="color:#0000ff">.</span>OperationalError<span style="color:#008080">,</span>message<span style="color:#008080">:</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">    <span style="color:#0000ff">print</span> message</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">sys<span style="color:#0000ff">.</span>exit<span style="color:#008080">()</span></span></span>
+</code></pre></div>
+
+<p>Notas:</p>
+<ul>
+<li>linha 7: a função <em>executeSQL</em> executa uma consulta SQL numa ligação aberta;</li>
+<li>linha 10: As operações SQL na ligação são realizadas através de um objeto especial denominado <em>cursor;</em></li>
+<li>Linha 10: Obter um cursor;</li>
+<li>linha 13: execute a consulta SQL;</li>
+<li>linha 14: a transação atual é confirmada;</li>
+<li>linha 15: se ocorrer uma exceção, a mensagem de erro é armazenada na variável <em>de erro;</em></li>
+<li>linha 16: a transação atual é revertida;</li>
+<li>linha 17: a exceção é re-lançada;</li>
+<li>linha 19: quer haja um erro ou não, o cursor é fechado. Isto liberta os recursos a ele associados.</li>
+</ul>
+<hr style="border:0; border-top:0.99pt solid #000000; margin:0.75em 0;" data-odt-border="top" />
+<div style="margin:0 0 0.75em 0; background-color:#e6e6e6; padding:0.35em 0.6em">Resultados</div>
+
+<hr style="border:0; border-top:0.99pt solid #000000; margin:0.75em 0;" data-odt-border="bottom" />
+
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="k">create</span><span class="w"> </span><span class="k">table</span><span class="w"> </span><span class="n">personnes</span><span class="w"> </span><span class="p">(</span><span class="n">prenom</span><span class="w"> </span><span class="nb">varchar</span><span class="p">(</span><span class="mi">30</span><span class="p">)</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span><span class="w"> </span><span class="n">nom</span><span class="w"> </span><span class="nb">varchar</span><span class="p">(</span><span class="mi">30</span><span class="p">)</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span><span class="w"> </span><span class="n">age</span><span class="w"> </span><span class="nb">integer</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span><span class="w"> </span><span class="k">primary</span><span class="w"> </span><span class="k">key</span><span class="p">(</span><span class="n">nom</span><span class="p">,</span><span class="n">prenom</span><span class="p">))</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">requete</span><span class="w"> </span><span class="n">reussie</span>
+</code></pre></div>
+<p>Verificação com o phpMyAdmin:</p>
+<table class="odt-table" style="border-collapse: collapse; width: 100%; margin-bottom: 1em;"><tr><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><img src="images/100000000000049D0000030F944CE019.png" width="591" height="392" style="display:inline-block; margin:4px;width:15.625cm;height:10.359cm;" class="odt-zoomable" data-zoom-src="images/100000000000049D0000030F944CE019.png" /></td></tr></table>
+
+<ul>
+<li>A base de dados [dbpersonnes] [1] possui uma tabela [personnes] [2] com a estrutura [3] e a chave primária [4].
+<a id="refheading383062423505"></a></li>
+</ul>
+<h2 id="96-preenchimento-da-tabela-people">9.6. <span style="color: #4f81bd">Preenchimento da tabela [people]</span></h2>
+<p>Depois de criar a tabela [people], vamos agora preenchê-la.</p>
+<hr style="border:0; border-top:0.99pt solid #000000; margin:0.75em 0;" data-odt-border="top" />
+<div style="margin:0 0 0.75em 0; background-color:#e6e6e6; padding:0.35em 0.6em">Programa (mysqldb_04)</div>
+
+<hr style="border:0; border-top:0.99pt solid #000000; margin:0.75em 0;" data-odt-border="bottom" />
+
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-7-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-7-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-7-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-7-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-7-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-7-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-7-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-7-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-7-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-7-10">10</a></span>
+<span class="normal"><a href="#__codelineno-7-11">11</a></span>
+<span class="normal"><a href="#__codelineno-7-12">12</a></span>
+<span class="normal"><a href="#__codelineno-7-13">13</a></span>
+<span class="normal"><a href="#__codelineno-7-14">14</a></span>
+<span class="normal"><a href="#__codelineno-7-15">15</a></span>
+<span class="normal"><a href="#__codelineno-7-16">16</a></span>
+<span class="normal"><a href="#__codelineno-7-17">17</a></span>
+<span class="normal"><a href="#__codelineno-7-18">18</a></span>
+<span class="normal"><a href="#__codelineno-7-19">19</a></span>
+<span class="normal"><a href="#__codelineno-7-20">20</a></span>
+<span class="normal"><a href="#__codelineno-7-21">21</a></span>
+<span class="normal"><a href="#__codelineno-7-22">22</a></span>
+<span class="normal"><a href="#__codelineno-7-23">23</a></span>
+<span class="normal"><a href="#__codelineno-7-24">24</a></span>
+<span class="normal"><a href="#__codelineno-7-25">25</a></span>
+<span class="normal"><a href="#__codelineno-7-26">26</a></span>
+<span class="normal"><a href="#__codelineno-7-27">27</a></span>
+<span class="normal"><a href="#__codelineno-7-28">28</a></span>
+<span class="normal"><a href="#__codelineno-7-29">29</a></span>
+<span class="normal"><a href="#__codelineno-7-30">30</a></span>
+<span class="normal"><a href="#__codelineno-7-31">31</a></span>
+<span class="normal"><a href="#__codelineno-7-32">32</a></span>
+<span class="normal"><a href="#__codelineno-7-33">33</a></span>
+<span class="normal"><a href="#__codelineno-7-34">34</a></span>
+<span class="normal"><a href="#__codelineno-7-35">35</a></span>
+<span class="normal"><a href="#__codelineno-7-36">36</a></span>
+<span class="normal"><a href="#__codelineno-7-37">37</a></span>
+<span class="normal"><a href="#__codelineno-7-38">38</a></span>
+<span class="normal"><a href="#__codelineno-7-39">39</a></span>
+<span class="normal"><a href="#__codelineno-7-40">40</a></span>
+<span class="normal"><a href="#__codelineno-7-41">41</a></span>
+<span class="normal"><a href="#__codelineno-7-42">42</a></span>
+<span class="normal"><a href="#__codelineno-7-43">43</a></span>
+<span class="normal"><a href="#__codelineno-7-44">44</a></span>
+<span class="normal"><a href="#__codelineno-7-45">45</a></span>
+<span class="normal"><a href="#__codelineno-7-46">46</a></span>
+<span class="normal"><a href="#__codelineno-7-47">47</a></span>
+<span class="normal"><a href="#__codelineno-7-48">48</a></span>
+<span class="normal"><a href="#__codelineno-7-49">49</a></span>
+<span class="normal"><a href="#__codelineno-7-50">50</a></span>
+<span class="normal"><a href="#__codelineno-7-51">51</a></span>
+<span class="normal"><a href="#__codelineno-7-52">52</a></span>
+<span class="normal"><a href="#__codelineno-7-53">53</a></span>
+<span class="normal"><a href="#__codelineno-7-54">54</a></span>
+<span class="normal"><a href="#__codelineno-7-55">55</a></span>
+<span class="normal"><a href="#__codelineno-7-56">56</a></span>
+<span class="normal"><a href="#__codelineno-7-57">57</a></span>
+<span class="normal"><a href="#__codelineno-7-58">58</a></span>
+<span class="normal"><a href="#__codelineno-7-59">59</a></span>
+<span class="normal"><a href="#__codelineno-7-60">60</a></span>
+<span class="normal"><a href="#__codelineno-7-61">61</a></span>
+<span class="normal"><a href="#__codelineno-7-62">62</a></span>
+<span class="normal"><a href="#__codelineno-7-63">63</a></span>
+<span class="normal"><a href="#__codelineno-7-64">64</a></span>
+<span class="normal"><a href="#__codelineno-7-65">65</a></span>
+<span class="normal"><a href="#__codelineno-7-66">66</a></span>
+<span class="normal"><a href="#__codelineno-7-67">67</a></span>
+<span class="normal"><a href="#__codelineno-7-68">68</a></span>
+<span class="normal"><a href="#__codelineno-7-69">69</a></span>
+<span class="normal"><a href="#__codelineno-7-70">70</a></span>
+<span class="normal"><a href="#__codelineno-7-71">71</a></span>
+<span class="normal"><a href="#__codelineno-7-72">72</a></span>
+<span class="normal"><a href="#__codelineno-7-73">73</a></span>
+<span class="normal"><a href="#__codelineno-7-74">74</a></span>
+<span class="normal"><a href="#__codelineno-7-75">75</a></span>
+<span class="normal"><a href="#__codelineno-7-76">76</a></span>
+<span class="normal"><a href="#__codelineno-7-77">77</a></span>
+<span class="normal"><a href="#__codelineno-7-78">78</a></span>
+<span class="normal"><a href="#__codelineno-7-79">79</a></span>
+<span class="normal"><a href="#__codelineno-7-80">80</a></span>
+<span class="normal"><a href="#__codelineno-7-81">81</a></span>
+<span class="normal"><a href="#__codelineno-7-82">82</a></span>
+<span class="normal"><a href="#__codelineno-7-83">83</a></span>
+<span class="normal"><a href="#__codelineno-7-84">84</a></span>
+<span class="normal"><a href="#__codelineno-7-85">85</a></span>
+<span class="normal"><a href="#__codelineno-7-86">86</a></span>
+<span class="normal"><a href="#__codelineno-7-87">87</a></span>
+<span class="normal"><a href="#__codelineno-7-88">88</a></span>
+<span class="normal"><a href="#__codelineno-7-89">89</a></span>
+<span class="normal"><a href="#__codelineno-7-90">90</a></span>
+<span class="normal"><a href="#__codelineno-7-91">91</a></span>
+<span class="normal"><a href="#__codelineno-7-92">92</a></span>
+<span class="normal"><a href="#__codelineno-7-93">93</a></span>
+<span class="normal"><a href="#__codelineno-7-94">94</a></span>
+<span class="normal"><a href="#__codelineno-7-95">95</a></span>
+<span class="normal"><a href="#__codelineno-7-96">96</a></span>
+<span class="normal"><a href="#__codelineno-7-97">97</a></span>
+<span class="normal"><a href="#__codelineno-7-98">98</a></span>
+<span class="normal"><a href="#__codelineno-7-99">99</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1"></a><span class="c1">#    import module MySQLdb</span>
+<a id="__codelineno-7-2" name="__codelineno-7-2"></a><span class="kn">import</span><span class="w"> </span><span class="nn">sys</span>
+<a id="__codelineno-7-3" name="__codelineno-7-3"></a><span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;D:\Programs\ActivePython\site-packages&quot;</span><span class="p">)</span>
+<a id="__codelineno-7-4" name="__codelineno-7-4"></a><span class="kn">import</span><span class="w"> </span><span class="nn">MySQLdb</span>
+<a id="__codelineno-7-5" name="__codelineno-7-5"></a><span class="c1">#    other modules</span>
+<a id="__codelineno-7-6" name="__codelineno-7-6"></a><span class="kn">import</span><span class="w"> </span><span class="nn">re</span>
+<a id="__codelineno-7-7" name="__codelineno-7-7"></a>
+<a id="__codelineno-7-8" name="__codelineno-7-8"></a><span class="c1"># ---------------------------------------------------------------------------------</span>
+<a id="__codelineno-7-9" name="__codelineno-7-9"></a><span class="k">def</span><span class="w"> </span><span class="nf">executerCommandes</span><span class="p">(</span><span class="n">HOTE</span><span class="p">,</span><span class="n">ID</span><span class="p">,</span><span class="n">PWD</span><span class="p">,</span><span class="n">BASE</span><span class="p">,</span><span class="n">SQL</span><span class="p">,</span><span class="n">suivi</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">arret</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+<a id="__codelineno-7-10" name="__codelineno-7-10"></a>    <span class="c1">#    uses connection (HOTE,ID,PWD,BASE)</span>
+<a id="__codelineno-7-11" name="__codelineno-7-11"></a>    <span class="c1">#  executes the SQL commands contained in the SQL text file on this connection</span>
+<a id="__codelineno-7-12" name="__codelineno-7-12"></a>    <span class="c1">#  this is a file of SQL commands to be executed one per line</span>
+<a id="__codelineno-7-13" name="__codelineno-7-13"></a>    <span class="c1">#  if followed=True then each execution of a SQL order is displayed, indicating success or failure</span>
+<a id="__codelineno-7-14" name="__codelineno-7-14"></a>    <span class="c1">#  if arret=True, the function stops on the 1st error encountered, otherwise it executes all sql commands</span>
+<a id="__codelineno-7-15" name="__codelineno-7-15"></a>    <span class="c1">#  the function returns a list (no. of errors, error1, error2, ...)</span>
+<a id="__codelineno-7-16" name="__codelineno-7-16"></a>
+<a id="__codelineno-7-17" name="__codelineno-7-17"></a>    <span class="c1">#  check for the presence of the SQL file</span>
+<a id="__codelineno-7-18" name="__codelineno-7-18"></a>    <span class="n">data</span><span class="o">=</span><span class="kc">None</span>
+<a id="__codelineno-7-19" name="__codelineno-7-19"></a>    <span class="k">try</span><span class="p">:</span>
+<a id="__codelineno-7-20" name="__codelineno-7-20"></a>        <span class="n">data</span><span class="o">=</span><span class="nb">open</span><span class="p">(</span><span class="n">SQL</span><span class="p">,</span><span class="s2">&quot;r&quot;</span><span class="p">)</span>
+<a id="__codelineno-7-21" name="__codelineno-7-21"></a>    <span class="k">except</span><span class="p">:</span>
+<a id="__codelineno-7-22" name="__codelineno-7-22"></a>        <span class="k">return</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="s2">&quot;Le fichier </span><span class="si">%s</span><span class="s2"> n&#39;existe pas&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">SQL</span><span class="p">)]</span>
+<a id="__codelineno-7-23" name="__codelineno-7-23"></a>
+<a id="__codelineno-7-24" name="__codelineno-7-24"></a>    <span class="c1">#    connection</span>
+<a id="__codelineno-7-25" name="__codelineno-7-25"></a>    <span class="k">try</span><span class="p">:</span>
+<a id="__codelineno-7-26" name="__codelineno-7-26"></a>        <span class="n">connexion</span><span class="o">=</span><span class="n">MySQLdb</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">host</span><span class="o">=</span><span class="n">HOTE</span><span class="p">,</span><span class="n">user</span><span class="o">=</span><span class="n">ID</span><span class="p">,</span><span class="n">passwd</span><span class="o">=</span><span class="n">PWD</span><span class="p">,</span><span class="n">db</span><span class="o">=</span><span class="n">BASE</span><span class="p">)</span>
+<a id="__codelineno-7-27" name="__codelineno-7-27"></a>    <span class="k">except</span> <span class="n">MySQLdb</span><span class="o">.</span><span class="n">OperationalError</span><span class="p">,</span><span class="n">erreur</span><span class="p">:</span>
+<a id="__codelineno-7-28" name="__codelineno-7-28"></a>        <span class="k">return</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="s2">&quot;Erreur lors de la connexion a MySQL sous l&#39;identite (</span><span class="si">%s</span><span class="s2">,</span><span class="si">%s</span><span class="s2">,</span><span class="si">%s</span><span class="s2">,</span><span class="si">%s</span><span class="s2">) : </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">HOTE</span><span class="p">,</span> <span class="n">ID</span><span class="p">,</span> <span class="n">PWD</span><span class="p">,</span> <span class="n">BASE</span><span class="p">,</span> <span class="n">erreur</span><span class="p">)]</span>
+<a id="__codelineno-7-29" name="__codelineno-7-29"></a>
+<a id="__codelineno-7-30" name="__codelineno-7-30"></a>    <span class="c1">#  a cursor is requested</span>
+<a id="__codelineno-7-31" name="__codelineno-7-31"></a>    <span class="n">curseur</span><span class="o">=</span><span class="n">connexion</span><span class="o">.</span><span class="n">cursor</span><span class="p">()</span>
+<a id="__codelineno-7-32" name="__codelineno-7-32"></a>    <span class="c1">#  execution of SQL queries contained in the SQL file</span>
+<a id="__codelineno-7-33" name="__codelineno-7-33"></a>    <span class="c1">#  we put them in a table</span>
+<a id="__codelineno-7-34" name="__codelineno-7-34"></a>    <span class="n">requetes</span><span class="o">=</span><span class="n">data</span><span class="o">.</span><span class="n">readlines</span><span class="p">()</span>
+<a id="__codelineno-7-35" name="__codelineno-7-35"></a>    <span class="c1">#    run them one by one - initially no errors</span>
+<a id="__codelineno-7-36" name="__codelineno-7-36"></a>    <span class="n">erreurs</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<a id="__codelineno-7-37" name="__codelineno-7-37"></a>    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">requetes</span><span class="p">)):</span>
+<a id="__codelineno-7-38" name="__codelineno-7-38"></a>        <span class="c1">#  store the current query</span>
+<a id="__codelineno-7-39" name="__codelineno-7-39"></a>        <span class="n">requete</span><span class="o">=</span><span class="n">requetes</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+<a id="__codelineno-7-40" name="__codelineno-7-40"></a>        <span class="c1">#  do we have an empty query? If so, move on to the next query</span>
+<a id="__codelineno-7-41" name="__codelineno-7-41"></a>        <span class="k">if</span> <span class="n">re</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;^\s*$&quot;</span><span class="p">,</span><span class="n">requete</span><span class="p">):</span>
+<a id="__codelineno-7-42" name="__codelineno-7-42"></a>            <span class="k">continue</span>
+<a id="__codelineno-7-43" name="__codelineno-7-43"></a>        <span class="c1">#    query execution i</span>
+<a id="__codelineno-7-44" name="__codelineno-7-44"></a>        <span class="n">erreur</span><span class="o">=</span><span class="s2">&quot;&quot;</span>
+<a id="__codelineno-7-45" name="__codelineno-7-45"></a>        <span class="k">try</span><span class="p">:</span>
+<a id="__codelineno-7-46" name="__codelineno-7-46"></a>            <span class="n">curseur</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">requete</span><span class="p">)</span>
+<a id="__codelineno-7-47" name="__codelineno-7-47"></a>        <span class="k">except</span> <span class="ne">Exception</span><span class="p">,</span> <span class="n">erreur</span><span class="p">:</span>
+<a id="__codelineno-7-48" name="__codelineno-7-48"></a>            <span class="k">pass</span>
+<a id="__codelineno-7-49" name="__codelineno-7-49"></a>        <span class="c1">#   was there a mistake?</span>
+<a id="__codelineno-7-50" name="__codelineno-7-50"></a>        <span class="k">if</span> <span class="n">erreur</span><span class="p">:</span>
+<a id="__codelineno-7-51" name="__codelineno-7-51"></a>            <span class="c1">#    one more mistake</span>
+<a id="__codelineno-7-52" name="__codelineno-7-52"></a>            <span class="n">erreurs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">+=</span><span class="mi">1</span>
+<a id="__codelineno-7-53" name="__codelineno-7-53"></a>            <span class="c1">#  error msg</span>
+<a id="__codelineno-7-54" name="__codelineno-7-54"></a>            <span class="n">msg</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">%s</span><span class="s2"> : Erreur (</span><span class="si">%s</span><span class="s2">)&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">requete</span><span class="p">,</span><span class="n">erreur</span><span class="p">)</span>
+<a id="__codelineno-7-55" name="__codelineno-7-55"></a>            <span class="n">erreurs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
+<a id="__codelineno-7-56" name="__codelineno-7-56"></a>            <span class="c1">#  screen tracking or not?</span>
+<a id="__codelineno-7-57" name="__codelineno-7-57"></a>            <span class="k">if</span> <span class="n">suivi</span><span class="p">:</span>
+<a id="__codelineno-7-58" name="__codelineno-7-58"></a>                <span class="nb">print</span> <span class="n">msg</span>
+<a id="__codelineno-7-59" name="__codelineno-7-59"></a>            <span class="c1">#    shall we stop?</span>
+<a id="__codelineno-7-60" name="__codelineno-7-60"></a>            <span class="k">if</span> <span class="n">arret</span><span class="p">:</span>
+<a id="__codelineno-7-61" name="__codelineno-7-61"></a>                <span class="k">return</span> <span class="n">erreurs</span>
+<a id="__codelineno-7-62" name="__codelineno-7-62"></a>        <span class="k">else</span><span class="p">:</span>
+<a id="__codelineno-7-63" name="__codelineno-7-63"></a>            <span class="k">if</span> <span class="n">suivi</span><span class="p">:</span> 
+<a id="__codelineno-7-64" name="__codelineno-7-64"></a>                <span class="nb">print</span> <span class="s2">&quot;</span><span class="si">%s</span><span class="s2"> : Execution reussie&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">requete</span><span class="p">)</span>
+<a id="__codelineno-7-65" name="__codelineno-7-65"></a>    <span class="c1">#  close connection and release resources</span>
+<a id="__codelineno-7-66" name="__codelineno-7-66"></a>    <span class="n">curseur</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+<a id="__codelineno-7-67" name="__codelineno-7-67"></a>    <span class="n">connexion</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span>
+<a id="__codelineno-7-68" name="__codelineno-7-68"></a>    <span class="c1">#    we disconnect</span>
+<a id="__codelineno-7-69" name="__codelineno-7-69"></a>    <span class="k">try</span><span class="p">:</span>
+<a id="__codelineno-7-70" name="__codelineno-7-70"></a>        <span class="n">connexion</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+<a id="__codelineno-7-71" name="__codelineno-7-71"></a>    <span class="k">except</span> <span class="n">MySQLdb</span><span class="o">.</span><span class="n">OperationalError</span><span class="p">,</span><span class="n">erreur</span><span class="p">:</span>
+<a id="__codelineno-7-72" name="__codelineno-7-72"></a>        <span class="c1">#    one more mistake</span>
+<a id="__codelineno-7-73" name="__codelineno-7-73"></a>        <span class="n">erreurs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">+=</span><span class="mi">1</span>
+<a id="__codelineno-7-74" name="__codelineno-7-74"></a>        <span class="c1">#  error msg</span>
+<a id="__codelineno-7-75" name="__codelineno-7-75"></a>        <span class="n">msg</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">%s</span><span class="s2"> : Erreur (</span><span class="si">%s</span><span class="s2">)&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">requete</span><span class="p">,</span><span class="n">erreur</span><span class="p">)</span>
+<a id="__codelineno-7-76" name="__codelineno-7-76"></a>        <span class="n">erreurs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
+<a id="__codelineno-7-77" name="__codelineno-7-77"></a>
+<a id="__codelineno-7-78" name="__codelineno-7-78"></a>    <span class="c1">#    return</span>
+<a id="__codelineno-7-79" name="__codelineno-7-79"></a>    <span class="k">return</span> <span class="n">erreurs</span>
+<a id="__codelineno-7-80" name="__codelineno-7-80"></a>
+<a id="__codelineno-7-81" name="__codelineno-7-81"></a>
+<a id="__codelineno-7-82" name="__codelineno-7-82"></a><span class="c1">#    ---------------------------------------------- main</span>
+<a id="__codelineno-7-83" name="__codelineno-7-83"></a><span class="c1">#  connection to the MySQL database</span>
+<a id="__codelineno-7-84" name="__codelineno-7-84"></a><span class="c1">#    user identity</span>
+<a id="__codelineno-7-85" name="__codelineno-7-85"></a><span class="n">ID</span><span class="o">=</span><span class="s2">&quot;admpersonnes&quot;</span>
+<a id="__codelineno-7-86" name="__codelineno-7-86"></a><span class="n">PWD</span><span class="o">=</span><span class="s2">&quot;nobody&quot;</span>
+<a id="__codelineno-7-87" name="__codelineno-7-87"></a><span class="c1">#  the sgbd host machine</span>
+<a id="__codelineno-7-88" name="__codelineno-7-88"></a><span class="n">HOTE</span><span class="o">=</span><span class="s2">&quot;localhost&quot;</span>
+<a id="__codelineno-7-89" name="__codelineno-7-89"></a><span class="c1">#    base identity</span>
+<a id="__codelineno-7-90" name="__codelineno-7-90"></a><span class="n">BASE</span><span class="o">=</span><span class="s2">&quot;dbpersonnes&quot;</span>
+<a id="__codelineno-7-91" name="__codelineno-7-91"></a><span class="c1">#  identity of the SQL command text file to be executed</span>
+<a id="__codelineno-7-92" name="__codelineno-7-92"></a><span class="n">TEXTE</span><span class="o">=</span><span class="s2">&quot;sql.txt&quot;</span><span class="p">;</span>
+<a id="__codelineno-7-93" name="__codelineno-7-93"></a>
+<a id="__codelineno-7-94" name="__codelineno-7-94"></a><span class="c1">#  table creation and filling</span>
+<a id="__codelineno-7-95" name="__codelineno-7-95"></a><span class="n">erreurs</span><span class="o">=</span><span class="n">executerCommandes</span><span class="p">(</span><span class="n">HOTE</span><span class="p">,</span><span class="n">ID</span><span class="p">,</span><span class="n">PWD</span><span class="p">,</span><span class="n">BASE</span><span class="p">,</span><span class="n">TEXTE</span><span class="p">,</span><span class="kc">True</span><span class="p">,</span><span class="kc">False</span><span class="p">)</span>
+<a id="__codelineno-7-96" name="__codelineno-7-96"></a><span class="c1"># display number of errors</span>
+<a id="__codelineno-7-97" name="__codelineno-7-97"></a><span class="nb">print</span> <span class="s2">&quot;il y a eu </span><span class="si">%s</span><span class="s2"> erreur(s)&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">erreurs</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<a id="__codelineno-7-98" name="__codelineno-7-98"></a><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="n">erreurs</span><span class="p">)):</span>
+<a id="__codelineno-7-99" name="__codelineno-7-99"></a>    <span class="nb">print</span> <span class="n">erreurs</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+</code></pre></div></td></tr></table></div>
+<hr style="border:0; border-top:0.99pt solid #000000; margin:0.75em 0;" data-odt-border="top" />
+<div style="margin:0 0 0.75em 0; background-color:#e6e6e6; padding:0.35em 0.6em">Resultados</div>
+
+<hr style="border:0; border-top:0.99pt solid #000000; margin:0.75em 0;" data-odt-border="bottom" />
+<p>O ficheiro <em>sql.txt</em>:</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-8-1">1</a></span>
+<span class="normal"><a href="#__codelineno-8-2">2</a></span>
+<span class="normal"><a href="#__codelineno-8-3">3</a></span>
+<span class="normal"><a href="#__codelineno-8-4">4</a></span>
+<span class="normal"><a href="#__codelineno-8-5">5</a></span>
+<span class="normal"><a href="#__codelineno-8-6">6</a></span>
+<span class="normal"><a href="#__codelineno-8-7">7</a></span>
+<span class="normal"><a href="#__codelineno-8-8">8</a></span>
+<span class="normal"><a href="#__codelineno-8-9">9</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1"></a><span class="k">drop</span><span class="w"> </span><span class="k">table</span><span class="w"> </span><span class="n">personnes</span>
+<a id="__codelineno-8-2" name="__codelineno-8-2"></a><span class="k">create</span><span class="w"> </span><span class="k">table</span><span class="w"> </span><span class="n">personnes</span><span class="w"> </span><span class="p">(</span><span class="n">prenom</span><span class="w"> </span><span class="nb">varchar</span><span class="p">(</span><span class="mi">30</span><span class="p">)</span><span class="w"> </span><span class="k">not</span><span class="w"> </span><span class="k">null</span><span class="p">,</span><span class="w"> </span><span class="n">nom</span><span class="w"> </span><span class="nb">varchar</span><span class="p">(</span><span class="mi">30</span><span class="p">)</span><span class="w"> </span><span class="k">not</span><span class="w"> </span><span class="k">null</span><span class="p">,</span><span class="w"> </span><span class="n">age</span><span class="w"> </span><span class="nb">integer</span><span class="w"> </span><span class="k">not</span><span class="w"> </span><span class="k">null</span><span class="p">,</span><span class="w"> </span><span class="k">primary</span><span class="w"> </span><span class="k">key</span><span class="w"> </span><span class="p">(</span><span class="n">nom</span><span class="p">,</span><span class="n">prenom</span><span class="p">))</span>
+<a id="__codelineno-8-3" name="__codelineno-8-3"></a><span class="k">insert</span><span class="w"> </span><span class="k">into</span><span class="w"> </span><span class="n">personnes</span><span class="w"> </span><span class="k">values</span><span class="p">(</span><span class="s1">&#39;Paul&#39;</span><span class="p">,</span><span class="s1">&#39;Langevin&#39;</span><span class="p">,</span><span class="mi">48</span><span class="p">)</span>
+<a id="__codelineno-8-4" name="__codelineno-8-4"></a><span class="k">insert</span><span class="w"> </span><span class="k">into</span><span class="w"> </span><span class="n">personnes</span><span class="w"> </span><span class="k">values</span><span class="w"> </span><span class="p">(</span><span class="s1">&#39;Sylvie&#39;</span><span class="p">,</span><span class="s1">&#39;Lefur&#39;</span><span class="p">,</span><span class="mi">70</span><span class="p">)</span>
+<a id="__codelineno-8-5" name="__codelineno-8-5"></a><span class="n">xx</span>
+<a id="__codelineno-8-6" name="__codelineno-8-6"></a>
+<a id="__codelineno-8-7" name="__codelineno-8-7"></a><span class="k">insert</span><span class="w"> </span><span class="k">into</span><span class="w"> </span><span class="n">personnes</span><span class="w"> </span><span class="k">values</span><span class="w"> </span><span class="p">(</span><span class="s1">&#39;Pierre&#39;</span><span class="p">,</span><span class="s1">&#39;Nicazou&#39;</span><span class="p">,</span><span class="mi">35</span><span class="p">)</span>
+<a id="__codelineno-8-8" name="__codelineno-8-8"></a><span class="k">insert</span><span class="w"> </span><span class="k">into</span><span class="w"> </span><span class="n">personnes</span><span class="w"> </span><span class="k">values</span><span class="w"> </span><span class="p">(</span><span class="s1">&#39;Geraldine&#39;</span><span class="p">,</span><span class="s1">&#39;Colou&#39;</span><span class="p">,</span><span class="mi">26</span><span class="p">)</span>
+<a id="__codelineno-8-9" name="__codelineno-8-9"></a><span class="k">insert</span><span class="w"> </span><span class="k">into</span><span class="w"> </span><span class="n">personnes</span><span class="w"> </span><span class="k">values</span><span class="w"> </span><span class="p">(</span><span class="s1">&#39;Paulette&#39;</span><span class="p">,</span><span class="s1">&#39;Girond&#39;</span><span class="p">,</span><span class="mi">56</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+<p>Foi inserido intencionalmente um erro na linha 5.</p>
+<p>Resultados no ecrã:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="k">drop</span><span class="w"> </span><span class="k">table</span><span class="w"> </span><span class="n">personnes</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">Execution</span><span class="w"> </span><span class="n">reussie</span>
+<a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a><span class="k">create</span><span class="w"> </span><span class="k">table</span><span class="w"> </span><span class="n">personnes</span><span class="w"> </span><span class="p">(</span><span class="n">prenom</span><span class="w"> </span><span class="nb">varchar</span><span class="p">(</span><span class="mi">30</span><span class="p">)</span><span class="w"> </span><span class="k">not</span><span class="w"> </span><span class="k">null</span><span class="p">,</span><span class="w"> </span><span class="n">nom</span><span class="w"> </span><span class="nb">varchar</span><span class="p">(</span><span class="mi">30</span><span class="p">)</span><span class="w"> </span><span class="k">not</span><span class="w"> </span><span class="k">null</span><span class="p">,</span><span class="w"> </span><span class="n">age</span><span class="w"> </span><span class="nb">integer</span><span class="w"> </span><span class="k">not</span><span class="w"> </span><span class="k">null</span><span class="p">,</span><span class="w"> </span><span class="k">primary</span><span class="w"> </span><span class="k">key</span><span class="w"> </span><span class="p">(</span><span class="n">nom</span><span class="p">,</span><span class="n">prenom</span><span class="p">))</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">Execution</span><span class="w"> </span><span class="n">reussie</span>
+<a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a><span class="k">insert</span><span class="w"> </span><span class="k">into</span><span class="w"> </span><span class="n">personnes</span><span class="w"> </span><span class="k">values</span><span class="p">(</span><span class="s1">&#39;Paul&#39;</span><span class="p">,</span><span class="s1">&#39;Langevin&#39;</span><span class="p">,</span><span class="mi">48</span><span class="p">)</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">Execution</span><span class="w"> </span><span class="n">reussie</span>
+<a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a><span class="k">insert</span><span class="w"> </span><span class="k">into</span><span class="w"> </span><span class="n">personnes</span><span class="w"> </span><span class="k">values</span><span class="w"> </span><span class="p">(</span><span class="s1">&#39;Sylvie&#39;</span><span class="p">,</span><span class="s1">&#39;Lefur&#39;</span><span class="p">,</span><span class="mi">70</span><span class="p">)</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">Execution</span><span class="w"> </span><span class="n">reussie</span>
+<a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a><span class="n">xx</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">Erreur</span><span class="w"> </span><span class="p">((</span><span class="mi">1064</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near &#39;xx&#39; at</span>
+<a id="__codelineno-9-6" name="__codelineno-9-6" href="#__codelineno-9-6"></a><span class="ss"> line 1&quot;</span><span class="p">))</span>
+<a id="__codelineno-9-7" name="__codelineno-9-7" href="#__codelineno-9-7"></a><span class="k">insert</span><span class="w"> </span><span class="k">into</span><span class="w"> </span><span class="n">personnes</span><span class="w"> </span><span class="k">values</span><span class="w"> </span><span class="p">(</span><span class="s1">&#39;Pierre&#39;</span><span class="p">,</span><span class="s1">&#39;Nicazou&#39;</span><span class="p">,</span><span class="mi">35</span><span class="p">)</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">Execution</span><span class="w"> </span><span class="n">reussie</span>
+<a id="__codelineno-9-8" name="__codelineno-9-8" href="#__codelineno-9-8"></a><span class="k">insert</span><span class="w"> </span><span class="k">into</span><span class="w"> </span><span class="n">personnes</span><span class="w"> </span><span class="k">values</span><span class="w"> </span><span class="p">(</span><span class="s1">&#39;Geraldine&#39;</span><span class="p">,</span><span class="s1">&#39;Colou&#39;</span><span class="p">,</span><span class="mi">26</span><span class="p">)</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">Execution</span><span class="w"> </span><span class="n">reussie</span>
+<a id="__codelineno-9-9" name="__codelineno-9-9" href="#__codelineno-9-9"></a><span class="k">insert</span><span class="w"> </span><span class="k">into</span><span class="w"> </span><span class="n">personnes</span><span class="w"> </span><span class="k">values</span><span class="w"> </span><span class="p">(</span><span class="s1">&#39;Paulette&#39;</span><span class="p">,</span><span class="s1">&#39;Girond&#39;</span><span class="p">,</span><span class="mi">56</span><span class="p">)</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">Execution</span><span class="w"> </span><span class="n">reussie</span>
+<a id="__codelineno-9-10" name="__codelineno-9-10" href="#__codelineno-9-10"></a><span class="n">il</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="n">eu</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="n">erreur</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
+<a id="__codelineno-9-11" name="__codelineno-9-11" href="#__codelineno-9-11"></a><span class="n">xx</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">Erreur</span><span class="w"> </span><span class="p">((</span><span class="mi">1064</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near &#39;xx&#39; at line 1&quot;</span><span class="p">))</span>
+</code></pre></div>
+<p>Verificação com o phpMyAdmin:</p>
+<p><img src="images/100000000000059C000001FC8D7A2751.png" width="680" height="241" style="width:17.997cm;height:6.368cm;" alt="Image" class="odt-zoomable" data-zoom-src="images/100000000000059C000001FC8D7A2751.png" /></p>
+<ul>
+<li>Em [1], o link [Ver] permite-lhe ver o conteúdo da tabela [people] [2].</li>
+</ul>
+<p><a id="refheading383082423505"></a></p>
+<h2 id="97-execucao-de-consultas-sql-arbitrarias">9.7. <span style="color: #4f81bd"><strong><span style="color: #4f81bd">Execução de consultas SQL arbitrárias</span></strong></span></h2>
+<p>O script a seguir permite executar um ficheiro de comandos SQL e exibir o resultado de cada um:</p>
+<ul>
+<li>o resultado do SELECT, se o comando for um SELECT;</li>
+<li>o número de linhas modificadas se o comando for INSERT, UPDATE ou DELETE.</li>
+</ul>
+<hr style="border:0; border-top:0.99pt solid #000000; margin:0.75em 0;" data-odt-border="top" />
+<div style="margin:0 0 0.75em 0; background-color:#e6e6e6; padding:0.35em 0.6em">Programa (mysqldb_05)</div>
+
+<hr style="border:0; border-top:0.99pt solid #000000; margin:0.75em 0;" data-odt-border="bottom" />
+
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-10-1">  1</a></span>
+<span class="normal"><a href="#__codelineno-10-2">  2</a></span>
+<span class="normal"><a href="#__codelineno-10-3">  3</a></span>
+<span class="normal"><a href="#__codelineno-10-4">  4</a></span>
+<span class="normal"><a href="#__codelineno-10-5">  5</a></span>
+<span class="normal"><a href="#__codelineno-10-6">  6</a></span>
+<span class="normal"><a href="#__codelineno-10-7">  7</a></span>
+<span class="normal"><a href="#__codelineno-10-8">  8</a></span>
+<span class="normal"><a href="#__codelineno-10-9">  9</a></span>
+<span class="normal"><a href="#__codelineno-10-10"> 10</a></span>
+<span class="normal"><a href="#__codelineno-10-11"> 11</a></span>
+<span class="normal"><a href="#__codelineno-10-12"> 12</a></span>
+<span class="normal"><a href="#__codelineno-10-13"> 13</a></span>
+<span class="normal"><a href="#__codelineno-10-14"> 14</a></span>
+<span class="normal"><a href="#__codelineno-10-15"> 15</a></span>
+<span class="normal"><a href="#__codelineno-10-16"> 16</a></span>
+<span class="normal"><a href="#__codelineno-10-17"> 17</a></span>
+<span class="normal"><a href="#__codelineno-10-18"> 18</a></span>
+<span class="normal"><a href="#__codelineno-10-19"> 19</a></span>
+<span class="normal"><a href="#__codelineno-10-20"> 20</a></span>
+<span class="normal"><a href="#__codelineno-10-21"> 21</a></span>
+<span class="normal"><a href="#__codelineno-10-22"> 22</a></span>
+<span class="normal"><a href="#__codelineno-10-23"> 23</a></span>
+<span class="normal"><a href="#__codelineno-10-24"> 24</a></span>
+<span class="normal"><a href="#__codelineno-10-25"> 25</a></span>
+<span class="normal"><a href="#__codelineno-10-26"> 26</a></span>
+<span class="normal"><a href="#__codelineno-10-27"> 27</a></span>
+<span class="normal"><a href="#__codelineno-10-28"> 28</a></span>
+<span class="normal"><a href="#__codelineno-10-29"> 29</a></span>
+<span class="normal"><a href="#__codelineno-10-30"> 30</a></span>
+<span class="normal"><a href="#__codelineno-10-31"> 31</a></span>
+<span class="normal"><a href="#__codelineno-10-32"> 32</a></span>
+<span class="normal"><a href="#__codelineno-10-33"> 33</a></span>
+<span class="normal"><a href="#__codelineno-10-34"> 34</a></span>
+<span class="normal"><a href="#__codelineno-10-35"> 35</a></span>
+<span class="normal"><a href="#__codelineno-10-36"> 36</a></span>
+<span class="normal"><a href="#__codelineno-10-37"> 37</a></span>
+<span class="normal"><a href="#__codelineno-10-38"> 38</a></span>
+<span class="normal"><a href="#__codelineno-10-39"> 39</a></span>
+<span class="normal"><a href="#__codelineno-10-40"> 40</a></span>
+<span class="normal"><a href="#__codelineno-10-41"> 41</a></span>
+<span class="normal"><a href="#__codelineno-10-42"> 42</a></span>
+<span class="normal"><a href="#__codelineno-10-43"> 43</a></span>
+<span class="normal"><a href="#__codelineno-10-44"> 44</a></span>
+<span class="normal"><a href="#__codelineno-10-45"> 45</a></span>
+<span class="normal"><a href="#__codelineno-10-46"> 46</a></span>
+<span class="normal"><a href="#__codelineno-10-47"> 47</a></span>
+<span class="normal"><a href="#__codelineno-10-48"> 48</a></span>
+<span class="normal"><a href="#__codelineno-10-49"> 49</a></span>
+<span class="normal"><a href="#__codelineno-10-50"> 50</a></span>
+<span class="normal"><a href="#__codelineno-10-51"> 51</a></span>
+<span class="normal"><a href="#__codelineno-10-52"> 52</a></span>
+<span class="normal"><a href="#__codelineno-10-53"> 53</a></span>
+<span class="normal"><a href="#__codelineno-10-54"> 54</a></span>
+<span class="normal"><a href="#__codelineno-10-55"> 55</a></span>
+<span class="normal"><a href="#__codelineno-10-56"> 56</a></span>
+<span class="normal"><a href="#__codelineno-10-57"> 57</a></span>
+<span class="normal"><a href="#__codelineno-10-58"> 58</a></span>
+<span class="normal"><a href="#__codelineno-10-59"> 59</a></span>
+<span class="normal"><a href="#__codelineno-10-60"> 60</a></span>
+<span class="normal"><a href="#__codelineno-10-61"> 61</a></span>
+<span class="normal"><a href="#__codelineno-10-62"> 62</a></span>
+<span class="normal"><a href="#__codelineno-10-63"> 63</a></span>
+<span class="normal"><a href="#__codelineno-10-64"> 64</a></span>
+<span class="normal"><a href="#__codelineno-10-65"> 65</a></span>
+<span class="normal"><a href="#__codelineno-10-66"> 66</a></span>
+<span class="normal"><a href="#__codelineno-10-67"> 67</a></span>
+<span class="normal"><a href="#__codelineno-10-68"> 68</a></span>
+<span class="normal"><a href="#__codelineno-10-69"> 69</a></span>
+<span class="normal"><a href="#__codelineno-10-70"> 70</a></span>
+<span class="normal"><a href="#__codelineno-10-71"> 71</a></span>
+<span class="normal"><a href="#__codelineno-10-72"> 72</a></span>
+<span class="normal"><a href="#__codelineno-10-73"> 73</a></span>
+<span class="normal"><a href="#__codelineno-10-74"> 74</a></span>
+<span class="normal"><a href="#__codelineno-10-75"> 75</a></span>
+<span class="normal"><a href="#__codelineno-10-76"> 76</a></span>
+<span class="normal"><a href="#__codelineno-10-77"> 77</a></span>
+<span class="normal"><a href="#__codelineno-10-78"> 78</a></span>
+<span class="normal"><a href="#__codelineno-10-79"> 79</a></span>
+<span class="normal"><a href="#__codelineno-10-80"> 80</a></span>
+<span class="normal"><a href="#__codelineno-10-81"> 81</a></span>
+<span class="normal"><a href="#__codelineno-10-82"> 82</a></span>
+<span class="normal"><a href="#__codelineno-10-83"> 83</a></span>
+<span class="normal"><a href="#__codelineno-10-84"> 84</a></span>
+<span class="normal"><a href="#__codelineno-10-85"> 85</a></span>
+<span class="normal"><a href="#__codelineno-10-86"> 86</a></span>
+<span class="normal"><a href="#__codelineno-10-87"> 87</a></span>
+<span class="normal"><a href="#__codelineno-10-88"> 88</a></span>
+<span class="normal"><a href="#__codelineno-10-89"> 89</a></span>
+<span class="normal"><a href="#__codelineno-10-90"> 90</a></span>
+<span class="normal"><a href="#__codelineno-10-91"> 91</a></span>
+<span class="normal"><a href="#__codelineno-10-92"> 92</a></span>
+<span class="normal"><a href="#__codelineno-10-93"> 93</a></span>
+<span class="normal"><a href="#__codelineno-10-94"> 94</a></span>
+<span class="normal"><a href="#__codelineno-10-95"> 95</a></span>
+<span class="normal"><a href="#__codelineno-10-96"> 96</a></span>
+<span class="normal"><a href="#__codelineno-10-97"> 97</a></span>
+<span class="normal"><a href="#__codelineno-10-98"> 98</a></span>
+<span class="normal"><a href="#__codelineno-10-99"> 99</a></span>
+<span class="normal"><a href="#__codelineno-10-100">100</a></span>
+<span class="normal"><a href="#__codelineno-10-101">101</a></span>
+<span class="normal"><a href="#__codelineno-10-102">102</a></span>
+<span class="normal"><a href="#__codelineno-10-103">103</a></span>
+<span class="normal"><a href="#__codelineno-10-104">104</a></span>
+<span class="normal"><a href="#__codelineno-10-105">105</a></span>
+<span class="normal"><a href="#__codelineno-10-106">106</a></span>
+<span class="normal"><a href="#__codelineno-10-107">107</a></span>
+<span class="normal"><a href="#__codelineno-10-108">108</a></span>
+<span class="normal"><a href="#__codelineno-10-109">109</a></span>
+<span class="normal"><a href="#__codelineno-10-110">110</a></span>
+<span class="normal"><a href="#__codelineno-10-111">111</a></span>
+<span class="normal"><a href="#__codelineno-10-112">112</a></span>
+<span class="normal"><a href="#__codelineno-10-113">113</a></span>
+<span class="normal"><a href="#__codelineno-10-114">114</a></span>
+<span class="normal"><a href="#__codelineno-10-115">115</a></span>
+<span class="normal"><a href="#__codelineno-10-116">116</a></span>
+<span class="normal"><a href="#__codelineno-10-117">117</a></span>
+<span class="normal"><a href="#__codelineno-10-118">118</a></span>
+<span class="normal"><a href="#__codelineno-10-119">119</a></span>
+<span class="normal"><a href="#__codelineno-10-120">120</a></span>
+<span class="normal"><a href="#__codelineno-10-121">121</a></span>
+<span class="normal"><a href="#__codelineno-10-122">122</a></span>
+<span class="normal"><a href="#__codelineno-10-123">123</a></span>
+<span class="normal"><a href="#__codelineno-10-124">124</a></span>
+<span class="normal"><a href="#__codelineno-10-125">125</a></span>
+<span class="normal"><a href="#__codelineno-10-126">126</a></span>
+<span class="normal"><a href="#__codelineno-10-127">127</a></span>
+<span class="normal"><a href="#__codelineno-10-128">128</a></span>
+<span class="normal"><a href="#__codelineno-10-129">129</a></span>
+<span class="normal"><a href="#__codelineno-10-130">130</a></span>
+<span class="normal"><a href="#__codelineno-10-131">131</a></span>
+<span class="normal"><a href="#__codelineno-10-132">132</a></span>
+<span class="normal"><a href="#__codelineno-10-133">133</a></span>
+<span class="normal"><a href="#__codelineno-10-134">134</a></span>
+<span class="normal"><a href="#__codelineno-10-135">135</a></span>
+<span class="normal"><a href="#__codelineno-10-136">136</a></span>
+<span class="normal"><a href="#__codelineno-10-137">137</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1"></a><span class="c1">#    import module MySQLdb</span>
+<a id="__codelineno-10-2" name="__codelineno-10-2"></a><span class="kn">import</span><span class="w"> </span><span class="nn">sys</span>
+<a id="__codelineno-10-3" name="__codelineno-10-3"></a><span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;D:\Programs\ActivePython\site-packages&quot;</span><span class="p">)</span>
+<a id="__codelineno-10-4" name="__codelineno-10-4"></a><span class="kn">import</span><span class="w"> </span><span class="nn">MySQLdb</span>
+<a id="__codelineno-10-5" name="__codelineno-10-5"></a><span class="c1">#    other modules</span>
+<a id="__codelineno-10-6" name="__codelineno-10-6"></a><span class="kn">import</span><span class="w"> </span><span class="nn">re</span>
+<a id="__codelineno-10-7" name="__codelineno-10-7"></a>
+<a id="__codelineno-10-8" name="__codelineno-10-8"></a><span class="k">def</span><span class="w"> </span><span class="nf">cutNewLineChar</span><span class="p">(</span><span class="n">ligne</span><span class="p">):</span>
+<a id="__codelineno-10-9" name="__codelineno-10-9"></a>    <span class="c1">#  delete the [line] end-of-line mark if it exists</span>
+<a id="__codelineno-10-10" name="__codelineno-10-10"></a>    <span class="n">l</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="n">ligne</span><span class="p">)</span>
+<a id="__codelineno-10-11" name="__codelineno-10-11"></a>    <span class="k">while</span><span class="p">(</span><span class="n">ligne</span><span class="p">[</span><span class="n">l</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">==</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="ow">or</span> <span class="n">ligne</span><span class="p">[</span><span class="n">l</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">==</span><span class="s2">&quot;</span><span class="se">\r</span><span class="s2">&quot;</span><span class="p">):</span>
+<a id="__codelineno-10-12" name="__codelineno-10-12"></a>        <span class="n">l</span><span class="o">-=</span><span class="mi">1</span>
+<a id="__codelineno-10-13" name="__codelineno-10-13"></a>    <span class="k">return</span><span class="p">(</span><span class="n">ligne</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="n">l</span><span class="p">])</span>
+<a id="__codelineno-10-14" name="__codelineno-10-14"></a>
+<a id="__codelineno-10-15" name="__codelineno-10-15"></a><span class="c1"># ---------------------------------------------------------------------------------</span>
+<a id="__codelineno-10-16" name="__codelineno-10-16"></a><span class="k">def</span><span class="w"> </span><span class="nf">afficherInfos</span><span class="p">(</span><span class="n">curseur</span><span class="p">):</span>
+<a id="__codelineno-10-17" name="__codelineno-10-17"></a>    <span class="c1">#  displays the result of an sql query</span>
+<a id="__codelineno-10-18" name="__codelineno-10-18"></a>    <span class="c1">#    was it a select?</span>
+<a id="__codelineno-10-19" name="__codelineno-10-19"></a>    <span class="k">if</span> <span class="n">curseur</span><span class="o">.</span><span class="n">description</span><span class="p">:</span>
+<a id="__codelineno-10-20" name="__codelineno-10-20"></a>        <span class="c1">#    there&#39;s a description - so it&#39;s a select</span>
+<a id="__codelineno-10-21" name="__codelineno-10-21"></a>        <span class="c1">#  description[i] is the description of column no. i in the select</span>
+<a id="__codelineno-10-22" name="__codelineno-10-22"></a>        <span class="c1">#  description[i][0] is the name of column no. i in the select</span>
+<a id="__codelineno-10-23" name="__codelineno-10-23"></a>        <span class="c1">#  displays field names</span>
+<a id="__codelineno-10-24" name="__codelineno-10-24"></a>        <span class="n">titre</span><span class="o">=</span><span class="s2">&quot;&quot;</span>
+<a id="__codelineno-10-25" name="__codelineno-10-25"></a>        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">curseur</span><span class="o">.</span><span class="n">description</span><span class="p">)):</span>
+<a id="__codelineno-10-26" name="__codelineno-10-26"></a>            <span class="n">titre</span><span class="o">+=</span><span class="n">curseur</span><span class="o">.</span><span class="n">description</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="o">+</span><span class="s2">&quot;,&quot;</span>
+<a id="__codelineno-10-27" name="__codelineno-10-27"></a>        <span class="c1">#  displays the list of fields without the trailing comma</span>
+<a id="__codelineno-10-28" name="__codelineno-10-28"></a>        <span class="nb">print</span> <span class="n">titre</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="nb">len</span><span class="p">(</span><span class="n">titre</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+<a id="__codelineno-10-29" name="__codelineno-10-29"></a>        <span class="c1">#  dividing line</span>
+<a id="__codelineno-10-30" name="__codelineno-10-30"></a>        <span class="nb">print</span> <span class="s2">&quot;-&quot;</span><span class="o">*</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">titre</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+<a id="__codelineno-10-31" name="__codelineno-10-31"></a>        <span class="c1">#  current select line</span>
+<a id="__codelineno-10-32" name="__codelineno-10-32"></a>        <span class="n">ligne</span><span class="o">=</span><span class="n">curseur</span><span class="o">.</span><span class="n">fetchone</span><span class="p">()</span>
+<a id="__codelineno-10-33" name="__codelineno-10-33"></a>        <span class="k">while</span> <span class="n">ligne</span><span class="p">:</span>
+<a id="__codelineno-10-34" name="__codelineno-10-34"></a>            <span class="nb">print</span> <span class="n">ligne</span>
+<a id="__codelineno-10-35" name="__codelineno-10-35"></a>            <span class="c1">#  next line of the select</span>
+<a id="__codelineno-10-36" name="__codelineno-10-36"></a>            <span class="n">ligne</span><span class="o">=</span><span class="n">curseur</span><span class="o">.</span><span class="n">fetchone</span><span class="p">()</span>
+<a id="__codelineno-10-37" name="__codelineno-10-37"></a>    <span class="k">else</span><span class="p">:</span>
+<a id="__codelineno-10-38" name="__codelineno-10-38"></a>        <span class="c1">#  there are no fields - it wasn&#39;t a select</span>
+<a id="__codelineno-10-39" name="__codelineno-10-39"></a>        <span class="nb">print</span> <span class="s2">&quot;</span><span class="si">%s</span><span class="s2"> lignes(s) a (ont) ete modifiee(s)&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">curseur</span><span class="o">.</span><span class="n">rowcount</span><span class="p">)</span>
+<a id="__codelineno-10-40" name="__codelineno-10-40"></a>
+<a id="__codelineno-10-41" name="__codelineno-10-41"></a>
+<a id="__codelineno-10-42" name="__codelineno-10-42"></a><span class="c1"># ---------------------------------------------------------------------------------</span>
+<a id="__codelineno-10-43" name="__codelineno-10-43"></a><span class="k">def</span><span class="w"> </span><span class="nf">executerCommandes</span><span class="p">(</span><span class="n">HOTE</span><span class="p">,</span><span class="n">ID</span><span class="p">,</span><span class="n">PWD</span><span class="p">,</span><span class="n">BASE</span><span class="p">,</span><span class="n">SQL</span><span class="p">,</span><span class="n">suivi</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">arret</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+<a id="__codelineno-10-44" name="__codelineno-10-44"></a>    <span class="c1">#    uses connection (HOTE,ID,PWD,BASE)</span>
+<a id="__codelineno-10-45" name="__codelineno-10-45"></a>    <span class="c1">#  executes the SQL commands contained in the SQL text file on this connection</span>
+<a id="__codelineno-10-46" name="__codelineno-10-46"></a>    <span class="c1">#  this is a file of SQL commands to be executed one per line</span>
+<a id="__codelineno-10-47" name="__codelineno-10-47"></a>    <span class="c1">#  if followed=1 then each execution of a SQL order is displayed, indicating success or failure</span>
+<a id="__codelineno-10-48" name="__codelineno-10-48"></a>    <span class="c1">#  if arret=1, the function stops on the 1st error encountered, otherwise it executes all sql commands</span>
+<a id="__codelineno-10-49" name="__codelineno-10-49"></a>    <span class="c1">#  the function returns an array (nb of errors, error1, error2, ...)</span>
+<a id="__codelineno-10-50" name="__codelineno-10-50"></a>
+<a id="__codelineno-10-51" name="__codelineno-10-51"></a>    <span class="c1">#  check for the presence of the SQL file</span>
+<a id="__codelineno-10-52" name="__codelineno-10-52"></a>    <span class="n">data</span><span class="o">=</span><span class="kc">None</span>
+<a id="__codelineno-10-53" name="__codelineno-10-53"></a>    <span class="k">try</span><span class="p">:</span>
+<a id="__codelineno-10-54" name="__codelineno-10-54"></a>        <span class="n">data</span><span class="o">=</span><span class="nb">open</span><span class="p">(</span><span class="n">SQL</span><span class="p">,</span><span class="s2">&quot;r&quot;</span><span class="p">)</span>
+<a id="__codelineno-10-55" name="__codelineno-10-55"></a>    <span class="k">except</span><span class="p">:</span>
+<a id="__codelineno-10-56" name="__codelineno-10-56"></a>        <span class="k">return</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="s2">&quot;Le fichier </span><span class="si">%s</span><span class="s2"> n&#39;existe pas&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">SQL</span><span class="p">)]</span>
+<a id="__codelineno-10-57" name="__codelineno-10-57"></a>
+<a id="__codelineno-10-58" name="__codelineno-10-58"></a>    <span class="c1">#    connection</span>
+<a id="__codelineno-10-59" name="__codelineno-10-59"></a>    <span class="k">try</span><span class="p">:</span>
+<a id="__codelineno-10-60" name="__codelineno-10-60"></a>        <span class="n">connexion</span><span class="o">=</span><span class="n">MySQLdb</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">host</span><span class="o">=</span><span class="n">HOTE</span><span class="p">,</span><span class="n">user</span><span class="o">=</span><span class="n">ID</span><span class="p">,</span><span class="n">passwd</span><span class="o">=</span><span class="n">PWD</span><span class="p">,</span><span class="n">db</span><span class="o">=</span><span class="n">BASE</span><span class="p">)</span>
+<a id="__codelineno-10-61" name="__codelineno-10-61"></a>    <span class="k">except</span> <span class="n">MySQLdb</span><span class="o">.</span><span class="n">OperationalError</span><span class="p">,</span><span class="n">erreur</span><span class="p">:</span>
+<a id="__codelineno-10-62" name="__codelineno-10-62"></a>        <span class="k">return</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="s2">&quot;Erreur lors de la connexion a MySQL sous l&#39;identite (</span><span class="si">%s</span><span class="s2">,</span><span class="si">%s</span><span class="s2">,</span><span class="si">%s</span><span class="s2">,</span><span class="si">%s</span><span class="s2">) : </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">HOTE</span><span class="p">,</span> <span class="n">ID</span><span class="p">,</span> <span class="n">PWD</span><span class="p">,</span> <span class="n">BASE</span><span class="p">,</span> <span class="n">erreur</span><span class="p">)]</span>
+<a id="__codelineno-10-63" name="__codelineno-10-63"></a>
+<a id="__codelineno-10-64" name="__codelineno-10-64"></a>    <span class="c1">#  a cursor is requested</span>
+<a id="__codelineno-10-65" name="__codelineno-10-65"></a>    <span class="n">curseur</span><span class="o">=</span><span class="n">connexion</span><span class="o">.</span><span class="n">cursor</span><span class="p">()</span>
+<a id="__codelineno-10-66" name="__codelineno-10-66"></a>    <span class="c1">#  execution of SQL queries contained in the SQL file</span>
+<a id="__codelineno-10-67" name="__codelineno-10-67"></a>    <span class="c1">#  we put them in a table</span>
+<a id="__codelineno-10-68" name="__codelineno-10-68"></a>    <span class="n">requetes</span><span class="o">=</span><span class="n">data</span><span class="o">.</span><span class="n">readlines</span><span class="p">()</span>
+<a id="__codelineno-10-69" name="__codelineno-10-69"></a>    <span class="c1">#    run them one by one - initially no errors</span>
+<a id="__codelineno-10-70" name="__codelineno-10-70"></a>    <span class="n">erreurs</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<a id="__codelineno-10-71" name="__codelineno-10-71"></a>    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">requetes</span><span class="p">)):</span>
+<a id="__codelineno-10-72" name="__codelineno-10-72"></a>        <span class="c1">#  store the current query</span>
+<a id="__codelineno-10-73" name="__codelineno-10-73"></a>        <span class="n">requete</span><span class="o">=</span><span class="n">requetes</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+<a id="__codelineno-10-74" name="__codelineno-10-74"></a>        <span class="c1">#  do we have an empty query? If so, move on to the next query</span>
+<a id="__codelineno-10-75" name="__codelineno-10-75"></a>        <span class="k">if</span> <span class="n">re</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;^\s*$&quot;</span><span class="p">,</span><span class="n">requete</span><span class="p">):</span>
+<a id="__codelineno-10-76" name="__codelineno-10-76"></a>            <span class="k">continue</span>
+<a id="__codelineno-10-77" name="__codelineno-10-77"></a>        <span class="c1">#    query execution i</span>
+<a id="__codelineno-10-78" name="__codelineno-10-78"></a>        <span class="n">erreur</span><span class="o">=</span><span class="s2">&quot;&quot;</span>
+<a id="__codelineno-10-79" name="__codelineno-10-79"></a>        <span class="k">try</span><span class="p">:</span>
+<a id="__codelineno-10-80" name="__codelineno-10-80"></a>            <span class="n">curseur</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">requete</span><span class="p">)</span>
+<a id="__codelineno-10-81" name="__codelineno-10-81"></a>        <span class="k">except</span> <span class="ne">Exception</span><span class="p">,</span> <span class="n">erreur</span><span class="p">:</span>
+<a id="__codelineno-10-82" name="__codelineno-10-82"></a>            <span class="k">pass</span>
+<a id="__codelineno-10-83" name="__codelineno-10-83"></a>        <span class="c1">#   was there a mistake?</span>
+<a id="__codelineno-10-84" name="__codelineno-10-84"></a>        <span class="k">if</span> <span class="n">erreur</span><span class="p">:</span>
+<a id="__codelineno-10-85" name="__codelineno-10-85"></a>            <span class="c1">#    one more mistake</span>
+<a id="__codelineno-10-86" name="__codelineno-10-86"></a>            <span class="n">erreurs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">+=</span><span class="mi">1</span>
+<a id="__codelineno-10-87" name="__codelineno-10-87"></a>            <span class="c1">#  error msg</span>
+<a id="__codelineno-10-88" name="__codelineno-10-88"></a>            <span class="n">msg</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">%s</span><span class="s2"> : Erreur (</span><span class="si">%s</span><span class="s2">)&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">requete</span><span class="p">,</span><span class="n">erreur</span><span class="p">)</span>
+<a id="__codelineno-10-89" name="__codelineno-10-89"></a>            <span class="n">erreurs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
+<a id="__codelineno-10-90" name="__codelineno-10-90"></a>            <span class="c1">#  screen tracking or not?</span>
+<a id="__codelineno-10-91" name="__codelineno-10-91"></a>            <span class="k">if</span> <span class="n">suivi</span><span class="p">:</span>
+<a id="__codelineno-10-92" name="__codelineno-10-92"></a>                <span class="nb">print</span> <span class="n">msg</span>
+<a id="__codelineno-10-93" name="__codelineno-10-93"></a>            <span class="c1">#    shall we stop?</span>
+<a id="__codelineno-10-94" name="__codelineno-10-94"></a>            <span class="k">if</span> <span class="n">arret</span><span class="p">:</span>
+<a id="__codelineno-10-95" name="__codelineno-10-95"></a>                <span class="k">return</span> <span class="n">erreurs</span>
+<a id="__codelineno-10-96" name="__codelineno-10-96"></a>        <span class="k">else</span><span class="p">:</span>
+<a id="__codelineno-10-97" name="__codelineno-10-97"></a>            <span class="k">if</span> <span class="n">suivi</span><span class="p">:</span> 
+<a id="__codelineno-10-98" name="__codelineno-10-98"></a>                <span class="nb">print</span> <span class="s2">&quot;</span><span class="si">%s</span><span class="s2"> : Execution reussie&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">requete</span><span class="p">)</span>
+<a id="__codelineno-10-99" name="__codelineno-10-99"></a>                <span class="c1">#  information on the result of the query</span>
+<a id="__codelineno-10-100" name="__codelineno-10-100"></a>                <span class="n">afficherInfos</span><span class="p">(</span><span class="n">curseur</span><span class="p">)</span>
+<a id="__codelineno-10-101" name="__codelineno-10-101"></a>
+<a id="__codelineno-10-102" name="__codelineno-10-102"></a>    <span class="c1">#  close connection and release resources</span>
+<a id="__codelineno-10-103" name="__codelineno-10-103"></a>    <span class="n">curseur</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+<a id="__codelineno-10-104" name="__codelineno-10-104"></a>    <span class="n">connexion</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span>
+<a id="__codelineno-10-105" name="__codelineno-10-105"></a>    <span class="c1">#    we disconnect</span>
+<a id="__codelineno-10-106" name="__codelineno-10-106"></a>    <span class="k">try</span><span class="p">:</span>
+<a id="__codelineno-10-107" name="__codelineno-10-107"></a>        <span class="n">connexion</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+<a id="__codelineno-10-108" name="__codelineno-10-108"></a>    <span class="k">except</span> <span class="n">MySQLdb</span><span class="o">.</span><span class="n">OperationalError</span><span class="p">,</span><span class="n">erreur</span><span class="p">:</span>
+<a id="__codelineno-10-109" name="__codelineno-10-109"></a>        <span class="c1">#    one more mistake</span>
+<a id="__codelineno-10-110" name="__codelineno-10-110"></a>        <span class="n">erreurs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">+=</span><span class="mi">1</span>
+<a id="__codelineno-10-111" name="__codelineno-10-111"></a>        <span class="c1">#  error msg</span>
+<a id="__codelineno-10-112" name="__codelineno-10-112"></a>        <span class="n">msg</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">%s</span><span class="s2"> : Erreur (</span><span class="si">%s</span><span class="s2">)&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">requete</span><span class="p">,</span><span class="n">erreur</span><span class="p">)</span>
+<a id="__codelineno-10-113" name="__codelineno-10-113"></a>        <span class="n">erreurs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
+<a id="__codelineno-10-114" name="__codelineno-10-114"></a>
+<a id="__codelineno-10-115" name="__codelineno-10-115"></a>    <span class="c1">#    return</span>
+<a id="__codelineno-10-116" name="__codelineno-10-116"></a>    <span class="k">return</span> <span class="n">erreurs</span>
+<a id="__codelineno-10-117" name="__codelineno-10-117"></a>
+<a id="__codelineno-10-118" name="__codelineno-10-118"></a>
+<a id="__codelineno-10-119" name="__codelineno-10-119"></a><span class="c1">#    ---------------------------------------------- main</span>
+<a id="__codelineno-10-120" name="__codelineno-10-120"></a><span class="c1">#  connection to the MySQL database</span>
+<a id="__codelineno-10-121" name="__codelineno-10-121"></a><span class="c1">#    user identity</span>
+<a id="__codelineno-10-122" name="__codelineno-10-122"></a><span class="n">ID</span><span class="o">=</span><span class="s2">&quot;admpersonnes&quot;</span>
+<a id="__codelineno-10-123" name="__codelineno-10-123"></a><span class="n">PWD</span><span class="o">=</span><span class="s2">&quot;nobody&quot;</span>
+<a id="__codelineno-10-124" name="__codelineno-10-124"></a><span class="c1">#  the sgbd host machine</span>
+<a id="__codelineno-10-125" name="__codelineno-10-125"></a><span class="n">HOTE</span><span class="o">=</span><span class="s2">&quot;localhost&quot;</span>
+<a id="__codelineno-10-126" name="__codelineno-10-126"></a><span class="c1">#    base identity</span>
+<a id="__codelineno-10-127" name="__codelineno-10-127"></a><span class="n">BASE</span><span class="o">=</span><span class="s2">&quot;dbpersonnes&quot;</span>
+<a id="__codelineno-10-128" name="__codelineno-10-128"></a><span class="c1">#  identity of the SQL command text file to be executed</span>
+<a id="__codelineno-10-129" name="__codelineno-10-129"></a><span class="n">TEXTE</span><span class="o">=</span><span class="s2">&quot;sql2.txt&quot;</span>
+<a id="__codelineno-10-130" name="__codelineno-10-130"></a>
+<a id="__codelineno-10-131" name="__codelineno-10-131"></a>
+<a id="__codelineno-10-132" name="__codelineno-10-132"></a><span class="c1">#  table creation and filling</span>
+<a id="__codelineno-10-133" name="__codelineno-10-133"></a><span class="n">erreurs</span><span class="o">=</span><span class="n">executerCommandes</span><span class="p">(</span><span class="n">HOTE</span><span class="p">,</span><span class="n">ID</span><span class="p">,</span><span class="n">PWD</span><span class="p">,</span><span class="n">BASE</span><span class="p">,</span><span class="n">TEXTE</span><span class="p">,</span><span class="kc">True</span><span class="p">,</span><span class="kc">False</span><span class="p">)</span>
+<a id="__codelineno-10-134" name="__codelineno-10-134"></a><span class="c1"># display number of errors</span>
+<a id="__codelineno-10-135" name="__codelineno-10-135"></a><span class="nb">print</span> <span class="s2">&quot;il y a eu </span><span class="si">%s</span><span class="s2"> erreur(s)&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">erreurs</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<a id="__codelineno-10-136" name="__codelineno-10-136"></a><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="n">erreurs</span><span class="p">)):</span>
+<a id="__codelineno-10-137" name="__codelineno-10-137"></a>    <span class="nb">print</span> <span class="n">erreurs</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+</code></pre></div></td></tr></table></div>
+<p>Notas:</p>
+<ul>
+<li>A nova funcionalidade encontra-se na linha 100 do script: após a execução de uma instrução SQL, solicitamos informações sobre o cursor utilizado por essa consulta. Estas informações são fornecidas pela função <em>displayInfo</em> nas linhas 16–40;</li>
+<li>Linhas 19 e 39: Se a consulta SQL executada for um SELECT, o atributo [cursor.description] é uma matriz em que o elemento i descreve o campo i do resultado do SELECT. Caso contrário, o atributo [cursor.rowcount] (linha 39) é o número de linhas modificadas pela consulta INSERT, UPDATE ou DELETE;</li>
+<li>Linhas 32 e 36: o método [cursor.fetchone] recupera a linha atual do SELECT. Existe um método [cursor.fetchall] que recupera todas as linhas de uma só vez.</li>
+</ul>
+<hr style="border:0; border-top:0.99pt solid #000000; margin:0.75em 0;" data-odt-border="top" />
+<div style="margin:0 0 0.75em 0; background-color:#e6e6e6; padding:0.35em 0.6em">Resultados</div>
+
+<hr style="border:0; border-top:0.99pt solid #000000; margin:0.75em 0;" data-odt-border="bottom" />
+<p>O ficheiro das consultas executadas:</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-11-1">1</a></span>
+<span class="normal"><a href="#__codelineno-11-2">2</a></span>
+<span class="normal"><a href="#__codelineno-11-3">3</a></span>
+<span class="normal"><a href="#__codelineno-11-4">4</a></span>
+<span class="normal"><a href="#__codelineno-11-5">5</a></span>
+<span class="normal"><a href="#__codelineno-11-6">6</a></span>
+<span class="normal"><a href="#__codelineno-11-7">7</a></span>
+<span class="normal"><a href="#__codelineno-11-8">8</a></span>
+<span class="normal"><a href="#__codelineno-11-9">9</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1"></a><span class="k">select</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">personnes</span>
+<a id="__codelineno-11-2" name="__codelineno-11-2"></a><span class="k">select</span><span class="w"> </span><span class="n">nom</span><span class="p">,</span><span class="n">prenom</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">personnes</span><span class="w"> </span><span class="k">order</span><span class="w"> </span><span class="k">by</span><span class="w"> </span><span class="n">nom</span><span class="w"> </span><span class="k">asc</span><span class="p">,</span><span class="w"> </span><span class="n">prenom</span><span class="w"> </span><span class="k">desc</span>
+<a id="__codelineno-11-3" name="__codelineno-11-3"></a><span class="k">select</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">personnes</span><span class="w"> </span><span class="k">where</span><span class="w"> </span><span class="n">age</span><span class="w"> </span><span class="k">between</span><span class="w"> </span><span class="mi">20</span><span class="w"> </span><span class="k">and</span><span class="w"> </span><span class="mi">40</span><span class="w"> </span><span class="k">order</span><span class="w"> </span><span class="k">by</span><span class="w"> </span><span class="n">age</span><span class="w"> </span><span class="k">desc</span><span class="p">,</span><span class="w"> </span><span class="n">nom</span><span class="w"> </span><span class="k">asc</span><span class="p">,</span><span class="w"> </span><span class="n">prenom</span><span class="w"> </span><span class="k">asc</span>
+<a id="__codelineno-11-4" name="__codelineno-11-4"></a><span class="k">insert</span><span class="w"> </span><span class="k">into</span><span class="w"> </span><span class="n">personnes</span><span class="w"> </span><span class="k">values</span><span class="p">(</span><span class="s1">&#39;Josette&#39;</span><span class="p">,</span><span class="s1">&#39;Bruneau&#39;</span><span class="p">,</span><span class="mi">46</span><span class="p">)</span>
+<a id="__codelineno-11-5" name="__codelineno-11-5"></a><span class="k">update</span><span class="w"> </span><span class="n">personnes</span><span class="w"> </span><span class="k">set</span><span class="w"> </span><span class="n">age</span><span class="o">=</span><span class="mi">47</span><span class="w"> </span><span class="k">where</span><span class="w"> </span><span class="n">nom</span><span class="o">=</span><span class="s1">&#39;Bruneau&#39;</span>
+<a id="__codelineno-11-6" name="__codelineno-11-6"></a><span class="k">select</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">personnes</span><span class="w"> </span><span class="k">where</span><span class="w"> </span><span class="n">nom</span><span class="o">=</span><span class="s1">&#39;Bruneau&#39;</span>
+<a id="__codelineno-11-7" name="__codelineno-11-7"></a><span class="k">delete</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">personnes</span><span class="w"> </span><span class="k">where</span><span class="w"> </span><span class="n">nom</span><span class="o">=</span><span class="s1">&#39;Bruneau&#39;</span>
+<a id="__codelineno-11-8" name="__codelineno-11-8"></a><span class="k">select</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">personnes</span><span class="w"> </span><span class="k">where</span><span class="w"> </span><span class="n">nom</span><span class="o">=</span><span class="s1">&#39;Bruneau&#39;</span>
+<a id="__codelineno-11-9" name="__codelineno-11-9"></a><span class="n">xselect</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">personnes</span><span class="w"> </span><span class="k">where</span><span class="w"> </span><span class="n">nom</span><span class="o">=</span><span class="s1">&#39;Bruneau&#39;</span>
+</code></pre></div></td></tr></table></div>
+<p>Resultados no ecrã:</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-12-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-12-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-12-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-12-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-12-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-12-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-12-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-12-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-12-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-12-10">10</a></span>
+<span class="normal"><a href="#__codelineno-12-11">11</a></span>
+<span class="normal"><a href="#__codelineno-12-12">12</a></span>
+<span class="normal"><a href="#__codelineno-12-13">13</a></span>
+<span class="normal"><a href="#__codelineno-12-14">14</a></span>
+<span class="normal"><a href="#__codelineno-12-15">15</a></span>
+<span class="normal"><a href="#__codelineno-12-16">16</a></span>
+<span class="normal"><a href="#__codelineno-12-17">17</a></span>
+<span class="normal"><a href="#__codelineno-12-18">18</a></span>
+<span class="normal"><a href="#__codelineno-12-19">19</a></span>
+<span class="normal"><a href="#__codelineno-12-20">20</a></span>
+<span class="normal"><a href="#__codelineno-12-21">21</a></span>
+<span class="normal"><a href="#__codelineno-12-22">22</a></span>
+<span class="normal"><a href="#__codelineno-12-23">23</a></span>
+<span class="normal"><a href="#__codelineno-12-24">24</a></span>
+<span class="normal"><a href="#__codelineno-12-25">25</a></span>
+<span class="normal"><a href="#__codelineno-12-26">26</a></span>
+<span class="normal"><a href="#__codelineno-12-27">27</a></span>
+<span class="normal"><a href="#__codelineno-12-28">28</a></span>
+<span class="normal"><a href="#__codelineno-12-29">29</a></span>
+<span class="normal"><a href="#__codelineno-12-30">30</a></span>
+<span class="normal"><a href="#__codelineno-12-31">31</a></span>
+<span class="normal"><a href="#__codelineno-12-32">32</a></span>
+<span class="normal"><a href="#__codelineno-12-33">33</a></span>
+<span class="normal"><a href="#__codelineno-12-34">34</a></span>
+<span class="normal"><a href="#__codelineno-12-35">35</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1"></a><span class="k">select</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">personnes</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">Execution</span><span class="w"> </span><span class="n">reussie</span>
+<a id="__codelineno-12-2" name="__codelineno-12-2"></a><span class="n">prenom</span><span class="p">,</span><span class="n">nom</span><span class="p">,</span><span class="n">age</span>
+<a id="__codelineno-12-3" name="__codelineno-12-3"></a><span class="c1">---------------</span>
+<a id="__codelineno-12-4" name="__codelineno-12-4"></a><span class="p">(</span><span class="s1">&#39;Geraldine&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Colou&#39;</span><span class="p">,</span><span class="w"> </span><span class="mi">26</span><span class="n">L</span><span class="p">)</span>
+<a id="__codelineno-12-5" name="__codelineno-12-5"></a><span class="p">(</span><span class="s1">&#39;Paulette&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Girond&#39;</span><span class="p">,</span><span class="w"> </span><span class="mi">56</span><span class="n">L</span><span class="p">)</span>
+<a id="__codelineno-12-6" name="__codelineno-12-6"></a><span class="p">(</span><span class="s1">&#39;Paul&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Langevin&#39;</span><span class="p">,</span><span class="w"> </span><span class="mi">48</span><span class="n">L</span><span class="p">)</span>
+<a id="__codelineno-12-7" name="__codelineno-12-7"></a><span class="p">(</span><span class="s1">&#39;Sylvie&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Lefur&#39;</span><span class="p">,</span><span class="w"> </span><span class="mi">70</span><span class="n">L</span><span class="p">)</span>
+<a id="__codelineno-12-8" name="__codelineno-12-8"></a><span class="p">(</span><span class="s1">&#39;Pierre&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Nicazou&#39;</span><span class="p">,</span><span class="w"> </span><span class="mi">35</span><span class="n">L</span><span class="p">)</span>
+<a id="__codelineno-12-9" name="__codelineno-12-9"></a><span class="k">select</span><span class="w"> </span><span class="n">nom</span><span class="p">,</span><span class="n">prenom</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">personnes</span><span class="w"> </span><span class="k">order</span><span class="w"> </span><span class="k">by</span><span class="w"> </span><span class="n">nom</span><span class="w"> </span><span class="k">asc</span><span class="p">,</span><span class="w"> </span><span class="n">prenom</span><span class="w"> </span><span class="k">desc</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">Execution</span><span class="w"> </span><span class="n">reussie</span>
+<a id="__codelineno-12-10" name="__codelineno-12-10"></a><span class="n">nom</span><span class="p">,</span><span class="n">prenom</span>
+<a id="__codelineno-12-11" name="__codelineno-12-11"></a><span class="c1">-----------</span>
+<a id="__codelineno-12-12" name="__codelineno-12-12"></a><span class="p">(</span><span class="s1">&#39;Colou&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Geraldine&#39;</span><span class="p">)</span>
+<a id="__codelineno-12-13" name="__codelineno-12-13"></a><span class="p">(</span><span class="s1">&#39;Girond&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Paulette&#39;</span><span class="p">)</span>
+<a id="__codelineno-12-14" name="__codelineno-12-14"></a><span class="p">(</span><span class="s1">&#39;Langevin&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Paul&#39;</span><span class="p">)</span>
+<a id="__codelineno-12-15" name="__codelineno-12-15"></a><span class="p">(</span><span class="s1">&#39;Lefur&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Sylvie&#39;</span><span class="p">)</span>
+<a id="__codelineno-12-16" name="__codelineno-12-16"></a><span class="p">(</span><span class="s1">&#39;Nicazou&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Pierre&#39;</span><span class="p">)</span>
+<a id="__codelineno-12-17" name="__codelineno-12-17"></a><span class="k">select</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">personnes</span><span class="w"> </span><span class="k">where</span><span class="w"> </span><span class="n">age</span><span class="w"> </span><span class="k">between</span><span class="w"> </span><span class="mi">20</span><span class="w"> </span><span class="k">and</span><span class="w"> </span><span class="mi">40</span><span class="w"> </span><span class="k">order</span><span class="w"> </span><span class="k">by</span><span class="w"> </span><span class="n">age</span><span class="w"> </span><span class="k">desc</span><span class="p">,</span><span class="w"> </span><span class="n">nom</span><span class="w"> </span><span class="k">asc</span><span class="p">,</span><span class="n">prenom</span><span class="w"> </span><span class="k">asc</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">Execution</span><span class="w"> </span><span class="n">reussie</span>
+<a id="__codelineno-12-18" name="__codelineno-12-18"></a><span class="n">prenom</span><span class="p">,</span><span class="n">nom</span><span class="p">,</span><span class="n">age</span>
+<a id="__codelineno-12-19" name="__codelineno-12-19"></a><span class="c1">---------------</span>
+<a id="__codelineno-12-20" name="__codelineno-12-20"></a><span class="p">(</span><span class="s1">&#39;Pierre&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Nicazou&#39;</span><span class="p">,</span><span class="w"> </span><span class="mi">35</span><span class="n">L</span><span class="p">)</span>
+<a id="__codelineno-12-21" name="__codelineno-12-21"></a><span class="p">(</span><span class="s1">&#39;Geraldine&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Colou&#39;</span><span class="p">,</span><span class="w"> </span><span class="mi">26</span><span class="n">L</span><span class="p">)</span>
+<a id="__codelineno-12-22" name="__codelineno-12-22"></a><span class="k">insert</span><span class="w"> </span><span class="k">into</span><span class="w"> </span><span class="n">personnes</span><span class="w"> </span><span class="k">values</span><span class="p">(</span><span class="s1">&#39;Josette&#39;</span><span class="p">,</span><span class="s1">&#39;Bruneau&#39;</span><span class="p">,</span><span class="mi">46</span><span class="p">)</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">Execution</span><span class="w"> </span><span class="n">reussie</span>
+<a id="__codelineno-12-23" name="__codelineno-12-23"></a><span class="mi">1</span><span class="w"> </span><span class="n">lignes</span><span class="p">(</span><span class="n">s</span><span class="p">)</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="p">(</span><span class="n">ont</span><span class="p">)</span><span class="w"> </span><span class="n">ete</span><span class="w"> </span><span class="n">modifiee</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
+<a id="__codelineno-12-24" name="__codelineno-12-24"></a><span class="k">update</span><span class="w"> </span><span class="n">personnes</span><span class="w"> </span><span class="k">set</span><span class="w"> </span><span class="n">age</span><span class="o">=</span><span class="mi">47</span><span class="w"> </span><span class="k">where</span><span class="w"> </span><span class="n">nom</span><span class="o">=</span><span class="s1">&#39;Bruneau&#39;</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">Execution</span><span class="w"> </span><span class="n">reussie</span>
+<a id="__codelineno-12-25" name="__codelineno-12-25"></a><span class="mi">1</span><span class="w"> </span><span class="n">lignes</span><span class="p">(</span><span class="n">s</span><span class="p">)</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="p">(</span><span class="n">ont</span><span class="p">)</span><span class="w"> </span><span class="n">ete</span><span class="w"> </span><span class="n">modifiee</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
+<a id="__codelineno-12-26" name="__codelineno-12-26"></a><span class="k">select</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">personnes</span><span class="w"> </span><span class="k">where</span><span class="w"> </span><span class="n">nom</span><span class="o">=</span><span class="s1">&#39;Bruneau&#39;</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">Execution</span><span class="w"> </span><span class="n">reussie</span>
+<a id="__codelineno-12-27" name="__codelineno-12-27"></a><span class="n">prenom</span><span class="p">,</span><span class="n">nom</span><span class="p">,</span><span class="n">age</span>
+<a id="__codelineno-12-28" name="__codelineno-12-28"></a><span class="c1">---------------</span>
+<a id="__codelineno-12-29" name="__codelineno-12-29"></a><span class="p">(</span><span class="s1">&#39;Josette&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Bruneau&#39;</span><span class="p">,</span><span class="w"> </span><span class="mi">47</span><span class="n">L</span><span class="p">)</span>
+<a id="__codelineno-12-30" name="__codelineno-12-30"></a><span class="k">delete</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">personnes</span><span class="w"> </span><span class="k">where</span><span class="w"> </span><span class="n">nom</span><span class="o">=</span><span class="s1">&#39;Bruneau&#39;</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">Execution</span><span class="w"> </span><span class="n">reussie</span>
+<a id="__codelineno-12-31" name="__codelineno-12-31"></a><span class="mi">1</span><span class="w"> </span><span class="n">lignes</span><span class="p">(</span><span class="n">s</span><span class="p">)</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="p">(</span><span class="n">ont</span><span class="p">)</span><span class="w"> </span><span class="n">ete</span><span class="w"> </span><span class="n">modifiee</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
+<a id="__codelineno-12-32" name="__codelineno-12-32"></a><span class="k">select</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">personnes</span><span class="w"> </span><span class="k">where</span><span class="w"> </span><span class="n">nom</span><span class="o">=</span><span class="s1">&#39;Bruneau&#39;</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">Execution</span><span class="w"> </span><span class="n">reussie</span>
+<a id="__codelineno-12-33" name="__codelineno-12-33"></a><span class="n">prenom</span><span class="p">,</span><span class="n">nom</span><span class="p">,</span><span class="n">age</span>
+<a id="__codelineno-12-34" name="__codelineno-12-34"></a><span class="c1">---------------</span>
+<a id="__codelineno-12-35" name="__codelineno-12-35"></a><span class="n">xselect</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">personnes</span><span class="w"> </span><span class="k">where</span><span class="w"> </span><span class="n">nom</span><span class="o">=</span><span class="s1">&#39;Bruneau&#39;</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">Erreur</span><span class="w"> </span><span class="p">((</span><span class="mi">1064</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near &#39;xselect * from personnes where nom=&#39;Bruneau&#39;&#39; at line 1&quot;</span><span class="p">))</span>
+</code></pre></div></td></tr></table></div>
+<p>Verificação no PhpMyAdmin:</p>
+<table class="odt-table" style="border-collapse: collapse; width: 100%; margin-bottom: 1em;"><tr><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;"><img src="images/10000000000000D800000093F449E680.png" width="151" height="103" style="display:inline-block; margin:4px;width:4.001cm;height:2.723cm;" class="odt-zoomable" data-zoom-src="images/10000000000000D800000093F449E680.png" /></td><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top;">&nbsp;</td></tr></table>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner">
+
+      <div>
+        <a href="https://stahe.github.io" target="_blank">
+          https://stahe.github.io
+        </a>
+        <br>
+        Este tutorial, escrito por <strong>Serge Tahé</strong>, é disponibilizado ao público sob os termos da
+<em>Licença Creative Commons Atribuição – Não comercial –
+Partilha Igual 3.0 Unported</em>.
+      </div>
+
+    </div>
+  </div>
+
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": ".", "features": ["navigation.sections", "navigation.indexes", "navigation.expand", "toc.integrate", "navigation.top"], "search": "assets/javascripts/workers/search.7a47a382.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="assets/javascripts/bundle.e71a0d61.min.js"></script>
+      
+        <script src="javascripts/focus.js"></script>
+      
+    
+  </body>
+</html>
