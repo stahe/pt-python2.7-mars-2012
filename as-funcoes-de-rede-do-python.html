@@ -1,0 +1,2039 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Introdução ao Python 2.7 através de exemplos">
+      
+      
+        <meta name="author" content="Serge Tahé">
+      
+      
+        <link rel="canonical" href="https://stahe.github.io/pt-python2.7-mars-2012/as-funcoes-de-rede-do-python.html">
+      
+      
+        <link rel="prev" href="operacao-impots-com-mysql.html">
+      
+      
+        <link rel="next" href="servicos-web-em-python.html">
+      
+      
+        
+      
+      
+      <link rel="icon" href="assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.0">
+    
+    
+      
+        <title>11. As funções de rede do Python - Introdução ao Python 2.7 através de exemplos</title>
+      
+    
+    
+      <link rel="stylesheet" href="assets/stylesheets/main.618322db.min.css">
+      
+        
+        <link rel="stylesheet" href="assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="stylesheets/focus.css">
+    
+      <link rel="stylesheet" href="stylesheets/bidi.css">
+    
+    <script>__md_scope=new URL(".",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-EBZC3JVJNR"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    var siteName = "Introdução ao Python 2.7 através de exemplos";
+    gtag('config', 'G-EBZC3JVJNR', {
+        'page_title': siteName
+    });
+  </script>
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="blue" data-md-color-accent="purple">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#11-as-funcoes-de-rede-do-python" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="index.html" title="Introdução ao Python 2.7 através de exemplos" class="md-header__button md-logo" aria-label="Introdução ao Python 2.7 através de exemplos" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Introdução ao Python 2.7 através de exemplos
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              11. As funções de rede do Python
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="blue" data-md-color-accent="purple"  aria-label="Mudar para o modo escuro"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Mudar para o modo escuro" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="blue" data-md-color-accent="purple"  aria-label="Mudar para o modo claro"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Mudar para o modo claro" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://stahe.github.io/pt-python2.7-mars-2012" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+  
+
+<nav class="md-nav md-nav--primary md-nav--integrated" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="index.html" title="Introdução ao Python 2.7 através de exemplos" class="md-nav__button md-logo" aria-label="Introdução ao Python 2.7 através de exemplos" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Introdução ao Python 2.7 através de exemplos
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://stahe.github.io/pt-python2.7-mars-2012" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="index.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Bem-vindos
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="prefacio.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    1. Prefácio
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="instalacao-de-um-interpretador-python.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2. Instalação de um interpretador Python
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="nocoes-basicas.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    3. Noções básicas
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="exercicio-pratico---impots.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    4. Exercício prático – [IMPOTS]
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="as-classes-e-os-objetos.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    5. As classes e os objetos
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="as-excecoes.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    6. As exceções
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="arquitetura-em-camadas-e-programacao-por-interfaces.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    7. Arquitetura em camadas e programação por interfaces
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="exercicio-pratico----impots-com-arquitetura-em-camadas.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    8. Exercício prático — [IMPOTS] com arquitetura em camadas
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="utilizacao-do-sgbd-mysql.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    9. Utilização do SGBD MySQL
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="operacao-impots-com-mysql.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    10. Operação [IMPOTS] com MySQL
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    11. As funções de rede do Python
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="as-funcoes-de-rede-do-python.html" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    11. As funções de rede do Python
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#111-obter-o-nome-ou-o-endereco-ip-de-um-computador-na-internet" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        11.1. Obter o nome ou o endereço IP de um computador na Internet
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#112-um-cliente-web" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        11.2. Um cliente web
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#113-um-cliente-smtp" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        11.3. Um cliente SMTP
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#114-um-segundo-cliente-smtp" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        11.4. Um segundo cliente SMTP
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#115-clienteservidor-de-eco" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        11.5. Cliente/servidor de eco
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#116-servidor-tcp-generico" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        11.6. Servidor TCP genérico
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="servicos-web-em-python.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    12. Serviços web em Python
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="exercicio-impots-com-um-servico-web.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    13. Exercício [IMPOTS] com um serviço WEB
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="processamento-de-documentos-xml.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    14. Processamento de documentos XML
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="exercicio-impots-com-xml.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    15. Exercício [IMPOTS] com XML
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<p><span id="refheading383162423505" name="refheading383162423505" class="odt-bookmark-anchor"></span></p>
+<h1 id="11-as-funcoes-de-rede-do-python">11. <span style="color: #365f91"><strong>As funções de rede do Python</strong></span></h1>
+<p>Passamos agora a abordar as funções de rede do Python que nos permitem programar em TCP / IP (Transfer Control Protocol / Internet Protocol).</p>
+<table class="odt-table" style="border-collapse: collapse; width: 100%; margin-bottom: 1em;"><tr><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top; text-align: left;"><img src="images/10000000000000C5000001719CAFE7BC.png" width="138" height="258" style="display:inline-block; margin:4px;width:3.649cm;height:6.83cm;" class="odt-zoomable" data-zoom-src="images/10000000000000C5000001719CAFE7BC.png" /></td><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top; text-align: left;">&nbsp;</td><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top; text-align: left;">&nbsp;</td></tr></table>
+
+<p><span id="refheading383182423505" name="refheading383182423505" class="odt-bookmark-anchor"></span></p>
+<h2 id="111-obter-o-nome-ou-o-endereco-ip-de-um-computador-na-internet">11.1. <span style="color: #4f81bd">Obter o nome  ou o endereço IP de um computador na Internet</span></h2>
+<hr style="border:0; border-top:0.99pt solid #000000; margin:0.75em 0;" data-odt-border="top" />
+<div style="margin:0 0 0.75em 0; background-color:#e6e6e6; padding:0.35em 0.6em">Programa (inet_01)</div>
+
+<hr style="border:0; border-top:0.99pt solid #000000; margin:0.75em 0;" data-odt-border="bottom" />
+
+<div class="odt-code-rich" data-linenums="true" style="counter-reset: odtline 0;"><pre><code class="language-python">
+<span class="odt-code-line"><span class="odt-code-line-content"><span style="color:#0000ff">import</span> sys<span style="color:#008080">,</span> socket</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">#------------------------------------------------</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"><span style="color:#0000ff">def</span> getIPandName<span style="color:#008080">(</span>nomMachine<span style="color:#008080">):</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">    #nomMachine: nome do computador cujo endereço se pretende obter IP</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">    # nomMachine--&gt;endereço IP</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">    <span style="color:#0000ff">try</span><span style="color:#008080">:</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">        ip<span style="color:#008080">=</span>socket<span style="color:#0000ff">.</span>gethostbyname<span style="color:#008080">(</span>nomMachine<span style="color:#008080">)</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">        <span style="color:#0000ff">print</span> <span style="color:#a31515">&quot;ip[%s]=%s&quot;</span> <span style="color:#008080">%</span> <span style="color:#008080">(</span>nomMachine<span style="color:#008080">,</span>ip<span style="color:#008080">)</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">    <span style="color:#0000ff">except</span> socket<span style="color:#0000ff">.</span>error<span style="color:#008080">,</span> erreur<span style="color:#008080">:</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">        <span style="color:#0000ff">print</span> <span style="color:#a31515">&quot;ip[%s]=%s&quot;</span> <span style="color:#008080">%</span> <span style="color:#008080">(</span>nomMachine<span style="color:#008080">,</span>erreur<span style="color:#008080">)</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">        <span style="color:#0000ff">return</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">    # endereço IP --&gt; nomMachine</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">    <span style="color:#0000ff">try</span><span style="color:#008080">:</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">        name<span style="color:#008080">=</span>socket<span style="color:#0000ff">.</span>gethostbyaddr<span style="color:#008080">(</span>ip<span style="color:#008080">)</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">        <span style="color:#0000ff">print</span> <span style="color:#a31515">&quot;name[%s]=%s&quot;</span> <span style="color:#008080">%</span> <span style="color:#008080">(</span>ip<span style="color:#008080">,</span>name<span style="color:#008080">[</span>0<span style="color:#008080">])</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">    <span style="color:#0000ff">except</span> socket<span style="color:#0000ff">.</span>error<span style="color:#008080">,</span> erreur<span style="color:#008080">:</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">        <span style="color:#0000ff">print</span> <span style="color:#a31515">&quot;name[%s]=%s&quot;</span> <span style="color:#008080">%</span> <span style="color:#008080">(</span>ip<span style="color:#008080">,</span>erreur<span style="color:#008080">)</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">        <span style="color:#0000ff">return</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"># ---------------------------------------- principal</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"># constantes</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">HOTES<span style="color:#008080">=[</span><span style="color:#a31515">&quot;istia.univ-angers.fr&quot;</span><span style="color:#008080">,</span><span style="color:#a31515">&quot;www.univ-angers.fr&quot;</span><span style="color:#008080">,</span><span style="color:#a31515">&quot;www.ibm.com&quot;</span><span style="color:#008080">,</span><span style="color:#a31515">&quot;localhost&quot;</span><span style="color:#008080">,</span><span style="color:#a31515">&quot;&quot;</span><span style="color:#008080">,</span><span style="color:#a31515">&quot;xx&quot;</span><span style="color:#008080">]</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"># endereços IP das máquinas de HOTES</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"><span style="color:#0000ff">for</span> i <span style="color:#0000ff">in</span> range<span style="color:#008080">(</span>len<span style="color:#008080">(</span>HOTES<span style="color:#008080">)):</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">    getIPandName<span style="color:#008080">(</span>HOTES<span style="color:#008080">[</span>i<span style="color:#008080">])</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"># fim</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">sys<span style="color:#0000ff">.</span>exit<span style="color:#008080">()</span></span></span>
+</code></pre></div>
+
+<p>Notas:</p>
+<ul>
+<li>linha 1: as funções de rede do Python estão encapsuladas no módulo <em>socket</em>.</li>
+</ul>
+<hr style="border:0; border-top:0.99pt solid #000000; margin:0.75em 0;" data-odt-border="top" />
+<div style="margin:0 0 0.75em 0; background-color:#e6e6e6; padding:0.35em 0.6em">Resultados</div>
+
+<hr style="border:0; border-top:0.99pt solid #000000; margin:0.75em 0;" data-odt-border="bottom" />
+
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-0-1">1</a></span>
+<span class="normal"><a href="#__codelineno-0-2">2</a></span>
+<span class="normal"><a href="#__codelineno-0-3">3</a></span>
+<span class="normal"><a href="#__codelineno-0-4">4</a></span>
+<span class="normal"><a href="#__codelineno-0-5">5</a></span>
+<span class="normal"><a href="#__codelineno-0-6">6</a></span>
+<span class="normal"><a href="#__codelineno-0-7">7</a></span>
+<span class="normal"><a href="#__codelineno-0-8">8</a></span>
+<span class="normal"><a href="#__codelineno-0-9">9</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1"></a>ip[istia.univ-angers.fr]=193.49.146.171
+<a id="__codelineno-0-2" name="__codelineno-0-2"></a>name[193.49.146.171]=istia.istia.univ-angers.fr
+<a id="__codelineno-0-3" name="__codelineno-0-3"></a>ip[www.univ-angers.fr]=193.49.144.40
+<a id="__codelineno-0-4" name="__codelineno-0-4"></a>name[193.49.144.40]=ametys-fo.univ-angers.fr
+<a id="__codelineno-0-5" name="__codelineno-0-5"></a>ip[www.ibm.com]=129.42.58.216
+<a id="__codelineno-0-6" name="__codelineno-0-6"></a>name[129.42.58.216]=[Errno 11004] host not found
+<a id="__codelineno-0-7" name="__codelineno-0-7"></a>ip[localhost]=127.0.0.1
+<a id="__codelineno-0-8" name="__codelineno-0-8"></a>name[127.0.0.1]=Gportpers3.ad.univ-angers.fr
+<a id="__codelineno-0-9" name="__codelineno-0-9"></a>ip[xx]=[Errno 11004] getaddrinfo failed
+</code></pre></div></td></tr></table></div>
+<p><span id="refheading383202423505" name="refheading383202423505" class="odt-bookmark-anchor"></span></p>
+<h2 id="112-um-cliente-web">11.2. <span style="color: #4f81bd">Um cliente web</span></h2>
+<p>Um script que permite obter o conteúdo do parágrafo «index» de um site web.</p>
+<hr style="border:0; border-top:0.99pt solid #000000; margin:0.75em 0;" data-odt-border="top" />
+<div style="margin:0 0 0.75em 0; background-color:#e6e6e6; padding:0.35em 0.6em">Programa (inet_02)</div>
+
+<hr style="border:0; border-top:0.99pt solid #000000; margin:0.75em 0;" data-odt-border="bottom" />
+
+<div class="odt-code-rich" data-linenums="true" style="counter-reset: odtline 0;"><pre><code class="language-python">
+<span class="odt-code-line"><span class="odt-code-line-content"><span style="color:#0000ff">import</span> sys<span style="color:#008080">,</span>socket</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">  <span style="color:#008000">#-----------------------------------------------------------------------</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"><span style="color:#0000ff">def</span> getIndex<span style="color:#008080">(</span>site<span style="color:#008080">):</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">    # lê o site URL e armazena-o no ficheiro site.html</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">  </span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">    # inicialmente sem erros</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">    erreur<span style="color:#008080">=</span><span style="color:#a31515">&quot;&quot;</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">    # criação do ficheiro site.html</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">    <span style="color:#0000ff">try</span><span style="color:#008080">:</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">        html<span style="color:#008080">=</span>open<span style="color:#008080">(</span><span style="color:#a31515">&quot;%s.html&quot;</span> <span style="color:#008080">%</span> <span style="color:#008080">(</span>site<span style="color:#008080">),</span><span style="color:#a31515">&quot;w&quot;</span><span style="color:#008080">)</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">    <span style="color:#0000ff">except</span> IOError<span style="color:#008080">,</span> erreur<span style="color:#008080">:</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">        <span style="color:#0000ff">pass</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">    # erro?</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">    <span style="color:#0000ff">if</span> erreur<span style="color:#008080">:</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">        <span style="color:#0000ff">return</span> <span style="color:#a31515">&quot;Erreur (%s) lors de la création du fichier %s.html&quot;</span> <span style="color:#008080">%</span> <span style="color:#008080">(</span>erreur<span style="color:#008080">,</span>site<span style="color:#008080">)</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">    # abertura de uma ligação na porta 80 do site</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">    <span style="color:#0000ff">try</span><span style="color:#008080">:</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">        connexion<span style="color:#008080">=</span>socket<span style="color:#0000ff">.</span>create_connection<span style="color:#008080">((</span>site<span style="color:#008080">,</span>80<span style="color:#008080">))</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">    <span style="color:#0000ff">except</span> socket<span style="color:#0000ff">.</span>error<span style="color:#008080">,</span> erreur<span style="color:#008080">:</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">        <span style="color:#0000ff">pass</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">    # retorno em caso de erro</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">    <span style="color:#0000ff">if</span> erreur<span style="color:#008080">:</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">        <span style="color:#0000ff">return</span> <span style="color:#a31515">&quot;Echec de la connexion au site (%s,80) : %s&quot;</span> <span style="color:#008080">%</span> <span style="color:#008080">(</span>site<span style="color:#008080">,</span>erreur<span style="color:#008080">)</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">    # a ligação representa um fluxo de comunicação bidirecional</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">    # entre o cliente (este programa) e o servidor web contactado</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">    # este canal é utilizado para a troca de comandos e informações</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">    # o protocolo de comunicação é HTTP</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">    # o cliente envia o comando get para solicitar o URL /</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">    # sintaxe «get» URL HTTP/1.0</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">    # os cabeçalhos (headers) do protocolo HTTP devem terminar com uma linha em branco</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">    connexion<span style="color:#0000ff">.</span>send<span style="color:#008080">(</span><span style="color:#a31515">&quot;GET / HTTP/1.0\n\n&quot;</span><span style="color:#008080">)</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">    # o servidor vai agora responder no canal de ligação. Vai enviar todos</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">    # os seus dados e, em seguida, encerrará o canal. O cliente lê tudo o que chega pelo canal de ligação</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">    # até ao encerramento do canal</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">    ligne<span style="color:#008080">=</span>connexion<span style="color:#0000ff">.</span>recv<span style="color:#008080">(</span>1000<span style="color:#008080">)</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">    <span style="color:#0000ff">while</span><span style="color:#008080">(</span>ligne<span style="color:#008080">):</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">        html<span style="color:#0000ff">.</span>write<span style="color:#008080">(</span>ligne<span style="color:#008080">)</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">        ligne<span style="color:#008080">=</span>connexion<span style="color:#0000ff">.</span>recv<span style="color:#008080">(</span>1000<span style="color:#008080">)</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">    # o cliente, por sua vez, encerra a ligação</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">    connexion<span style="color:#0000ff">.</span>close<span style="color:#008080">()</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">    # fecho do ficheiro HTML</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">    html<span style="color:#0000ff">.</span>close<span style="color:#008080">()</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">    # retorno</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">    <span style="color:#0000ff">return</span> <span style="color:#a31515">&quot;Transfert reussi du paragraphe index du site %s&quot;</span> <span style="color:#008080">%</span> <span style="color:#008080">(</span>site<span style="color:#008080">)</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"># --------------------------------------------- main    </span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"># obter o texto HTML de URL</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"># lista de sites</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">SITES<span style="color:#008080">=(</span><span style="color:#a31515">&quot;istia.univ-angers.fr&quot;</span><span style="color:#008080">,</span><span style="color:#a31515">&quot;www.univ-angers.fr&quot;</span><span style="color:#008080">,</span><span style="color:#a31515">&quot;www.ibm.com&quot;</span><span style="color:#008080">,</span><span style="color:#a31515">&quot;xx&quot;</span><span style="color:#008080">)</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"># leitura das páginas de índice dos sites da tabela SITES</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"><span style="color:#0000ff">for</span> i <span style="color:#0000ff">in</span> range<span style="color:#008080">(</span>len<span style="color:#008080">(</span>SITES<span style="color:#008080">)):</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">      # leitura da página de índice do site SITES[i]</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">      resultat<span style="color:#008080">=</span>getIndex<span style="color:#008080">(</span>SITES<span style="color:#008080">[</span>i<span style="color:#008080">])</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">      # exibição do resultado</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">      <span style="color:#0000ff">print</span> resultat</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"># fim</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">sys<span style="color:#0000ff">.</span>exit<span style="color:#008080">()</span></span></span>
+</code></pre></div>
+
+<p>Notas:</p>
+<ul>
+<li>linha 57: a lista de URLs dos sites cuja página inicial se pretende obter. Esta lista está armazenada no ficheiro de texto [nomsite.html];</li>
+<li>linha 62: a função <em>getIndex</em> executa a tarefa;</li>
+<li>linha 4: a função <em>getIndex;</em></li>
+<li>linha 20: o método <em>create_connection((site,port))</em> permite criar uma ligação com um serviço TCP / IP a funcionar na porta <em>port</em> do computador <em>«site»;</em></li>
+<li>linha 35: o método <em>send</em> permite enviar dados através de uma ligação TCP / IP. Neste caso, o que é enviado é texto. Este texto segue o protocolo HTTP (Protocolo de Transferência HyperText);</li>
+<li>linha 40: o método <em>recv</em> permite receber dados através de uma ligação TCP / IP. Aqui, a resposta do servidor web é lida em blocos de 1000 caracteres e gravada no ficheiro de texto [nomsite.html].</li>
+</ul>
+<hr style="border:0; border-top:0.99pt solid #000000; margin:0.75em 0;" data-odt-border="top" />
+<div style="margin:0 0 0.75em 0; background-color:#e6e6e6; padding:0.35em 0.6em">Resultados</div>
+
+<hr style="border:0; border-top:0.99pt solid #000000; margin:0.75em 0;" data-odt-border="bottom" />
+
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>Transfert reussi du paragraphe index du site istia.univ-angers.fr
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>Transfert reussi du paragraphe index du site www.univ-angers.fr
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>Transfert reussi du paragraphe index du site www.ibm.com
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>Echec de la connexion au site (xx,80) : [Errno 11001] getaddrinfo failed
+</code></pre></div>
+<p>O ficheiro recebido para o site [www.ibm.com]:</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-2-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-2-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-2-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-2-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-2-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-2-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-2-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-2-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-2-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-2-10">10</a></span>
+<span class="normal"><a href="#__codelineno-2-11">11</a></span>
+<span class="normal"><a href="#__codelineno-2-12">12</a></span>
+<span class="normal"><a href="#__codelineno-2-13">13</a></span>
+<span class="normal"><a href="#__codelineno-2-14">14</a></span>
+<span class="normal"><a href="#__codelineno-2-15">15</a></span>
+<span class="normal"><a href="#__codelineno-2-16">16</a></span>
+<span class="normal"><a href="#__codelineno-2-17">17</a></span>
+<span class="normal"><a href="#__codelineno-2-18">18</a></span>
+<span class="normal"><a href="#__codelineno-2-19">19</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1"></a>HTTP/1.1 302 Found
+<a id="__codelineno-2-2" name="__codelineno-2-2"></a>Date: Wed, 08 Jun 2011 15:43:56 GMT
+<a id="__codelineno-2-3" name="__codelineno-2-3"></a>Server: IBM_HTTP_Server
+<a id="__codelineno-2-4" name="__codelineno-2-4"></a>Content-Type: text/html
+<a id="__codelineno-2-5" name="__codelineno-2-5"></a>Expires: Fri, 01 Jan 1990 00:00:00 GMT
+<a id="__codelineno-2-6" name="__codelineno-2-6"></a>Pragma: no-cache
+<a id="__codelineno-2-7" name="__codelineno-2-7"></a>Cache-Control: no-cache, must-revalidate
+<a id="__codelineno-2-8" name="__codelineno-2-8"></a>Location: http://www.ibm.com/us/en/
+<a id="__codelineno-2-9" name="__codelineno-2-9"></a>Content-Length: 209
+<a id="__codelineno-2-10" name="__codelineno-2-10"></a>Kp-eeAlive: timeout=10, max=14
+<a id="__codelineno-2-11" name="__codelineno-2-11"></a>Connection: Keep-Alive
+<a id="__codelineno-2-12" name="__codelineno-2-12"></a>
+<a id="__codelineno-2-13" name="__codelineno-2-13"></a><span class="cp">&lt;!DOCTYPE HTML PUBLIC &quot;-//IETF//DTD HTML 2.0//EN&quot;&gt;</span>
+<a id="__codelineno-2-14" name="__codelineno-2-14"></a><span class="p">&lt;</span><span class="nt">html</span><span class="p">&gt;&lt;</span><span class="nt">head</span><span class="p">&gt;</span>
+<a id="__codelineno-2-15" name="__codelineno-2-15"></a><span class="p">&lt;</span><span class="nt">title</span><span class="p">&gt;</span>302 Found<span class="p">&lt;/</span><span class="nt">title</span><span class="p">&gt;</span>
+<a id="__codelineno-2-16" name="__codelineno-2-16"></a><span class="p">&lt;/</span><span class="nt">head</span><span class="p">&gt;&lt;</span><span class="nt">body</span><span class="p">&gt;</span>
+<a id="__codelineno-2-17" name="__codelineno-2-17"></a><span class="p">&lt;</span><span class="nt">h1</span><span class="p">&gt;</span>Found<span class="p">&lt;/</span><span class="nt">h1</span><span class="p">&gt;</span>
+<a id="__codelineno-2-18" name="__codelineno-2-18"></a><span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;</span>The document has moved <span class="p">&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;http://www.ibm.com/us/en/&quot;</span><span class="p">&gt;</span>here<span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;</span>.<span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
+<a id="__codelineno-2-19" name="__codelineno-2-19"></a><span class="p">&lt;/</span><span class="nt">body</span><span class="p">&gt;&lt;/</span><span class="nt">html</span><span class="p">&gt;</span>
+</code></pre></div></td></tr></table></div>
+<ul>
+<li>as linhas 1 a 11 correspondem aos cabeçalhos HTTP da resposta do servidor;</li>
+<li>linha 1: o servidor solicita ao cliente que se redirecione para o URL indicado na linha 8;</li>
+<li>linha 2: data e hora da resposta;</li>
+<li>linha 3: identidade do servidor web;</li>
+<li>linha 4: conteúdo enviado pelo servidor. Neste caso, uma página HTML que começa na linha 13;</li>
+<li>linha 12: a linha vazia que encerra os cabeçalhos HTTP;</li>
+<li>linhas 13-19: a página HTML enviada pelo servidor web.</li>
+</ul>
+<p><span id="refheading383222423505" name="refheading383222423505" class="odt-bookmark-anchor"></span></p>
+<h2 id="113-um-cliente-smtp">11.3. <span style="color: #4f81bd">Um cliente SMTP</span></h2>
+<p>Entre os protocolos TCP / IP, o SMTP (SendMail Transfer Protocol) é o protocolo de comunicação do serviço de envio de mensagens.</p>
+<hr style="border:0; border-top:0.99pt solid #000000; margin:0.75em 0;" data-odt-border="top" />
+<div style="margin:0 0 0.75em 0; background-color:#e6e6e6; padding:0.35em 0.6em">Programa (inet_03)</div>
+
+<hr style="border:0; border-top:0.99pt solid #000000; margin:0.75em 0;" data-odt-border="bottom" />
+
+<div class="odt-code-rich" data-linenums="true" style="counter-reset: odtline 0;"><pre><code class="language-python">
+<span class="odt-code-line"><span class="odt-code-line-content"># -*- coding=utf-8 -*-</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"><span style="color:#0000ff">import</span> sys<span style="color:#008080">,</span>socket</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">#-----------------------------------------------------------------------</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"><span style="color:#0000ff">def</span> getInfos<span style="color:#008080">(</span>fichier<span style="color:#008080">):</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">    # retorna as informações (SMTP, remetente, destinatário, mensagem) extraídas do ficheiro de texto [fichier]</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">    # linha 1: smtp, remetente, destinatário</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">    # linhas seguintes: o texto da mensagem</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">    # abertura de [fichier]</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">    erreur<span style="color:#008080">=</span><span style="color:#a31515">&quot;&quot;</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">    <span style="color:#0000ff">try</span><span style="color:#008080">:</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">        infos<span style="color:#008080">=</span>open<span style="color:#008080">(</span>fichier<span style="color:#008080">,</span><span style="color:#a31515">&quot;r&quot;</span><span style="color:#008080">)</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">    <span style="color:#0000ff">except</span> IOError<span style="color:#008080">,</span> erreur<span style="color:#008080">:</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">        <span style="color:#0000ff">return</span> <span style="color:#008080">(</span><span style="color:#a31515">&quot;Le fichier %s n&#x27;a pu etre ouvert en lecture : %s&quot;</span> <span style="color:#008080">%</span> <span style="color:#008080">(</span>fichier<span style="color:#008080">,</span> erreur<span style="color:#008080">))</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">  </span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">    # leitura da 1.ª linha</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">    ligne<span style="color:#008080">=</span>infos<span style="color:#0000ff">.</span>readline<span style="color:#008080">()</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">    # remoção do caractere de fim de linha</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">    ligne<span style="color:#008080">=</span>cutNewLineChar<span style="color:#008080">(</span>ligne<span style="color:#008080">)</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">    # recuperação dos campos smtp, remetente, destinatário</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">    champs<span style="color:#008080">=</span>ligne<span style="color:#0000ff">.</span>split<span style="color:#008080">(</span><span style="color:#a31515">&quot;,&quot;</span><span style="color:#008080">)</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">    # Temos o número correto de campos?</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">    <span style="color:#0000ff">if</span> len<span style="color:#008080">(</span>champs<span style="color:#008080">)!=</span>3 <span style="color:#008080">:</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">        <span style="color:#0000ff">return</span> <span style="color:#008080">(</span><span style="color:#a31515">&quot;La ligne 1 du fichier %s (serveur smtp, expediteur, destinataire) a un nombre de champs incorrect&quot;</span> <span style="color:#008080">%</span> <span style="color:#008080">(</span>fichier<span style="color:#008080">))</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">    # «processamento» das informações recuperadas</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">    # removemos de cada um dos 3 campos os «espaços em branco» que precedem ou seguem a informação útil</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">    <span style="color:#0000ff">for</span> i <span style="color:#0000ff">in</span> range<span style="color:#008080">(</span>3<span style="color:#008080">):</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">        champs<span style="color:#008080">[</span>i<span style="color:#008080">]=</span>champs<span style="color:#008080">[</span>i<span style="color:#008080">]</span><span style="color:#0000ff">.</span>strip<span style="color:#008080">()</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">    # recuperação dos campos</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">    <span style="color:#008080">(</span>smtpServer<span style="color:#008080">,</span>expediteur<span style="color:#008080">,</span>destinataire<span style="color:#008080">)=</span>champs</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">    message<span style="color:#008080">=</span><span style="color:#a31515">&quot;&quot;</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">    # leitura do resto da mensagem</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">    ligne<span style="color:#008080">=</span>infos<span style="color:#0000ff">.</span>readline<span style="color:#008080">()</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">    <span style="color:#0000ff">while</span> ligne<span style="color:#008080">!=</span><span style="color:#a31515">&#x27;&#x27;</span><span style="color:#008080">:</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">        message<span style="color:#008080">+=</span>ligne</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">        ligne<span style="color:#008080">=</span>infos<span style="color:#0000ff">.</span>readline<span style="color:#008080">()</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">    infos<span style="color:#0000ff">.</span>close<span style="color:#008080">()</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">    # retorno</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">    <span style="color:#0000ff">return</span> <span style="color:#008080">(</span><span style="color:#a31515">&quot;&quot;</span><span style="color:#008080">,</span>smtpServer<span style="color:#008080">,</span>expediteur<span style="color:#008080">,</span>destinataire<span style="color:#008080">,</span>message<span style="color:#008080">)</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">#-----------------------------------------------------------------------</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"><span style="color:#0000ff">def</span> sendmail<span style="color:#008080">(</span>smtpServer<span style="color:#008080">,</span>expediteur<span style="color:#008080">,</span>destinataire<span style="color:#008080">,</span>message<span style="color:#008080">,</span>verbose<span style="color:#008080">):</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">    # envia a mensagem para o servidor SMTP smtpserver em nome do remetente</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">    # para o destinatário. Se verbose=True, efetua um acompanhamento das trocas cliente-servidor</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">    # recupera-se o nome do cliente</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">    <span style="color:#0000ff">try</span><span style="color:#008080">:</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">        client<span style="color:#008080">=</span>socket<span style="color:#0000ff">.</span>gethostbyaddr<span style="color:#008080">(</span>socket<span style="color:#0000ff">.</span>gethostbyname<span style="color:#008080">(</span><span style="color:#a31515">&quot;localhost&quot;</span><span style="color:#008080">))[</span>0<span style="color:#008080">]</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">    <span style="color:#0000ff">except</span> socket<span style="color:#0000ff">.</span>error<span style="color:#008080">,</span> erreur<span style="color:#008080">:</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">        <span style="color:#0000ff">return</span> <span style="color:#a31515">&quot;Erreur IP / Nom du client : %s&quot;</span> <span style="color:#008080">%</span> <span style="color:#008080">(</span>erreur<span style="color:#008080">)</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">    </span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">    # abertura de uma ligação na porta 25 do smtpServer</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">    <span style="color:#0000ff">try</span><span style="color:#008080">:</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">        connexion<span style="color:#008080">=</span>socket<span style="color:#0000ff">.</span>create_connection<span style="color:#008080">((</span>smtpServer<span style="color:#008080">,</span>25<span style="color:#008080">))</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">    <span style="color:#0000ff">except</span> socket<span style="color:#0000ff">.</span>error<span style="color:#008080">,</span> erreur<span style="color:#008080">:</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">        <span style="color:#0000ff">return</span> <span style="color:#a31515">&quot;Echec de la connexion au site (%s,25) : %s&quot;</span> <span style="color:#008080">%</span> <span style="color:#008080">(</span>smtpServer<span style="color:#008080">,</span>erreur<span style="color:#008080">)</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">    # a ligação representa um fluxo de comunicação bidirecional</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">    # entre o cliente (este programa) e o servidor SMTP contactado</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">    # este canal é utilizado para a troca de comandos e informações</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">    # após a ligação, o servidor envia uma mensagem de boas-vindas que é lida</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">    erreur<span style="color:#008080">=</span>sendCommand<span style="color:#008080">(</span>connexion<span style="color:#008080">,</span><span style="color:#a31515">&quot;&quot;</span><span style="color:#008080">,</span>verbose<span style="color:#008080">,</span>1<span style="color:#008080">)</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">    <span style="color:#0000ff">if</span><span style="color:#008080">(</span>erreur<span style="color:#008080">)</span> <span style="color:#008080">:</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">        connexion<span style="color:#0000ff">.</span>close<span style="color:#008080">()</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">        <span style="color:#0000ff">return</span> erreur</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">    # comando «ehlo»:</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">    erreur<span style="color:#008080">=</span>sendCommand<span style="color:#008080">(</span>connexion<span style="color:#008080">,</span><span style="color:#a31515">&quot;EHLO %s&quot;</span> <span style="color:#008080">%</span> <span style="color:#008080">(</span>client<span style="color:#008080">),</span>verbose<span style="color:#008080">,</span>1<span style="color:#008080">)</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">    <span style="color:#0000ff">if</span> erreur <span style="color:#008080">:</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">        connexion<span style="color:#0000ff">.</span>close<span style="color:#008080">()</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">        <span style="color:#0000ff">return</span> erreur</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">    # comando mail from:</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">    erreur<span style="color:#008080">=</span>sendCommand<span style="color:#008080">(</span>connexion<span style="color:#008080">,</span><span style="color:#a31515">&quot;MAIL FROM: &lt;%s&gt;&quot;</span> <span style="color:#008080">%</span> <span style="color:#008080">(</span>expediteur<span style="color:#008080">),</span>verbose<span style="color:#008080">,</span>1<span style="color:#008080">)</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">    <span style="color:#0000ff">if</span> erreur <span style="color:#008080">:</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">        connexion<span style="color:#0000ff">.</span>close<span style="color:#008080">()</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">        <span style="color:#0000ff">return</span> erreur</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">    # comando rcpt to:</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">    erreur<span style="color:#008080">=</span>sendCommand<span style="color:#008080">(</span>connexion<span style="color:#008080">,</span><span style="color:#a31515">&quot;RCPT TO: &lt;%s&gt;&quot;</span> <span style="color:#008080">%</span> <span style="color:#008080">(</span>destinataire<span style="color:#008080">),</span>verbose<span style="color:#008080">,</span>1<span style="color:#008080">)</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">    <span style="color:#0000ff">if</span> erreur <span style="color:#008080">:</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">        connexion<span style="color:#0000ff">.</span>close<span style="color:#008080">()</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">        <span style="color:#0000ff">return</span> erreur</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">    # comando «data»</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">    erreur<span style="color:#008080">=</span>sendCommand<span style="color:#008080">(</span>connexion<span style="color:#008080">,</span><span style="color:#a31515">&quot;DATA&quot;</span><span style="color:#008080">,</span>verbose<span style="color:#008080">,</span>1<span style="color:#008080">)</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">    <span style="color:#0000ff">if</span> erreur <span style="color:#008080">:</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">        connexion<span style="color:#0000ff">.</span>close<span style="color:#008080">()</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">        <span style="color:#0000ff">return</span> erreur</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">    # preparação da mensagem a enviar</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">    # deve conter as linhas</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">    # De: remetente</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">    # Para: destinatário</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">    # linha em branco</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">    # Mensagem</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">    <span style="color:#008000"># .</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">    data<span style="color:#008080">=</span><span style="color:#a31515">&quot;From: %s\r\nTo: %s\r\n%s\r\n.\r\n&quot;</span> <span style="color:#008080">%</span> <span style="color:#008080">(</span>expediteur<span style="color:#008080">,</span>destinataire<span style="color:#008080">,</span>message<span style="color:#008080">)</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">    # envio da mensagem</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">    erreur<span style="color:#008080">=</span>sendCommand<span style="color:#008080">(</span>connexion<span style="color:#008080">,</span>data<span style="color:#008080">,</span>verbose<span style="color:#008080">,</span>0<span style="color:#008080">)</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">    <span style="color:#0000ff">if</span> erreur <span style="color:#008080">:</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">        connexion<span style="color:#0000ff">.</span>close<span style="color:#008080">()</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">        <span style="color:#0000ff">return</span> erreur</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">    # comando de saída</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">    erreur<span style="color:#008080">=</span>sendCommand<span style="color:#008080">(</span>connexion<span style="color:#008080">,</span><span style="color:#a31515">&quot;QUIT&quot;</span><span style="color:#008080">,</span>verbose<span style="color:#008080">,</span>1<span style="color:#008080">)</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">    <span style="color:#0000ff">if</span> erreur <span style="color:#008080">:</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">        connexion<span style="color:#0000ff">.</span>close<span style="color:#008080">()</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">        <span style="color:#0000ff">return</span> erreur</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">    # fim</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">    connexion<span style="color:#0000ff">.</span>close<span style="color:#008080">()</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">    <span style="color:#0000ff">return</span> <span style="color:#a31515">&quot;Message envoye&quot;</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"># --------------------------------------------------------------------------</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"><span style="color:#0000ff">def</span> sendCommand<span style="color:#008080">(</span>connexion<span style="color:#008080">,</span>commande<span style="color:#008080">,</span>verbose<span style="color:#008080">,</span>withRCLF<span style="color:#008080">):</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">    # envia comando no canal de ligação</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">    # modo detalhado se verbose=1</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">    # se withRCLF=1, adiciona a sequência RCLF ao comando</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">    # dados</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">    RCLF<span style="color:#008080">=</span><span style="color:#a31515">&quot;\r\n&quot;</span> <span style="color:#0000ff">if</span> withRCLF <span style="color:#0000ff">else</span> <span style="color:#a31515">&quot;&quot;</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">    # envio do comando se o comando não estiver vazio</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">    <span style="color:#0000ff">if</span> commande<span style="color:#008080">:</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">        connexion<span style="color:#0000ff">.</span>send<span style="color:#008080">(</span><span style="color:#a31515">&quot;%s%s&quot;</span> <span style="color:#008080">%</span> <span style="color:#008080">(</span>commande<span style="color:#008080">,</span>RCLF<span style="color:#008080">))</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">        # eventual resposta</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">        <span style="color:#0000ff">if</span> verbose<span style="color:#008080">:</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">            affiche<span style="color:#008080">(</span>commande<span style="color:#008080">,</span>1<span style="color:#008080">)</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">        # leitura da resposta com menos de 1000 caracteres</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">        reponse<span style="color:#008080">=</span>connexion<span style="color:#0000ff">.</span>recv<span style="color:#008080">(</span>1000<span style="color:#008080">)</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">        # eco eventual</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">        <span style="color:#0000ff">if</span> verbose<span style="color:#008080">:</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">            affiche<span style="color:#008080">(</span>reponse<span style="color:#008080">,</span>2<span style="color:#008080">)</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">        # recuperação do código de erro</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">        codeErreur<span style="color:#008080">=</span>reponse<span style="color:#008080">[</span>0<span style="color:#008080">:</span>3<span style="color:#008080">]</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">        # erro devolvido pelo servidor?</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">        <span style="color:#0000ff">if</span> int<span style="color:#008080">(</span>codeErreur<span style="color:#008080">)</span> <span style="color:#008080">&gt;=</span>500<span style="color:#008080">:</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">            <span style="color:#0000ff">return</span> reponse<span style="color:#008080">[</span>4<span style="color:#008080">:]</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">        # resposta sem erros</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">        <span style="color:#0000ff">return</span> <span style="color:#a31515">&quot;&quot;</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"># --------------------------------------------------------------------------</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"><span style="color:#0000ff">def</span> affiche<span style="color:#008080">(</span>echange<span style="color:#008080">,</span>sens<span style="color:#008080">):</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">    # exibe a troca de dados no ecrã?</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">    # se sens=1, exibe --&gt;troca</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">    # se sens=2, exibe &lt;-- troca sem os dois últimos caracteres RCLF</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">    <span style="color:#0000ff">if</span> sens<span style="color:#008080">==</span>1<span style="color:#008080">:</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">        <span style="color:#0000ff">print</span> <span style="color:#a31515">&quot;--&gt; [%s]&quot;</span> <span style="color:#008080">%</span> <span style="color:#008080">(</span>echange<span style="color:#008080">)</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">        <span style="color:#0000ff">return</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">    <span style="color:#0000ff">elif</span> sens<span style="color:#008080">==</span>2<span style="color:#008080">:</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">        l<span style="color:#008080">=</span>len<span style="color:#008080">(</span>echange<span style="color:#008080">)</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">        <span style="color:#0000ff">print</span> <span style="color:#a31515">&quot;&lt;-- [%s]&quot;</span> <span style="color:#008080">%</span> echange<span style="color:#008080">[</span>0<span style="color:#008080">:</span>l<span style="color:#008080">-</span>2<span style="color:#008080">]</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">        <span style="color:#0000ff">return</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">      </span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"># --------------------------------------------------------------------------</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"><span style="color:#0000ff">def</span> cutNewLineChar<span style="color:#008080">(</span>ligne<span style="color:#008080">):</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">    # elimina-se o marcador de fim de linha de [ligne], caso exista</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">    l<span style="color:#008080">=</span>len<span style="color:#008080">(</span>ligne<span style="color:#008080">)</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">    <span style="color:#0000ff">while</span><span style="color:#008080">(</span>ligne<span style="color:#008080">[</span>l<span style="color:#008080">-</span>1<span style="color:#008080">]==</span><span style="color:#a31515">&quot;\n&quot;</span> <span style="color:#0000ff">or</span> ligne<span style="color:#008080">[</span>l<span style="color:#008080">-</span>1<span style="color:#008080">]==</span><span style="color:#a31515">&quot;\r&quot;</span><span style="color:#008080">):</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">        l<span style="color:#008080">-=</span>1</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">    <span style="color:#0000ff">return</span><span style="color:#008080">(</span>ligne<span style="color:#008080">[</span>0<span style="color:#008080">:</span>l<span style="color:#008080">])</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"># main ----------------------------------------------------------------</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">  </span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"># cliente SMTP (Protocolo de Transferência SendMail) que permite enviar uma mensagem</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"># as informações são extraídas de um ficheiro INFOS que contém as seguintes linhas</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"># linha 1: smtp, remetente, destinatário</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"># linhas seguintes: o texto da mensagem</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"># remetente: e-mail do remetente</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"># destinatário: e-mail do destinatário</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"># SMTP: nome do servidor SMTP a utilizar</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"># protocolo de comunicação SMTP cliente-servidor</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"># -&gt; o cliente liga-se à porta 25 do servidor SMTP</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"># &lt;- o servidor envia-lhe uma mensagem de boas-vindas</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"># -&gt; o cliente envia o comando EHLO: nome do seu computador</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"># &lt;- o servidor responde com OK ou não</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"># -&gt; o cliente envia o comando «mail from: &lt;remetente&gt;»</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"># &lt;- o servidor responde com OK ou não</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"># -&gt; o cliente envia o comando rcpt to: &lt;destinatário&gt;</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"># &lt;- o servidor responde com OK ou não</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"># -&gt; o cliente envia o comando «data»</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"># &lt;- o servidor responde com OK ou não</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"># -&gt; o cliente envia todas as linhas da sua mensagem e termina com uma linha que contém apenas o caractere .</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"># &lt;- o servidor responde com OK ou não</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"># -&gt; o cliente envia o comando «quit»</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"># &lt;- o servidor responde com OK ou não</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"># as respostas do servidor têm o formato xxx texto, em que xxx é um número de 3 dígitos. Qualquer número xxx &gt;=500</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"># indica um erro. A resposta pode conter várias linhas, todas começando por xxx-, exceto a última</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"># no formato xxx(espaço)</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"># as linhas de texto trocadas devem terminar com os caracteres RC(#13) e LF(#10)</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"># # os parâmetros de envio do e-mail</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">MAIL<span style="color:#008080">=</span><span style="color:#a31515">&quot;mail2.txt&quot;</span> </span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"># recuperam-se os parâmetros do e-mail</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">res<span style="color:#008080">=</span>getInfos<span style="color:#008080">(</span>MAIL<span style="color:#008080">)</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"># erro?</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"><span style="color:#0000ff">if</span> res<span style="color:#008080">[</span>0<span style="color:#008080">]:</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">      <span style="color:#0000ff">print</span> <span style="color:#a31515">&quot;%s&quot;</span> <span style="color:#008080">%</span> <span style="color:#008080">(</span>erreur<span style="color:#008080">)</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">      sys<span style="color:#0000ff">.</span>exit<span style="color:#008080">()</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"># envio de e-mail em modo detalhado</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"><span style="color:#008080">(</span>smtpServer<span style="color:#008080">,</span>expediteur<span style="color:#008080">,</span>destinataire<span style="color:#008080">,</span>message<span style="color:#008080">)=</span>res<span style="color:#008080">[</span>1<span style="color:#008080">:]</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"><span style="color:#0000ff">print</span> <span style="color:#a31515">&quot;Envoi du message [%s,%s,%s]&quot;</span> <span style="color:#008080">%</span> <span style="color:#008080">(</span>smtpServer<span style="color:#008080">,</span>expediteur<span style="color:#008080">,</span>destinataire<span style="color:#008080">)</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">resultat<span style="color:#008080">=</span>sendmail<span style="color:#008080">(</span>smtpServer<span style="color:#008080">,</span>expediteur<span style="color:#008080">,</span>destinataire<span style="color:#008080">,</span>message<span style="color:#008080">,</span>True<span style="color:#008080">)</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"><span style="color:#0000ff">print</span> <span style="color:#a31515">&quot;Resultat de l&#x27;envoi : %s&quot;</span> <span style="color:#008080">%</span> <span style="color:#008080">(</span>resultat<span style="color:#008080">)</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"># fim</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">sys<span style="color:#0000ff">.</span>exit<span style="color:#008080">()</span></span></span>
+</code></pre></div>
+
+<p><strong>Notas</strong>:</p>
+<ul>
+<li>num computador Windows equipado com um antivírus, este poderá impedir que o script Python se ligue à porta 25 de um servidor SMTP. Nesse caso, é necessário desativar o antivírus. Para o McAfee, por exemplo, pode proceder da seguinte forma:</li>
+</ul>
+<table class="odt-table" style="border-collapse: collapse; width: 100%; margin-bottom: 1em;"><tr><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top; text-align: left;"><img src="images/100000000000062F00000192B859489A.png" width="680" height="173" style="display:inline-block; margin:4px;width:17.997cm;height:4.568cm;" class="odt-zoomable" data-zoom-src="images/100000000000062F00000192B859489A.png" /></td></tr></table>
+
+<ul>
+<li>no [1], ativa-se a consola VirusScan</li>
+<li>em [2], desativa-se o serviço [Protection lors de l&#x27;accès]</li>
+<li>em [3], o serviço está parado</li>
+</ul>
+<hr style="border:0; border-top:0.99pt solid #000000; margin:0.75em 0;" data-odt-border="top" />
+<div style="margin:0 0 0.75em 0; background-color:#e6e6e6; padding:0.35em 0.6em">Resultados</div>
+
+<hr style="border:0; border-top:0.99pt solid #000000; margin:0.75em 0;" data-odt-border="bottom" />
+<p>O ficheiro <em>infos.txt</em>:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>smtp.univ-angers.fr, serge.tahe@univ-angers.fr , serge.tahe@univ-angers.fr
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>Subject: test
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>
+<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>ligne1
+<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a>ligne2
+<a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a>
+<a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a>ligne3
+</code></pre></div>
+<p>Resultados no ecrã:</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-4-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-4-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-4-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-4-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-4-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-4-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-4-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-4-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-4-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-4-10">10</a></span>
+<span class="normal"><a href="#__codelineno-4-11">11</a></span>
+<span class="normal"><a href="#__codelineno-4-12">12</a></span>
+<span class="normal"><a href="#__codelineno-4-13">13</a></span>
+<span class="normal"><a href="#__codelineno-4-14">14</a></span>
+<span class="normal"><a href="#__codelineno-4-15">15</a></span>
+<span class="normal"><a href="#__codelineno-4-16">16</a></span>
+<span class="normal"><a href="#__codelineno-4-17">17</a></span>
+<span class="normal"><a href="#__codelineno-4-18">18</a></span>
+<span class="normal"><a href="#__codelineno-4-19">19</a></span>
+<span class="normal"><a href="#__codelineno-4-20">20</a></span>
+<span class="normal"><a href="#__codelineno-4-21">21</a></span>
+<span class="normal"><a href="#__codelineno-4-22">22</a></span>
+<span class="normal"><a href="#__codelineno-4-23">23</a></span>
+<span class="normal"><a href="#__codelineno-4-24">24</a></span>
+<span class="normal"><a href="#__codelineno-4-25">25</a></span>
+<span class="normal"><a href="#__codelineno-4-26">26</a></span>
+<span class="normal"><a href="#__codelineno-4-27">27</a></span>
+<span class="normal"><a href="#__codelineno-4-28">28</a></span>
+<span class="normal"><a href="#__codelineno-4-29">29</a></span>
+<span class="normal"><a href="#__codelineno-4-30">30</a></span>
+<span class="normal"><a href="#__codelineno-4-31">31</a></span>
+<span class="normal"><a href="#__codelineno-4-32">32</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1"></a>Envoi du message [smtp.univ-angers.fr,serge.tahe@univ-angers.fr,serge.tahe@univ-angers.fr]
+<a id="__codelineno-4-2" name="__codelineno-4-2"></a>--&gt; [EHLO Gportpers3.ad.univ-angers.fr]
+<a id="__codelineno-4-3" name="__codelineno-4-3"></a>&lt;-- [220 smtp.univ-angers.fr ESMTP Postfix
+<a id="__codelineno-4-4" name="__codelineno-4-4"></a>250-smtp.univ-angers.fr
+<a id="__codelineno-4-5" name="__codelineno-4-5"></a>250-PIPELINING
+<a id="__codelineno-4-6" name="__codelineno-4-6"></a>250-SIZE 20480000
+<a id="__codelineno-4-7" name="__codelineno-4-7"></a>250-VRFY
+<a id="__codelineno-4-8" name="__codelineno-4-8"></a>250-ETRN
+<a id="__codelineno-4-9" name="__codelineno-4-9"></a>250-ENHANCEDSTATUSCODES
+<a id="__codelineno-4-10" name="__codelineno-4-10"></a>250-8BITMIME
+<a id="__codelineno-4-11" name="__codelineno-4-11"></a>250 DSN]
+<a id="__codelineno-4-12" name="__codelineno-4-12"></a>--&gt; [MAIL FROM: &lt;serge.tahe@univ-angers.fr&gt;]
+<a id="__codelineno-4-13" name="__codelineno-4-13"></a>&lt;-- [250 2.1.0 Ok]
+<a id="__codelineno-4-14" name="__codelineno-4-14"></a>--&gt; [RCPT TO: &lt;serge.tahe@univ-angers.fr&gt;]
+<a id="__codelineno-4-15" name="__codelineno-4-15"></a>&lt;-- [250 2.1.5 Ok]
+<a id="__codelineno-4-16" name="__codelineno-4-16"></a>--&gt; [DATA]
+<a id="__codelineno-4-17" name="__codelineno-4-17"></a>&lt;-- [354 End data with &lt;CR&gt;&lt;LF&gt;.&lt;CR&gt;&lt;LF&gt;]
+<a id="__codelineno-4-18" name="__codelineno-4-18"></a>--&gt; [From: serge.tahe@univ-angers.fr
+<a id="__codelineno-4-19" name="__codelineno-4-19"></a>To: serge.tahe@univ-angers.fr
+<a id="__codelineno-4-20" name="__codelineno-4-20"></a>Subject: test
+<a id="__codelineno-4-21" name="__codelineno-4-21"></a>
+<a id="__codelineno-4-22" name="__codelineno-4-22"></a>ligne1
+<a id="__codelineno-4-23" name="__codelineno-4-23"></a>ligne2
+<a id="__codelineno-4-24" name="__codelineno-4-24"></a>
+<a id="__codelineno-4-25" name="__codelineno-4-25"></a>ligne3
+<a id="__codelineno-4-26" name="__codelineno-4-26"></a>
+<a id="__codelineno-4-27" name="__codelineno-4-27"></a>.
+<a id="__codelineno-4-28" name="__codelineno-4-28"></a>]
+<a id="__codelineno-4-29" name="__codelineno-4-29"></a>&lt;-- [250 2.0.0 Ok: queued as 63412114203]
+<a id="__codelineno-4-30" name="__codelineno-4-30"></a>--&gt; [QUIT]
+<a id="__codelineno-4-31" name="__codelineno-4-31"></a>&lt;-- [221 2.0.0 Bye]
+<a id="__codelineno-4-32" name="__codelineno-4-32"></a>Resultat de l&#39;envoi : Message envoye
+</code></pre></div></td></tr></table></div>
+<p>A mensagem lida pelo cliente de e-mail Thunderbird:</p>
+<table class="odt-table" style="border-collapse: collapse; width: 100%; margin-bottom: 1em;"><tr><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top; text-align: left;"><img src="images/1000000000000090000000B3B1AE64AE.png" width="101" height="125" style="display:inline-block; margin:4px;width:2.671cm;height:3.311cm;" class="odt-zoomable" data-zoom-src="images/1000000000000090000000B3B1AE64AE.png" /></td><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top; text-align: left;">&nbsp;</td><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top; text-align: left;">&nbsp;</td></tr></table>
+
+<p><span id="refheading383242423505" name="refheading383242423505" class="odt-bookmark-anchor"></span></p>
+<h2 id="114-um-segundo-cliente-smtp">11.4. <span style="color: #4f81bd">Um segundo cliente SMTP</span></h2>
+<p>Este segundo script faz o mesmo que o anterior, mas utilizando as funcionalidades do módulo [smtplib].</p>
+<hr style="border:0; border-top:0.99pt solid #000000; margin:0.75em 0;" data-odt-border="top" />
+<div style="margin:0 0 0.75em 0; background-color:#e6e6e6; padding:0.35em 0.6em">Programa (inet_04)</div>
+
+<hr style="border:0; border-top:0.99pt solid #000000; margin:0.75em 0;" data-odt-border="bottom" />
+
+<div class="odt-code-rich" data-linenums="true" style="counter-reset: odtline 0;"><pre><code class="language-python">
+<span class="odt-code-line"><span class="odt-code-line-content"># -*- coding=utf-8 -*-</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"><span style="color:#0000ff">import</span> sys<span style="color:#008080">,</span>socket<span style="color:#008080">,</span> smtplib</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">#-----------------------------------------------------------------------</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"><span style="color:#0000ff">def</span> getInfos<span style="color:#008080">(</span>fichier<span style="color:#008080">):</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">    # retorna as informações (SMTP, remetente, destinatário, mensagem) extraídas do ficheiro de texto [fichier]</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">    # linha 1: smtp, remetente, destinatário</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">    # linhas seguintes: o texto da mensagem</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">    # abertura do ficheiro [fichier]</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">    erreur<span style="color:#008080">=</span><span style="color:#a31515">&quot;&quot;</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">    <span style="color:#0000ff">try</span><span style="color:#008080">:</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">        infos<span style="color:#008080">=</span>open<span style="color:#008080">(</span>fichier<span style="color:#008080">,</span><span style="color:#a31515">&quot;r&quot;</span><span style="color:#008080">)</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">    <span style="color:#0000ff">except</span> IOError<span style="color:#008080">,</span> erreur<span style="color:#008080">:</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">        <span style="color:#0000ff">return</span> <span style="color:#008080">(</span><span style="color:#a31515">&quot;Le fichier %s n&#x27;a pu etre ouvert en lecture : %s&quot;</span> <span style="color:#008080">%</span> <span style="color:#008080">(</span>fichier<span style="color:#008080">,</span> erreur<span style="color:#008080">))</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">  </span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">    # leitura da 1.ª linha</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">    ligne<span style="color:#008080">=</span>infos<span style="color:#0000ff">.</span>readline<span style="color:#008080">()</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">    # remoção do caractere de fim de linha</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">    ligne<span style="color:#008080">=</span>cutNewLineChar<span style="color:#008080">(</span>ligne<span style="color:#008080">)</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">    # recuperação dos campos smtp, remetente, destinatário</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">    champs<span style="color:#008080">=</span>ligne<span style="color:#0000ff">.</span>split<span style="color:#008080">(</span><span style="color:#a31515">&quot;,&quot;</span><span style="color:#008080">)</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">    # Temos o número correto de campos?</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">    <span style="color:#0000ff">if</span> len<span style="color:#008080">(</span>champs<span style="color:#008080">)!=</span>3 <span style="color:#008080">:</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">        <span style="color:#0000ff">return</span> <span style="color:#008080">(</span><span style="color:#a31515">&quot;La ligne 1 du fichier %s (serveur smtp, expediteur, destinataire) a un nombre de champs incorrect&quot;</span> <span style="color:#008080">%</span> <span style="color:#008080">(</span>fichier<span style="color:#008080">))</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">    # «processamento» das informações recuperadas — removem-se os «espaços» que as precedem ou seguem</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">    <span style="color:#0000ff">for</span> i <span style="color:#0000ff">in</span> range<span style="color:#008080">(</span>3<span style="color:#008080">):</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">        champs<span style="color:#008080">[</span>i<span style="color:#008080">]=</span>champs<span style="color:#008080">[</span>i<span style="color:#008080">]</span><span style="color:#0000ff">.</span>strip<span style="color:#008080">()</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">    # recuperação dos campos</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">    <span style="color:#008080">(</span>smtpServer<span style="color:#008080">,</span>expediteur<span style="color:#008080">,</span>destinataire<span style="color:#008080">)=</span>champs</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">    # leitura da mensagem a enviar</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">    message<span style="color:#008080">=</span><span style="color:#a31515">&quot;&quot;</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">    ligne<span style="color:#008080">=</span>infos<span style="color:#0000ff">.</span>readline<span style="color:#008080">()</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">    <span style="color:#0000ff">while</span> ligne<span style="color:#008080">!=</span><span style="color:#a31515">&#x27;&#x27;</span><span style="color:#008080">:</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">        message<span style="color:#008080">+=</span>ligne</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">        ligne<span style="color:#008080">=</span>infos<span style="color:#0000ff">.</span>readline<span style="color:#008080">()</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">    infos<span style="color:#0000ff">.</span>close<span style="color:#008080">()</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">    # retorno</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">    <span style="color:#0000ff">return</span> <span style="color:#008080">(</span><span style="color:#a31515">&quot;&quot;</span><span style="color:#008080">,</span>smtpServer<span style="color:#008080">,</span>expediteur<span style="color:#008080">,</span>destinataire<span style="color:#008080">,</span>message<span style="color:#008080">)</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">#-----------------------------------------------------------------------</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"><span style="color:#0000ff">def</span> sendmail<span style="color:#008080">(</span>smtpServer<span style="color:#008080">,</span>expediteur<span style="color:#008080">,</span>destinataire<span style="color:#008080">,</span>message<span style="color:#008080">,</span>verbose<span style="color:#008080">):</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">    # envia a mensagem para o servidor SMTP smtpserver em nome do remetente</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">    # para o destinatário. Se verbose=True, efetua um acompanhamento das trocas cliente-servidor</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">    # utiliza-se a biblioteca smtplib </span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">    <span style="color:#0000ff">try</span><span style="color:#008080">:</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">        server <span style="color:#008080">=</span> smtplib<span style="color:#0000ff">.</span>SMTP<span style="color:#008080">(</span>smtpServer<span style="color:#008080">)</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">        <span style="color:#0000ff">if</span> verbose<span style="color:#008080">:</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">            server<span style="color:#0000ff">.</span>set_debuglevel<span style="color:#008080">(</span>1<span style="color:#008080">)</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">            server<span style="color:#0000ff">.</span>sendmail<span style="color:#008080">(</span>expediteur<span style="color:#008080">,</span> destinataire<span style="color:#008080">,</span> message<span style="color:#008080">)</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">            server<span style="color:#0000ff">.</span>quit<span style="color:#008080">()</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">    <span style="color:#0000ff">except</span> Exception<span style="color:#008080">,</span> erreur<span style="color:#008080">:</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">        <span style="color:#0000ff">return</span> <span style="color:#a31515">&quot;Erreur envoi du message : %s&quot;</span> <span style="color:#008080">%</span> <span style="color:#008080">(</span>erreur<span style="color:#008080">)</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">    # fim</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">    <span style="color:#0000ff">return</span> <span style="color:#a31515">&quot;Message envoye&quot;</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">      </span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"># --------------------------------------------------------------------------</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"><span style="color:#0000ff">def</span> cutNewLineChar<span style="color:#008080">(</span>ligne<span style="color:#008080">):</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">    # elimina-se o marcador de fim de linha de [ligne], caso exista</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">    l<span style="color:#008080">=</span>len<span style="color:#008080">(</span>ligne<span style="color:#008080">)</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">    <span style="color:#0000ff">while</span><span style="color:#008080">(</span>ligne<span style="color:#008080">[</span>l<span style="color:#008080">-</span>1<span style="color:#008080">]==</span><span style="color:#a31515">&quot;\n&quot;</span> <span style="color:#0000ff">or</span> ligne<span style="color:#008080">[</span>l<span style="color:#008080">-</span>1<span style="color:#008080">]==</span><span style="color:#a31515">&quot;\r&quot;</span><span style="color:#008080">):</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">        l<span style="color:#008080">-=</span>1</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">    <span style="color:#0000ff">return</span><span style="color:#008080">(</span>ligne<span style="color:#008080">[</span>0<span style="color:#008080">:</span>l<span style="color:#008080">])</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"># main ----------------------------------------------------------------</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">  </span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"># cliente SMTP (Protocolo de Transferência SendMail) que permite enviar uma mensagem</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"># as informações são extraídas de um ficheiro INFOS que contém as seguintes linhas</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"># linha 1: smtp, remetente, destinatário</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"># linhas seguintes: o texto da mensagem</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"># remetente: e-mail do remetente</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"># destinatário: e-mail do destinatário</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"># SMTP: nome do servidor SMTP a utilizar</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"># protocolo de comunicação SMTP cliente-servidor</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"># -&gt; o cliente liga-se à porta 25 do servidor SMTP</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"># &lt;- o servidor envia-lhe uma mensagem de boas-vindas</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"># -&gt; o cliente envia o comando EHLO: nome do seu computador</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"># &lt;- o servidor responde com OK ou não</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"># -&gt; o cliente envia o comando mail from: &lt;remetente&gt;</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"># &lt;- o servidor responde com OK ou não</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"># -&gt; o cliente envia o comando rcpt to: &lt;destinatário&gt;</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"># &lt;- o servidor responde com OK ou não</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"># -&gt; o cliente envia o comando «data»</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"># &lt;- o servidor responde com OK ou não</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"># -&gt; o cliente envia todas as linhas da sua mensagem e termina com uma linha que contém apenas o caractere .</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"># &lt;- o servidor responde com OK ou não</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"># -&gt; o cliente envia o comando «quit»</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"># &lt;- o servidor responde com OK ou não</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"># as respostas do servidor têm o formato xxx texto, em que xxx é um número de 3 dígitos. Qualquer número xxx &gt;=500</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"># indica um erro. A resposta pode conter várias linhas, todas começando por xxx-, exceto a última</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"># no formato xxx(espaço)</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"># as linhas de texto trocadas devem terminar com os caracteres RC(#13) e LF(#10)</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"># # os parâmetros de envio do e-mail</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">MAIL<span style="color:#008080">=</span><span style="color:#a31515">&quot;mail2.txt&quot;</span> </span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"># recuperam-se os parâmetros do e-mail</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">res<span style="color:#008080">=</span>getInfos<span style="color:#008080">(</span>MAIL<span style="color:#008080">)</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"># erro?</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"><span style="color:#0000ff">if</span> res<span style="color:#008080">[</span>0<span style="color:#008080">]:</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">      <span style="color:#0000ff">print</span> <span style="color:#a31515">&quot;%s&quot;</span> <span style="color:#008080">%</span> <span style="color:#008080">(</span>erreur<span style="color:#008080">)</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">      sys<span style="color:#0000ff">.</span>exit<span style="color:#008080">()</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"># envio do e-mail em modo detalhado</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"><span style="color:#008080">(</span>smtpServer<span style="color:#008080">,</span>expediteur<span style="color:#008080">,</span>destinataire<span style="color:#008080">,</span>message<span style="color:#008080">)=</span>res<span style="color:#008080">[</span>1<span style="color:#008080">:]</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"><span style="color:#0000ff">print</span> <span style="color:#a31515">&quot;Envoi du message [%s,%s,%s]&quot;</span> <span style="color:#008080">%</span> <span style="color:#008080">(</span>smtpServer<span style="color:#008080">,</span>expediteur<span style="color:#008080">,</span>destinataire<span style="color:#008080">)</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">resultat<span style="color:#008080">=</span>sendmail<span style="color:#008080">(</span>smtpServer<span style="color:#008080">,</span>expediteur<span style="color:#008080">,</span>destinataire<span style="color:#008080">,</span>message<span style="color:#008080">,</span>True<span style="color:#008080">)</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"><span style="color:#0000ff">print</span> <span style="color:#a31515">&quot;Resultat de l&#x27;envoi : %s&quot;</span> <span style="color:#008080">%</span> <span style="color:#008080">(</span>resultat<span style="color:#008080">)</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"># fim</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">sys<span style="color:#0000ff">.</span>exit<span style="color:#008080">()</span></span></span>
+</code></pre></div>
+
+<p>Notas:</p>
+<ul>
+<li>este script é idêntico ao anterior, com exceção da função <em>sendmail</em>. Esta função utiliza agora as funcionalidades do módulo [smtplib] (linha 3).</li>
+</ul>
+<hr style="border:0; border-top:0.99pt solid #000000; margin:0.75em 0;" data-odt-border="top" />
+<div style="margin:0 0 0.75em 0; background-color:#e6e6e6; padding:0.35em 0.6em">Resultados</div>
+
+<hr style="border:0; border-top:0.99pt solid #000000; margin:0.75em 0;" data-odt-border="bottom" />
+<p>O ficheiro <em>mail2.txt</em>:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>smtp.univ-angers.fr, serge.tahe@univ-angers.fr , serge.tahe@univ-angers.fr
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>From: serge.tahe@univ-angers.fr
+<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>To: serge.tahe@univ-angers.fr
+<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a>Subject: test
+<a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a>
+<a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a>ligne1
+<a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a>ligne2
+<a id="__codelineno-5-8" name="__codelineno-5-8" href="#__codelineno-5-8"></a>
+<a id="__codelineno-5-9" name="__codelineno-5-9" href="#__codelineno-5-9"></a>ligne3
+</code></pre></div>
+<p>Resultados no ecrã:</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-6-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-6-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-6-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-6-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-6-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-6-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-6-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-6-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-6-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-6-10">10</a></span>
+<span class="normal"><a href="#__codelineno-6-11">11</a></span>
+<span class="normal"><a href="#__codelineno-6-12">12</a></span>
+<span class="normal"><a href="#__codelineno-6-13">13</a></span>
+<span class="normal"><a href="#__codelineno-6-14">14</a></span>
+<span class="normal"><a href="#__codelineno-6-15">15</a></span>
+<span class="normal"><a href="#__codelineno-6-16">16</a></span>
+<span class="normal"><a href="#__codelineno-6-17">17</a></span>
+<span class="normal"><a href="#__codelineno-6-18">18</a></span>
+<span class="normal"><a href="#__codelineno-6-19">19</a></span>
+<span class="normal"><a href="#__codelineno-6-20">20</a></span>
+<span class="normal"><a href="#__codelineno-6-21">21</a></span>
+<span class="normal"><a href="#__codelineno-6-22">22</a></span>
+<span class="normal"><a href="#__codelineno-6-23">23</a></span>
+<span class="normal"><a href="#__codelineno-6-24">24</a></span>
+<span class="normal"><a href="#__codelineno-6-25">25</a></span>
+<span class="normal"><a href="#__codelineno-6-26">26</a></span>
+<span class="normal"><a href="#__codelineno-6-27">27</a></span>
+<span class="normal"><a href="#__codelineno-6-28">28</a></span>
+<span class="normal"><a href="#__codelineno-6-29">29</a></span>
+<span class="normal"><a href="#__codelineno-6-30">30</a></span>
+<span class="normal"><a href="#__codelineno-6-31">31</a></span>
+<span class="normal"><a href="#__codelineno-6-32">32</a></span>
+<span class="normal"><a href="#__codelineno-6-33">33</a></span>
+<span class="normal"><a href="#__codelineno-6-34">34</a></span>
+<span class="normal"><a href="#__codelineno-6-35">35</a></span>
+<span class="normal"><a href="#__codelineno-6-36">36</a></span>
+<span class="normal"><a href="#__codelineno-6-37">37</a></span>
+<span class="normal"><a href="#__codelineno-6-38">38</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1"></a>Envoi du message [smtp.univ-angers.fr,serge.tahe@univ-angers.fr,serge.tahe@univ-
+<a id="__codelineno-6-2" name="__codelineno-6-2"></a>angers.fr]
+<a id="__codelineno-6-3" name="__codelineno-6-3"></a>send: &#39;ehlo Gportpers3.ad.univ-angers.fr\r\n&#39;
+<a id="__codelineno-6-4" name="__codelineno-6-4"></a>reply: &#39;250-smtp.univ-angers.fr\r\n&#39;
+<a id="__codelineno-6-5" name="__codelineno-6-5"></a>reply: &#39;250-PIPELINING\r\n&#39;
+<a id="__codelineno-6-6" name="__codelineno-6-6"></a>reply: &#39;250-SIZE 20480000\r\n&#39;
+<a id="__codelineno-6-7" name="__codelineno-6-7"></a>reply: &#39;250-VRFY\r\n&#39;
+<a id="__codelineno-6-8" name="__codelineno-6-8"></a>reply: &#39;250-ETRN\r\n&#39;
+<a id="__codelineno-6-9" name="__codelineno-6-9"></a>reply: &#39;250-ENHANCEDSTATUSCODES\r\n&#39;
+<a id="__codelineno-6-10" name="__codelineno-6-10"></a>reply: &#39;250-8BITMIME\r\n&#39;
+<a id="__codelineno-6-11" name="__codelineno-6-11"></a>reply: &#39;250 DSN\r\n&#39;
+<a id="__codelineno-6-12" name="__codelineno-6-12"></a>reply: retcode (250); Msg: smtp.univ-angers.fr
+<a id="__codelineno-6-13" name="__codelineno-6-13"></a>PIPELINING
+<a id="__codelineno-6-14" name="__codelineno-6-14"></a>SIZE 20480000
+<a id="__codelineno-6-15" name="__codelineno-6-15"></a>VRFY
+<a id="__codelineno-6-16" name="__codelineno-6-16"></a>ETRN
+<a id="__codelineno-6-17" name="__codelineno-6-17"></a>ENHANCEDSTATUSCODES
+<a id="__codelineno-6-18" name="__codelineno-6-18"></a>8BITMIME
+<a id="__codelineno-6-19" name="__codelineno-6-19"></a>DSN
+<a id="__codelineno-6-20" name="__codelineno-6-20"></a>send: &#39;mail FROM:&lt;serge.tahe@univ-angers.fr&gt; size=99\r\n&#39;
+<a id="__codelineno-6-21" name="__codelineno-6-21"></a>reply: &#39;250 2.1.0 Ok\r\n&#39;
+<a id="__codelineno-6-22" name="__codelineno-6-22"></a>reply: retcode (250); Msg: 2.1.0 Ok
+<a id="__codelineno-6-23" name="__codelineno-6-23"></a>send: &#39;rcpt TO:&lt;serge.tahe@univ-angers.fr&gt;\r\n&#39;
+<a id="__codelineno-6-24" name="__codelineno-6-24"></a>reply: &#39;250 2.1.5 Ok\r\n&#39;
+<a id="__codelineno-6-25" name="__codelineno-6-25"></a>reply: retcode (250); Msg: 2.1.5 Ok
+<a id="__codelineno-6-26" name="__codelineno-6-26"></a>send: &#39;data\r\n&#39;
+<a id="__codelineno-6-27" name="__codelineno-6-27"></a>reply: &#39;354 End data with &lt;CR&gt;&lt;LF&gt;.&lt;CR&gt;&lt;LF&gt;\r\n&#39;
+<a id="__codelineno-6-28" name="__codelineno-6-28"></a>reply: retcode (354); Msg: End data with &lt;CR&gt;&lt;LF&gt;.&lt;CR&gt;&lt;LF&gt;
+<a id="__codelineno-6-29" name="__codelineno-6-29"></a>data: (354, &#39;End data with &lt;CR&gt;&lt;LF&gt;.&lt;CR&gt;&lt;LF&gt;&#39;)
+<a id="__codelineno-6-30" name="__codelineno-6-30"></a>send: &#39;From: serge.tahe@univ-angers.fr\r\nTo: serge.tahe@univ-angers.fr\r\nSubje
+<a id="__codelineno-6-31" name="__codelineno-6-31"></a>ct: test\r\n\r\nligne1\r\nligne2\r\n\r\nligne3\r\n.\r\n&#39;
+<a id="__codelineno-6-32" name="__codelineno-6-32"></a>reply: &#39;250 2.0.0 Ok: queued as D4977114358\r\n&#39;
+<a id="__codelineno-6-33" name="__codelineno-6-33"></a>reply: retcode (250); Msg: 2.0.0 Ok: queued as D4977114358
+<a id="__codelineno-6-34" name="__codelineno-6-34"></a>data: (250, &#39;2.0.0 Ok: queued as D4977114358&#39;)
+<a id="__codelineno-6-35" name="__codelineno-6-35"></a>send: &#39;quit\r\n&#39;
+<a id="__codelineno-6-36" name="__codelineno-6-36"></a>reply: &#39;221 2.0.0 Bye\r\n&#39;
+<a id="__codelineno-6-37" name="__codelineno-6-37"></a>reply: retcode (221); Msg: 2.0.0 Bye
+<a id="__codelineno-6-38" name="__codelineno-6-38"></a>Resultat de l&#39;envoi : Message envoye
+</code></pre></div></td></tr></table></div>
+<p><span id="refheading383262423505" name="refheading383262423505" class="odt-bookmark-anchor"></span></p>
+<h2 id="115-clienteservidor-de-eco">11.5. <span style="color: #4f81bd">Cliente/servidor de eco</span></h2>
+<p>Cria-se um serviço de eco. O servidor devolve, em maiúsculas, todas as linhas de texto que o cliente lhe envia. O serviço pode servir vários clientes ao mesmo tempo graças à utilização de threads.</p>
+<hr style="border:0; border-top:0.99pt solid #000000; margin:0.75em 0;" data-odt-border="top" />
+<div style="margin:0 0 0.75em 0; background-color:#e6e6e6; padding:0.35em 0.6em">O programa do servidor (inet_08)</div>
+
+<hr style="border:0; border-top:0.99pt solid #000000; margin:0.75em 0;" data-odt-border="bottom" />
+
+<div class="odt-code-rich" data-linenums="true" style="counter-reset: odtline 0;"><pre><code class="language-python">
+<span class="odt-code-line"><span class="odt-code-line-content"># -*- coding=utf-8 -*-</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"># servidor TCP genérico no Windows</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"># carregamento dos ficheiros de cabeçalho</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"><span style="color:#0000ff">import</span> re<span style="color:#008080">,</span>sys<span style="color:#008080">,</span>SocketServer<span style="color:#008080">,</span>threading</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"># servidor TCP multithread</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"><span style="color:#0000ff">class</span> ThreadedTCPRequestHandler<span style="color:#008080">(</span>SocketServer<span style="color:#0000ff">.</span>StreamRequestHandler<span style="color:#008080">):</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">  <span style="color:#0000ff">def</span> handle<span style="color:#008080">(</span>self<span style="color:#008080">):</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">    # thread atual</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">    cur_thread <span style="color:#008080">=</span> threading<span style="color:#0000ff">.</span>currentThread<span style="color:#008080">()</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">    # dados do cliente</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">    self<span style="color:#0000ff">.</span>data<span style="color:#008080">=</span><span style="color:#a31515">&quot;on&quot;</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">    # paragem em cadeia vazia</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">    <span style="color:#0000ff">while</span> self<span style="color:#0000ff">.</span>data<span style="color:#008080">:</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">      # as linhas de texto do cliente são lidas com o método readline</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">      self<span style="color:#0000ff">.</span>data <span style="color:#008080">=</span>self<span style="color:#0000ff">.</span>rfile<span style="color:#0000ff">.</span>readline<span style="color:#008080">()</span><span style="color:#0000ff">.</span>strip<span style="color:#008080">()</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">      # monitorização da consola</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">      <span style="color:#0000ff">print</span> <span style="color:#a31515">&quot;client %s : %s (%s)&quot;</span> <span style="color:#008080">%</span> <span style="color:#008080">(</span>self<span style="color:#0000ff">.</span>client_address<span style="color:#008080">[</span>0<span style="color:#008080">],</span>self<span style="color:#0000ff">.</span>data<span style="color:#008080">,</span>cur_thread<span style="color:#0000ff">.</span>getName<span style="color:#008080">())</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">      # envio da resposta ao cliente</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">      response <span style="color:#008080">=</span> <span style="color:#a31515">&quot;%s: %s&quot;</span> <span style="color:#008080">%</span> <span style="color:#008080">(</span>cur_thread<span style="color:#0000ff">.</span>getName<span style="color:#008080">(),</span> self<span style="color:#0000ff">.</span>data<span style="color:#0000ff">.</span>upper<span style="color:#008080">())</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">      # self.wfile é o fluxo de escrita para o cliente</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">      self<span style="color:#0000ff">.</span>wfile<span style="color:#0000ff">.</span>write<span style="color:#008080">(</span>response<span style="color:#008080">)</span>                    </span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"><span style="color:#0000ff">class</span> ThreadedTCPServer<span style="color:#008080">(</span>SocketServer<span style="color:#0000ff">.</span>ThreadingMixIn<span style="color:#008080">,</span> SocketServer<span style="color:#0000ff">.</span>TCPServer<span style="color:#008080">):</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">    <span style="color:#0000ff">pass</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"># ------------------------------------------------------ main        </span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"># sintaxe da chamada: argv[0] porta</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"># o servidor é iniciado na porta indicada</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"># Dados</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">syntaxe<span style="color:#008080">=</span><span style="color:#a31515">&quot;syntaxe : %s port&quot;</span> <span style="color:#008080">%</span> <span style="color:#008080">(</span>sys<span style="color:#0000ff">.</span>argv<span style="color:#008080">[</span>0<span style="color:#008080">])</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">#------------------------------------- verifica-se a chamada</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"># deve haver um único argumento</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">nbArguments<span style="color:#008080">=</span>len<span style="color:#008080">(</span>sys<span style="color:#0000ff">.</span>argv<span style="color:#008080">)</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"><span style="color:#0000ff">if</span> nbArguments<span style="color:#008080">!=</span>2<span style="color:#008080">:</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">    <span style="color:#0000ff">print</span> syntaxe</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">    sys<span style="color:#0000ff">.</span>exit<span style="color:#008080">(</span>1<span style="color:#008080">)</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"># a porta deve ser numérica</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">port<span style="color:#008080">=</span>sys<span style="color:#0000ff">.</span>argv<span style="color:#008080">[</span>1<span style="color:#008080">]</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">modele<span style="color:#008080">=</span><span style="color:#a31515">r&quot;^\s*\d+\s*$&quot;</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"><span style="color:#0000ff">if</span> <span style="color:#0000ff">not</span> re<span style="color:#0000ff">.</span>match<span style="color:#008080">(</span>modele<span style="color:#008080">,</span>port<span style="color:#008080">):</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">    <span style="color:#0000ff">print</span> <span style="color:#a31515">&quot;Le port %s n&#x27;est pas un nombre entier positif\n&quot;</span> <span style="color:#008080">%</span> <span style="color:#008080">(</span>port<span style="color:#008080">)</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">    sys<span style="color:#0000ff">.</span>exit<span style="color:#008080">(</span>2<span style="color:#008080">)</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"># inicialização do servidor — atende cada cliente numa thread</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">host<span style="color:#008080">=</span><span style="color:#a31515">&quot;localhost&quot;</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">server <span style="color:#008080">=</span> ThreadedTCPServer<span style="color:#008080">((</span>host<span style="color:#008080">,</span>int<span style="color:#008080">(</span>port<span style="color:#008080">)),</span> ThreadedTCPRequestHandler<span style="color:#008080">)</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"># o servidor é iniciado numa thread</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"># cada cliente será atendido numa thread adicional</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">server_thread <span style="color:#008080">=</span> threading<span style="color:#0000ff">.</span>Thread<span style="color:#008080">(</span>target<span style="color:#008080">=</span>server<span style="color:#0000ff">.</span>serve_forever<span style="color:#008080">)</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"># inicia o servidor - ciclo infinito de espera pelos clientes</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">server_thread<span style="color:#0000ff">.</span>start<span style="color:#008080">()</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"># acompanhamento</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"><span style="color:#0000ff">print</span> <span style="color:#a31515">&quot;Serveur d&#x27;echo a l&#x27;ecoute sur le port % s&quot;</span> <span style="color:#008080">%</span> <span style="color:#008080">(</span>port<span style="color:#008080">)</span></span></span>
+</code></pre></div>
+
+<p>Notas:</p>
+<ul>
+<li>linha 39: <em>sys.argv</em> representa os parâmetros do script. Aqui, devem ter o formato: <em>nom_du_script porta</em>. Por isso, devem existir dois. <em>sys.argv[0]</em> passará a ser <em>nom_du_script</em> e <em>sys.argv[1]</em> passará a ser <em>port</em> ;</li>
+<li>linha 53: o servidor de eco é uma instância da classe <em>ThreadedTcpServer</em>. O construtor desta classe espera dois parâmetros:<ul>
+<li>parâmetro 1: um tuplo de dois elementos (host, porta) que define o computador e a porta de escuta do servidor;</li>
+<li>parâmetro 2: o nome da classe responsável por processar os pedidos de um cliente.</li>
+</ul>
+</li>
+<li>linha 57: é criado um thread (mas ainda não iniciado). Este thread executa o método [serve_forever] do servidor TCP. Este método é um ciclo de escuta de ligações de clientes. Assim que for detetada uma ligação de cliente, será criada uma instância da classe <em>ThreadedTCPRequestHandler</em>. O seu método <em>handle</em> é responsável pelo diálogo com o cliente;</li>
+<li>linha 59: o thread do serviço de eco é iniciado. A partir deste momento, os clientes podem ligar-se ao serviço;</li>
+<li>linha 27: a classe do servidor de eco. Esta deriva de duas classes:  <em>SocketServer.ThreadingMixIn</em> e <em>SocketServer.TCPServer</em>. Isto torna-o num servidor TCP multithread: o servidor é executado num thread e cada cliente é atendido num thread adicional;</li>
+<li>linha 9: a classe que processa os pedidos dos clientes. Deriva da classe <em>SocketServer.StreamRequestHandler</em>. Herda, assim, dois atributos:<ul>
+<li><em>rfile</em>: que é o fluxo de leitura dos dados enviados pelo cliente — pode ser tratado como um ficheiro de texto;</li>
+<li><em>wfile</em>: que é o fluxo de escrita que permite enviar dados ao cliente — pode ser tratado como um ficheiro de texto.</li>
+</ul>
+</li>
+<li>linha 11: o método <em>handle</em> processa os pedidos dos clientes;</li>
+<li>linha 13: o thread que executa este método<em>;</em></li>
+<li>linha 17: ciclo de processamento dos pedidos do cliente. O ciclo termina quando o cliente envia uma linha vazia;</li>
+<li>linha 19: leitura do pedido do cliente;</li>
+<li>linha 21: <em>self.client_address[0]</em> representa o endereço IP do cliente. <em>cur_thread.getName()</em> é o nome do thread que executa o método <em>handle;</em></li>
+<li>linha 23: a resposta ao cliente tem duas componentes — o nome do thread que atende o cliente e o comando que este enviou, apresentado em maiúsculas.</li>
+</ul>
+<hr style="border:0; border-top:0.99pt solid #000000; margin:0.75em 0;" data-odt-border="top" />
+<div style="margin:0 0 0.75em 0; background-color:#e6e6e6; padding:0.35em 0.6em">O programa do cliente (inet_06)</div>
+
+<hr style="border:0; border-top:0.99pt solid #000000; margin:0.75em 0;" data-odt-border="bottom" />
+
+<div class="odt-code-rich" data-linenums="true" style="counter-reset: odtline 0;"><pre><code class="language-python">
+<span class="odt-code-line"><span class="odt-code-line-content"># -*- coding=utf-8 -*-</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"><span style="color:#0000ff">import</span> re<span style="color:#008080">,</span>sys<span style="color:#008080">,</span>socket</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"># ------------------------------------------------------ main        </span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"># cliente TCP genérico</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"># sintaxe da chamada: argv[0] host porta</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"># o cliente liga-se ao serviço de eco (host, porta)</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"># o servidor devolve as linhas digitadas pelo cliente</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"># sintaxe</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">syntaxe<span style="color:#008080">=</span><span style="color:#a31515">&quot;syntaxe : %s hote port&quot;</span> <span style="color:#008080">%</span> <span style="color:#008080">(</span>sys<span style="color:#0000ff">.</span>argv<span style="color:#008080">[</span>0<span style="color:#008080">])</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">#------------------------------------- verifica-se a chamada</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"># devem existir dois argumentos</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">nbArguments<span style="color:#008080">=</span>len<span style="color:#008080">(</span>sys<span style="color:#0000ff">.</span>argv<span style="color:#008080">)</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"><span style="color:#0000ff">if</span> nbArguments<span style="color:#008080">!=</span>3<span style="color:#008080">:</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">    <span style="color:#0000ff">print</span> syntaxe</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">    sys<span style="color:#0000ff">.</span>exit<span style="color:#008080">(</span>1<span style="color:#008080">)</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"># recuperam-se os argumentos</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">hote<span style="color:#008080">=</span>sys<span style="color:#0000ff">.</span>argv<span style="color:#008080">[</span>1<span style="color:#008080">]</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"># a porta deve ser numérica</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">port<span style="color:#008080">=</span>sys<span style="color:#0000ff">.</span>argv<span style="color:#008080">[</span>2<span style="color:#008080">]</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">modele<span style="color:#008080">=</span><span style="color:#a31515">r&quot;^\s*\d+\s*$&quot;</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"><span style="color:#0000ff">if</span> <span style="color:#0000ff">not</span> re<span style="color:#0000ff">.</span>match<span style="color:#008080">(</span>modele<span style="color:#008080">,</span>port<span style="color:#008080">):</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">    <span style="color:#0000ff">print</span> <span style="color:#a31515">&quot;Le port %s foit être un nombre entier positif&quot;</span> <span style="color:#008080">%</span> <span style="color:#008080">(</span>port<span style="color:#008080">)</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">    sys<span style="color:#0000ff">.</span>exit<span style="color:#008080">(</span>2<span style="color:#008080">)</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"><span style="color:#0000ff">try</span><span style="color:#008080">:</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">  # ligação do cliente ao servidor</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">  connexion<span style="color:#008080">=</span>socket<span style="color:#0000ff">.</span>create_connection<span style="color:#008080">((</span>hote<span style="color:#008080">,</span>int<span style="color:#008080">(</span>port<span style="color:#008080">)))</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"><span style="color:#0000ff">except</span> socket<span style="color:#0000ff">.</span>error<span style="color:#008080">,</span> erreur<span style="color:#008080">:</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">  <span style="color:#0000ff">print</span> <span style="color:#a31515">&quot;Echec de la connexion au site (%s,%s) : %s&quot;</span> <span style="color:#008080">%</span> <span style="color:#008080">(</span>hote<span style="color:#008080">,</span>port<span style="color:#008080">,</span>erreur<span style="color:#008080">)</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">  sys<span style="color:#0000ff">.</span>exit<span style="color:#008080">(</span>3<span style="color:#008080">)</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">  </span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"><span style="color:#0000ff">try</span><span style="color:#008080">:</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">    # ciclo de introdução de dados</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">    ligne<span style="color:#008080">=</span>raw_input<span style="color:#008080">(</span><span style="color:#a31515">&quot;Commande (rien pour arreter): &quot;</span><span style="color:#008080">)</span><span style="color:#0000ff">.</span>strip<span style="color:#008080">()</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">    <span style="color:#0000ff">while</span> ligne<span style="color:#008080">!=</span><span style="color:#a31515">&quot;&quot;</span><span style="color:#008080">:</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">        # envia-se a linha para o servidor</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">        connexion<span style="color:#0000ff">.</span>send<span style="color:#008080">(</span><span style="color:#a31515">&quot;%s\n&quot;</span> <span style="color:#008080">%</span> <span style="color:#008080">(</span>ligne<span style="color:#008080">))</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">        # aguarda-se a resposta</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">        reponse<span style="color:#008080">=</span>connexion<span style="color:#0000ff">.</span>recv<span style="color:#008080">(</span>1000<span style="color:#008080">)</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">        <span style="color:#0000ff">print</span> <span style="color:#a31515">&quot;&lt;-- %s&quot;</span> <span style="color:#008080">%</span> <span style="color:#008080">(</span>reponse<span style="color:#008080">)</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">        ligne<span style="color:#008080">=</span>raw_input<span style="color:#008080">(</span><span style="color:#a31515">&quot;Commande (rien pour arreter): &quot;</span><span style="color:#008080">)</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"><span style="color:#0000ff">except</span> socket<span style="color:#0000ff">.</span>error<span style="color:#008080">,</span> erreur<span style="color:#008080">:</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">    <span style="color:#0000ff">print</span> <span style="color:#a31515">&quot;Echec de la connexion au site (%s,%s) : %s&quot;</span> <span style="color:#008080">%</span> <span style="color:#008080">(</span>hote<span style="color:#008080">,</span>port<span style="color:#008080">,</span>erreur<span style="color:#008080">)</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">    sys<span style="color:#0000ff">.</span>exit<span style="color:#008080">(</span>3<span style="color:#008080">)</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"><span style="color:#0000ff">finally</span><span style="color:#008080">:</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">    # encerra-se a ligação</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">    connexion<span style="color:#0000ff">.</span>close<span style="color:#008080">()</span></span></span>
+</code></pre></div>
+
+<hr style="border:0; border-top:0.99pt solid #000000; margin:0.75em 0;" data-odt-border="top" />
+<div style="margin:0 0 0.75em 0; background-color:#e6e6e6; padding:0.35em 0.6em">Os resultados</div>
+
+<hr style="border:0; border-top:0.99pt solid #000000; margin:0.75em 0;" data-odt-border="bottom" />
+<p>O servidor é iniciado numa primeira janela de comandos:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>cmd&gt;%python% inet_08.py 100
+<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>Serveur d&#39;echo a l&#39;ecoute sur le port 100
+</code></pre></div>
+<p>Um primeiro cliente é iniciado numa segunda janela:</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-8-1">1</a></span>
+<span class="normal"><a href="#__codelineno-8-2">2</a></span>
+<span class="normal"><a href="#__codelineno-8-3">3</a></span>
+<span class="normal"><a href="#__codelineno-8-4">4</a></span>
+<span class="normal"><a href="#__codelineno-8-5">5</a></span>
+<span class="normal"><a href="#__codelineno-8-6">6</a></span>
+<span class="normal"><a href="#__codelineno-8-7">7</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1"></a>cmd&gt;%python% inet_06.py localhost 100
+<a id="__codelineno-8-2" name="__codelineno-8-2"></a>Commande (rien pour arreter): cmde 1 du client 1
+<a id="__codelineno-8-3" name="__codelineno-8-3"></a>[cmde 1 du client 1]
+<a id="__codelineno-8-4" name="__codelineno-8-4"></a>&lt;-- Thread-2: CMDE 1 DU CLIENT 1
+<a id="__codelineno-8-5" name="__codelineno-8-5"></a>Commande (rien pour arreter): cmde 2 du client 1
+<a id="__codelineno-8-6" name="__codelineno-8-6"></a>&lt;-- Thread-2: CMDE 2 DU CLIENT 1
+<a id="__codelineno-8-7" name="__codelineno-8-7"></a>Commande (rien pour arreter):
+</code></pre></div></td></tr></table></div>
+<p>O cliente recebe, de facto, em resposta ao comando que envia ao servidor, esse mesmo comando escrito em maiúsculas. Um segundo cliente é iniciado numa terceira janela:</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-9-1">1</a></span>
+<span class="normal"><a href="#__codelineno-9-2">2</a></span>
+<span class="normal"><a href="#__codelineno-9-3">3</a></span>
+<span class="normal"><a href="#__codelineno-9-4">4</a></span>
+<span class="normal"><a href="#__codelineno-9-5">5</a></span>
+<span class="normal"><a href="#__codelineno-9-6">6</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1"></a>cmd&gt;%python% inet_06.py localhost 100
+<a id="__codelineno-9-2" name="__codelineno-9-2"></a>Commande (rien pour arreter): cmde 1 du client 2
+<a id="__codelineno-9-3" name="__codelineno-9-3"></a>&lt;-- Thread-3: CMDE 1 DU CLIENT 2
+<a id="__codelineno-9-4" name="__codelineno-9-4"></a>Commande (rien pour arreter): cmde 2 du client 2
+<a id="__codelineno-9-5" name="__codelineno-9-5"></a>&lt;-- Thread-3: CMDE 2 DU CLIENT 2
+<a id="__codelineno-9-6" name="__codelineno-9-6"></a>Commande (rien pour arreter):
+</code></pre></div></td></tr></table></div>
+<p>O terminal do servidor apresenta então o seguinte:</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-10-1">1</a></span>
+<span class="normal"><a href="#__codelineno-10-2">2</a></span>
+<span class="normal"><a href="#__codelineno-10-3">3</a></span>
+<span class="normal"><a href="#__codelineno-10-4">4</a></span>
+<span class="normal"><a href="#__codelineno-10-5">5</a></span>
+<span class="normal"><a href="#__codelineno-10-6">6</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1"></a>cmd&gt;%python% inet_08.py 100
+<a id="__codelineno-10-2" name="__codelineno-10-2"></a>Serveur d&#39;echo a l&#39;ecoute sur le port 100
+<a id="__codelineno-10-3" name="__codelineno-10-3"></a>client 127.0.0.1 : cmde 1 du client 1 (Thread-2)
+<a id="__codelineno-10-4" name="__codelineno-10-4"></a>client 127.0.0.1 : cmde 2 du client 1 (Thread-2)
+<a id="__codelineno-10-5" name="__codelineno-10-5"></a>client 127.0.0.1 : cmde 1 du client 2 (Thread-3)
+<a id="__codelineno-10-6" name="__codelineno-10-6"></a>client 127.0.0.1 : cmde 2 du client 2 (Thread-3)
+</code></pre></div></td></tr></table></div>
+<p>Os clientes são efetivamente atendidos em threads diferentes. Para encerrar um cliente, basta introduzir um comando vazio.</p>
+<p><span id="refheading383282423505" name="refheading383282423505" class="odt-bookmark-anchor"></span></p>
+<h2 id="116-servidor-tcp-generico">11.6. <span style="color: #4f81bd">Servidor TCP genérico</span></h2>
+<p>Propomos escrever um script em Python que </p>
+<ul>
+<li>será um servidor TCP capaz de atender um cliente de cada vez,</li>
+<li>aceite linhas de texto enviadas pelo cliente,</li>
+<li>aceite linhas de texto provenientes do teclado e que sejam enviadas em resposta ao cliente.</li>
+</ul>
+<p>Assim, é o utilizador ao teclado que desempenha o papel de servidor:</p>
+<ul>
+<li>ele vê no seu terminal as linhas de texto enviadas pelo cliente;</li>
+<li>responde a este digitando a resposta no teclado. </li>
+</ul>
+<p>Desta forma, pode adaptar-se a qualquer tipo de cliente. É por isso que lhe chamaremos «servidor TCP genérico». Trata-se de uma ferramenta prática para explorar protocolos de comunicação TCP. No exemplo que se segue, o cliente TCP será um navegador da Web, o que nos permitirá explorar o protocolo HTTP utilizado pelos clientes Web.</p>
+<table class="odt-table" style="border-collapse: collapse; width: 100%; margin-bottom: 1em;"><tr><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top; text-align: left;"><img src="images/100000000000054F000000EAB57E044F.png" width="680" height="117" style="display:inline-block; margin:4px;width:17.979cm;height:3.096cm;" class="odt-zoomable" data-zoom-src="images/100000000000054F000000EAB57E044F.png" /></td></tr></table>
+
+<hr style="border:0; border-top:0.99pt solid #000000; margin:0.75em 0;" data-odt-border="top" />
+<div style="margin:0 0 0.75em 0; background-color:#e6e6e6; padding:0.35em 0.6em">O programa (inet_10)</div>
+
+<hr style="border:0; border-top:0.99pt solid #000000; margin:0.75em 0;" data-odt-border="bottom" />
+
+<div class="odt-code-rich" data-linenums="true" style="counter-reset: odtline 0;"><pre><code class="language-python">
+<span class="odt-code-line"><span class="odt-code-line-content"># -*- coding=utf-8 -*-</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"># servidor TCP genérico</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"># carregamento dos ficheiros de cabeçalho</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"><span style="color:#0000ff">import</span> re<span style="color:#008080">,</span>sys<span style="color:#008080">,</span>SocketServer<span style="color:#008080">,</span>threading</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"># servidor TCP genérico</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"><span style="color:#0000ff">class</span> MyTCPHandler<span style="color:#008080">(</span>SocketServer<span style="color:#0000ff">.</span>StreamRequestHandler<span style="color:#008080">):</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">    <span style="color:#0000ff">def</span> handle<span style="color:#008080">(</span>self<span style="color:#008080">):</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">        # exibição do cliente</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">        <span style="color:#0000ff">print</span> <span style="color:#a31515">&quot;client %s&quot;</span> <span style="color:#008080">%</span> <span style="color:#008080">(</span>self<span style="color:#0000ff">.</span>client_address<span style="color:#008080">[</span>0<span style="color:#008080">])</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">        # criação de um thread para ler os comandos do cliente</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">        thread_lecture <span style="color:#008080">=</span> threading<span style="color:#0000ff">.</span>Thread<span style="color:#008080">(</span>target<span style="color:#008080">=</span>self<span style="color:#0000ff">.</span>lecture<span style="color:#008080">)</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">        thread_lecture<span style="color:#0000ff">.</span>start<span style="color:#008080">()</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">        # encerramento ao receber o comando «bye»</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">        # leitura do comando digitado no teclado</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">        cmde<span style="color:#008080">=</span>raw_input<span style="color:#008080">(</span><span style="color:#a31515">&quot;--&gt; &quot;</span><span style="color:#008080">)</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">        <span style="color:#0000ff">while</span> cmde<span style="color:#008080">!=</span><span style="color:#a31515">&quot;bye&quot;</span><span style="color:#008080">:</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">            # envio do comando para o cliente. self.wfile é o fluxo de escrita para o cliente</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">            self<span style="color:#0000ff">.</span>wfile<span style="color:#0000ff">.</span>write<span style="color:#008080">(</span><span style="color:#a31515">&quot;%s\n&quot;</span> <span style="color:#008080">%</span> <span style="color:#008080">(</span>cmde<span style="color:#008080">))</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">            # leitura do comando seguinte</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">            cmde<span style="color:#008080">=</span>raw_input<span style="color:#008080">(</span><span style="color:#a31515">&quot;--&gt; &quot;</span><span style="color:#008080">)</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">    <span style="color:#0000ff">def</span> lecture<span style="color:#008080">(</span>self<span style="color:#008080">):</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">        # são apresentadas todas as linhas enviadas pelo cliente até se receber o comando «bye»</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">        ligne<span style="color:#008080">=</span><span style="color:#a31515">&quot;&quot;</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">        <span style="color:#0000ff">while</span> ligne<span style="color:#008080">!=</span><span style="color:#a31515">&quot;bye&quot;</span><span style="color:#008080">:</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">            # as linhas de texto do cliente são lidas com o método readline</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">            ligne <span style="color:#008080">=</span> self<span style="color:#0000ff">.</span>rfile<span style="color:#0000ff">.</span>readline<span style="color:#008080">()</span><span style="color:#0000ff">.</span>strip<span style="color:#008080">()</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">            # acompanhamento da consola</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">            <span style="color:#0000ff">print</span> <span style="color:#a31515">&quot;&lt;--- %s : %s&quot;</span> <span style="color:#008080">%</span> <span style="color:#008080">(</span>self<span style="color:#0000ff">.</span>client_address<span style="color:#008080">[</span>0<span style="color:#008080">],</span> ligne<span style="color:#008080">)</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">    </span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"># ------------------------------------------------------ main        </span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"># sintaxe de chamada: argv[0] porta</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"># o servidor é iniciado na porta indicada</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"># Dados</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">syntaxe<span style="color:#008080">=</span><span style="color:#a31515">&quot;syntaxe : %s port&quot;</span> <span style="color:#008080">%</span> <span style="color:#008080">(</span>sys<span style="color:#0000ff">.</span>argv<span style="color:#008080">[</span>0<span style="color:#008080">])</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">#------------------------------------- verifica-se a chamada</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"># deve haver um único argumento</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">nbArguments<span style="color:#008080">=</span>len<span style="color:#008080">(</span>sys<span style="color:#0000ff">.</span>argv<span style="color:#008080">)</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"><span style="color:#0000ff">if</span> nbArguments<span style="color:#008080">!=</span>2<span style="color:#008080">:</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">    <span style="color:#0000ff">print</span> syntaxe</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">    sys<span style="color:#0000ff">.</span>exit<span style="color:#008080">(</span>1<span style="color:#008080">)</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"># a porta deve ser numérica</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">port<span style="color:#008080">=</span>sys<span style="color:#0000ff">.</span>argv<span style="color:#008080">[</span>1<span style="color:#008080">]</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">modele<span style="color:#008080">=</span><span style="color:#a31515">r&quot;^\s*\d+\s*$&quot;</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"><span style="color:#0000ff">if</span> <span style="color:#0000ff">not</span> re<span style="color:#0000ff">.</span>match<span style="color:#008080">(</span>modele<span style="color:#008080">,</span>port<span style="color:#008080">):</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">    <span style="color:#0000ff">print</span> <span style="color:#a31515">&quot;Le port %s n&#x27;est pas un nombre entier positif\n&quot;</span> <span style="color:#008080">%</span> <span style="color:#008080">(</span>port<span style="color:#008080">)</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">    sys<span style="color:#0000ff">.</span>exit<span style="color:#008080">(</span>2<span style="color:#008080">)</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"># inicialização do servidor</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">host<span style="color:#008080">=</span><span style="color:#a31515">&quot;localhost&quot;</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">server <span style="color:#008080">=</span> SocketServer<span style="color:#0000ff">.</span>TCPServer<span style="color:#008080">((</span>host<span style="color:#008080">,</span> int<span style="color:#008080">(</span>port<span style="color:#008080">)),</span> MyTCPHandler<span style="color:#008080">)</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"><span style="color:#0000ff">print</span> <span style="color:#a31515">&quot;Service tcp generique lance sur le port %s. Arret par Ctrl-C&quot;</span> <span style="color:#008080">%</span> <span style="color:#008080">(</span>port<span style="color:#008080">)</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">server<span style="color:#0000ff">.</span>serve_forever<span style="color:#008080">()</span></span></span>
+</code></pre></div>
+
+<p>Notas:</p>
+<ul>
+<li>linha 57: o servidor TCP será uma instância da classe <em>SocketServer.TCPServer</em>. O seu construtor aceita dois parâmetros:<ul>
+<li>o primeiro parâmetro é uma tupla de dois elementos (<em>host, porta</em>), em que <em>host</em> é a máquina na qual o serviço opera (geralmente <em>localhost</em>) e <em>port</em>, a porta na qual o serviço aguarda (escuta) os pedidos dos clientes;</li>
+<li>o segundo parâmetro especifica a classe de serviço de um cliente. Quando um cliente se liga, é criada uma instância da classe de serviço e é o seu método <em>handle</em> que deve gerir a ligação com o cliente.</li>
+</ul>
+</li>
+</ul>
+<p>O servidor TCP <em>SocketServer.TCPServer</em> não é multithread. Atende um cliente de cada vez;</p>
+<ul>
+<li>linha 59: o método <em>serve_forever</em> do servidor TCP é executado. Trata-se de um ciclo infinito de espera por clientes;</li>
+<li>linha 9: o servidor TCP é, neste caso, uma classe derivada da classe <em>SocketServer.StreamRequestHandler</em>. Isto permite considerar os fluxos de dados trocados com o cliente como ficheiros de texto. Já nos deparámos com esta classe. Dispomos dos métodos:<ul>
+<li><em>readline</em> para ler uma linha de texto proveniente do cliente;</li>
+<li><em>write</em> para lhe enviar linhas de texto.</li>
+</ul>
+</li>
+<li>linha 12: <em>self.client_address[0]</em> é o endereço IP do cliente;</li>
+<li>linha 14: o servidor TCP vai comunicar com o cliente através de duas threads <ul>
+<li>um thread para ler as linhas do cliente;</li>
+<li>um thread para escrever linhas para o cliente.</li>
+</ul>
+</li>
+<li>linha 14: é criada a thread de leitura das linhas do cliente. O seu parâmetro <em>target</em> define o método executado pela thread. É o método definido na linha 25;</li>
+<li>linha 25: o thread de leitura é iniciado;</li>
+<li>linhas 25-32: o método executado pelo thread de leitura;</li>
+<li>linha 28: o thread de leitura lê todas as linhas de texto enviadas pelo cliente até à receção da linha «bye»;</li>
+<li>linha 18: estamos aqui no thread de escrita para o cliente. O princípio consiste em enviar ao cliente todas as linhas de texto digitadas pelo utilizador no teclado.</li>
+</ul>
+<hr style="border:0; border-top:0.99pt solid #000000; margin:0.75em 0;" data-odt-border="top" />
+<div style="margin:0 0 0.75em 0; background-color:#e6e6e6; padding:0.35em 0.6em">Os resultados</div>
+
+<hr style="border:0; border-top:0.99pt solid #000000; margin:0.75em 0;" data-odt-border="bottom" />
+<p>O servidor</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>dos&gt;%python% inet_10.py 100
+<a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a>Service tcp generique lance sur le port 100. Arret par Ctrl-C
+</code></pre></div>
+<p>O navegador do cliente</p>
+<table class="odt-table" style="border-collapse: collapse; width: 100%; margin-bottom: 1em;"><tr><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top; text-align: left;"><img src="images/100000000000014000000042281F2627.png" width="224" height="46" style="display:inline-block; margin:4px;width:5.93cm;height:1.221cm;" class="odt-zoomable" data-zoom-src="images/100000000000014000000042281F2627.png" /></td><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top; text-align: left;">&nbsp;</td></tr></table>
+
+<p>O pedido recebido pelo servidor</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-12-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-12-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-12-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-12-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-12-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-12-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-12-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-12-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-12-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-12-10">10</a></span>
+<span class="normal"><a href="#__codelineno-12-11">11</a></span>
+<span class="normal"><a href="#__codelineno-12-12">12</a></span>
+<span class="normal"><a href="#__codelineno-12-13">13</a></span>
+<span class="normal"><a href="#__codelineno-12-14">14</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1"></a><span class="n">dos</span><span class="o">&gt;%</span><span class="n">python</span><span class="o">%</span> <span class="n">inet_10</span><span class="o">.</span><span class="n">py</span> <span class="mi">100</span>
+<a id="__codelineno-12-2" name="__codelineno-12-2"></a><span class="n">Service</span> <span class="n">tcp</span> <span class="n">generique</span> <span class="n">lance</span> <span class="n">sur</span> <span class="n">le</span> <span class="n">port</span> <span class="mf">100.</span> <span class="n">Arret</span> <span class="n">par</span> <span class="n">Ctrl</span><span class="o">-</span><span class="n">C</span>
+<a id="__codelineno-12-3" name="__codelineno-12-3"></a><span class="n">client</span> <span class="mf">127.0.0.1</span>
+<a id="__codelineno-12-4" name="__codelineno-12-4"></a><span class="o">&lt;---</span> <span class="mf">127.0.0.1</span> <span class="p">:</span> <span class="n">GET</span> <span class="o">/</span> <span class="n">HTTP</span><span class="o">/</span><span class="mf">1.1</span>
+<a id="__codelineno-12-5" name="__codelineno-12-5"></a><span class="o">&lt;--&gt;</span> <span class="o">---</span> <span class="mf">127.0.0.1</span> <span class="p">:</span> <span class="n">Host</span><span class="p">:</span> <span class="n">localhost</span><span class="p">:</span><span class="mi">100</span>
+<a id="__codelineno-12-6" name="__codelineno-12-6"></a><span class="o">&lt;---</span> <span class="mf">127.0.0.1</span> <span class="p">:</span> <span class="n">User</span><span class="o">-</span><span class="n">Agent</span><span class="p">:</span> <span class="n">Mozilla</span><span class="o">/</span><span class="mf">5.0</span> <span class="p">(</span><span class="n">Windows</span><span class="p">;</span> <span class="n">U</span><span class="p">;</span> <span class="n">Windows</span> <span class="n">NT</span> <span class="mf">5.1</span><span class="p">;</span> <span class="n">fr</span><span class="p">;</span> <span class="n">rv</span><span class="p">:</span><span class="mf">1.9.2.10</span><span class="p">)</span> <span class="n">Gecko</span><span class="o">/</span><span class="mi">20100914</span> <span class="n">Firefox</span><span class="o">/</span><span class="mf">3.6.10</span> <span class="n">GTB7</span><span class="mf">.1</span> <span class="p">(</span> <span class="o">.</span><span class="n">NET</span> <span class="n">CLR</span> <span class="mf">3.5.30729</span><span class="p">)</span>
+<a id="__codelineno-12-7" name="__codelineno-12-7"></a><span class="o">&lt;---</span> <span class="mf">127.0.0.1</span> <span class="p">:</span> <span class="n">Accept</span><span class="p">:</span> <span class="n">text</span><span class="o">/</span><span class="n">html</span><span class="p">,</span><span class="n">application</span><span class="o">/</span><span class="n">xhtml</span><span class="o">+</span><span class="n">xml</span><span class="p">,</span><span class="n">application</span><span class="o">/</span><span class="n">xml</span><span class="p">;</span><span class="n">q</span><span class="o">=</span><span class="mf">0.9</span><span class="p">,</span><span class="o">*/*</span><span class="p">;</span><span class="n">q</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="mi">8</span>
+<a id="__codelineno-12-8" name="__codelineno-12-8"></a><span class="o">&lt;---</span> <span class="mf">127.0.0.1</span> <span class="p">:</span> <span class="n">Accept</span><span class="o">-</span><span class="n">Language</span><span class="p">:</span> <span class="n">fr</span><span class="p">,</span><span class="n">fr</span><span class="o">-</span><span class="n">fr</span><span class="p">;</span><span class="n">q</span><span class="o">=</span><span class="mf">0.8</span><span class="p">,</span><span class="n">en</span><span class="p">;</span><span class="n">q</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span><span class="n">en</span><span class="o">-</span><span class="n">us</span><span class="p">;</span><span class="n">q</span><span class="o">=</span><span class="mf">0.3</span>
+<a id="__codelineno-12-9" name="__codelineno-12-9"></a><span class="o">&lt;---</span> <span class="mf">127.0.0.1</span> <span class="p">:</span> <span class="n">Accept</span><span class="o">-</span><span class="n">Encoding</span><span class="p">:</span> <span class="n">gzip</span><span class="p">,</span><span class="n">deflate</span>
+<a id="__codelineno-12-10" name="__codelineno-12-10"></a><span class="o">&lt;---</span> <span class="mf">127.0.0.1</span> <span class="p">:</span> <span class="n">Accept</span><span class="o">-</span><span class="n">Charset</span><span class="p">:</span> <span class="n">ISO</span><span class="o">-</span><span class="mi">8859</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="n">utf</span><span class="o">-</span><span class="mi">8</span><span class="p">;</span><span class="n">q</span><span class="o">=</span><span class="mf">0.7</span><span class="p">,</span><span class="o">*</span><span class="p">;</span><span class="n">q</span><span class="o">=</span><span class="mf">0.7</span>
+<a id="__codelineno-12-11" name="__codelineno-12-11"></a><span class="o">&lt;---</span> <span class="mf">127.0.0.1</span> <span class="p">:</span> <span class="n">Keep</span><span class="o">-</span><span class="n">Alive</span><span class="p">:</span> <span class="mi">115</span>
+<a id="__codelineno-12-12" name="__codelineno-12-12"></a><span class="o">&lt;---</span> <span class="mf">127.0.0.1</span> <span class="p">:</span> <span class="n">Connection</span><span class="p">:</span> <span class="n">keep</span><span class="o">-</span><span class="n">alive</span>
+<a id="__codelineno-12-13" name="__codelineno-12-13"></a><span class="o">&lt;---</span> <span class="mf">127.0.0.1</span> <span class="p">:</span> <span class="n">Cache</span><span class="o">-</span><span class="n">Control</span><span class="p">:</span> <span class="nb">max</span><span class="o">-</span><span class="n">age</span><span class="o">=</span><span class="mi">0</span>
+<a id="__codelineno-12-14" name="__codelineno-12-14"></a><span class="o">&lt;---</span> <span class="mf">127.0.0.1</span> <span class="p">:</span>
+</code></pre></div></td></tr></table></div>
+<p>A resposta do servidor digitada pelo utilizador no teclado (sem o sinal --&gt;)</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-13-1">1</a></span>
+<span class="normal"><a href="#__codelineno-13-2">2</a></span>
+<span class="normal"><a href="#__codelineno-13-3">3</a></span>
+<span class="normal"><a href="#__codelineno-13-4">4</a></span>
+<span class="normal"><a href="#__codelineno-13-5">5</a></span>
+<span class="normal"><a href="#__codelineno-13-6">6</a></span>
+<span class="normal"><a href="#__codelineno-13-7">7</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1"></a>HTTP/1.1 200 OK
+<a id="__codelineno-13-2" name="__codelineno-13-2"></a>--&gt; Server: serveur tcp generique
+<a id="__codelineno-13-3" name="__codelineno-13-3"></a>--&gt; Connection: close
+<a id="__codelineno-13-4" name="__codelineno-13-4"></a>--&gt; Content-Type: text/html
+<a id="__codelineno-13-5" name="__codelineno-13-5"></a>--&gt;
+<a id="__codelineno-13-6" name="__codelineno-13-6"></a>--&gt; <span class="p">&lt;</span><span class="nt">html</span><span class="p">&gt;&lt;</span><span class="nt">body</span><span class="p">&gt;&lt;</span><span class="nt">h2</span><span class="p">&gt;</span>Serveur tcp generique<span class="p">&lt;/</span><span class="nt">h2</span><span class="p">&gt;&lt;/</span><span class="nt">body</span><span class="p">&gt;&lt;/</span><span class="nt">html</span><span class="p">&gt;</span>
+<a id="__codelineno-13-7" name="__codelineno-13-7"></a>--&gt; bye
+</code></pre></div></td></tr></table></div>
+<ul>
+<li>linhas 1-5: resposta HTTP enviada ao cliente;</li>
+<li>linha 6: a página HTML enviada ao cliente;</li>
+<li>linha 7: fim do diálogo com o cliente. O serviço prestado ao cliente vai terminar e a ligação vai ser encerrada, o que vai interromper abruptamente o thread de leitura das linhas de texto enviadas pelo cliente;</li>
+<li>as linhas 1-5 da resposta HTTP enviada ao cliente têm o seguinte significado:</li>
+<li>linha 1: o recurso solicitado pelo cliente foi encontrado;</li>
+<li>linha 2: identificação do servidor;</li>
+<li>linha 3: o servidor irá encerrar a ligação após o envio do recurso;</li>
+<li>linha 4: tipo de recurso enviado pelo servidor: um documento HTML;</li>
+<li>linha 5: uma linha vazia.</li>
+</ul>
+<p>A página apresentada pelo navegador [1]:</p>
+<table class="odt-table" style="border-collapse: collapse; width: 100%; margin-bottom: 1em;"><tr><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top; text-align: left;"><img src="images/10000000000005EA000000ED7D7ED716.png" width="680" height="106" style="display:inline-block; margin:4px;width:17.997cm;height:2.817cm;" class="odt-zoomable" data-zoom-src="images/10000000000005EA000000ED7D7ED716.png" /></td></tr></table>
+
+<p>Se visualizarmos o código-fonte recebido pelo navegador [2], verificamos que o código HTML recebido pelo navegador web é, de facto, aquele que lhe foi enviado.</p>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner">
+
+      <div>
+        <a href="https://stahe.github.io" target="_blank">
+          https://stahe.github.io
+        </a>
+        <br>
+        Este tutorial, escrito por <strong>Serge Tahé</strong>, é disponibilizado ao público sob os termos da
+<em>Licença Creative Commons Atribuição – Não comercial –
+Partilha Igual 3.0 Unported</em>.
+      </div>
+
+    </div>
+  </div>
+
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": ".", "features": ["navigation.sections", "navigation.indexes", "navigation.expand", "toc.integrate", "navigation.top"], "search": "assets/javascripts/workers/search.7a47a382.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="assets/javascripts/bundle.e71a0d61.min.js"></script>
+      
+        <script src="javascripts/focus.js"></script>
+      
+    
+  </body>
+</html>

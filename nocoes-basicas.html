@@ -1,0 +1,2118 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Introdução ao Python 2.7 através de exemplos">
+      
+      
+        <meta name="author" content="Serge Tahé">
+      
+      
+        <link rel="canonical" href="https://stahe.github.io/pt-python2.7-mars-2012/nocoes-basicas.html">
+      
+      
+        <link rel="prev" href="instalacao-de-um-interpretador-python.html">
+      
+      
+        <link rel="next" href="exercicio-pratico---impots.html">
+      
+      
+        
+      
+      
+      <link rel="icon" href="assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.0">
+    
+    
+      
+        <title>3. Noções básicas - Introdução ao Python 2.7 através de exemplos</title>
+      
+    
+    
+      <link rel="stylesheet" href="assets/stylesheets/main.618322db.min.css">
+      
+        
+        <link rel="stylesheet" href="assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="stylesheets/focus.css">
+    
+      <link rel="stylesheet" href="stylesheets/bidi.css">
+    
+    <script>__md_scope=new URL(".",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-EBZC3JVJNR"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    var siteName = "Introdução ao Python 2.7 através de exemplos";
+    gtag('config', 'G-EBZC3JVJNR', {
+        'page_title': siteName
+    });
+  </script>
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="blue" data-md-color-accent="purple">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#3-nocoes-basicas" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="index.html" title="Introdução ao Python 2.7 através de exemplos" class="md-header__button md-logo" aria-label="Introdução ao Python 2.7 através de exemplos" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Introdução ao Python 2.7 através de exemplos
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              3. Noções básicas
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="blue" data-md-color-accent="purple"  aria-label="Mudar para o modo escuro"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Mudar para o modo escuro" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="blue" data-md-color-accent="purple"  aria-label="Mudar para o modo claro"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Mudar para o modo claro" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://stahe.github.io/pt-python2.7-mars-2012" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+  
+
+<nav class="md-nav md-nav--primary md-nav--integrated" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="index.html" title="Introdução ao Python 2.7 através de exemplos" class="md-nav__button md-logo" aria-label="Introdução ao Python 2.7 através de exemplos" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Introdução ao Python 2.7 através de exemplos
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://stahe.github.io/pt-python2.7-mars-2012" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="index.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Bem-vindos
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="prefacio.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    1. Prefácio
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="instalacao-de-um-interpretador-python.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2. Instalação de um interpretador Python
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    3. Noções básicas
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="nocoes-basicas.html" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    3. Noções básicas
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#31-um-exemplo-de-programa-em-python" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.1. Um exemplo de programa em Python
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#32-mudancas-de-tipos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.2. Mudanças de tipos
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#33-o-ambito-das-variaveis" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.3. O âmbito das variáveis
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#34-listas-tuplas-e-dicionarios" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.4. Listas, tuplas e dicionários
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3.4. Listas, tuplas e dicionários">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#341-listas-unidimensionais" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.4.1. Listas unidimensionais
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#342-o-dicionario" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.4.2. O dicionário
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#343-os-tuplos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.4.3. Os tuplos
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#344-listas-multidimensionais" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.4.4. Listas multidimensionais
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#345-ligacoes-entre-cadeias-e-listas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.4.5. Ligações entre cadeias e listas
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#35-as-expressoes-regulares" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.5. As expressões regulares
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#36-modo-de-passagem-de-parametros-das-funcoes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.6. Modo de passagem de parâmetros das funções
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#37-os-ficheiros-de-texto" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.7. Os ficheiros de texto
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="exercicio-pratico---impots.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    4. Exercício prático – [IMPOTS]
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="as-classes-e-os-objetos.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    5. As classes e os objetos
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="as-excecoes.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    6. As exceções
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="arquitetura-em-camadas-e-programacao-por-interfaces.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    7. Arquitetura em camadas e programação por interfaces
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="exercicio-pratico----impots-com-arquitetura-em-camadas.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    8. Exercício prático — [IMPOTS] com arquitetura em camadas
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="utilizacao-do-sgbd-mysql.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    9. Utilização do SGBD MySQL
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="operacao-impots-com-mysql.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    10. Operação [IMPOTS] com MySQL
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="as-funcoes-de-rede-do-python.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    11. As funções de rede do Python
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="servicos-web-em-python.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    12. Serviços web em Python
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="exercicio-impots-com-um-servico-web.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    13. Exercício [IMPOTS] com um serviço WEB
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="processamento-de-documentos-xml.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    14. Processamento de documentos XML
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="exercicio-impots-com-xml.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    15. Exercício [IMPOTS] com XML
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<p><span id="refheading382422423505" name="refheading382422423505" class="odt-bookmark-anchor"></span></p>
+<h1 id="3-nocoes-basicas">3. <span style="color: #365f91">Noções básicas</span></h1>
+<table class="odt-table" style="border-collapse: collapse; width: 100%; margin-bottom: 1em;"><tr><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top; text-align: left;"><img src="images/10000000000000BB000001360E270CD9.png" width="131" height="217" style="display:inline-block; margin:4px;width:3.461cm;height:5.74cm;" class="odt-zoomable" data-zoom-src="images/10000000000000BB000001360E270CD9.png" /></td><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top; text-align: left;">&nbsp;</td><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top; text-align: left;">&nbsp;</td></tr></table>
+
+<p><span id="refheading382442423505" name="refheading382442423505" class="odt-bookmark-anchor"></span></p>
+<h2 id="31-um-exemplo-de-programa-em-python">3.1. <span style="color: #4f81bd">Um exemplo de programa em Python</span></h2>
+<p>Abaixo, encontra-se um programa que apresenta as primeiras características do Python.</p>
+<hr style="border:0; border-top:0.99pt solid #000000; margin:0.75em 0;" data-odt-border="top" />
+<div style="margin:0 0 0.75em 0; background-color:#e6e6e6; padding:0.35em 0.6em">O programa (bases_01)</div>
+
+<hr style="border:0; border-top:0.99pt solid #000000; margin:0.75em 0;" data-odt-border="bottom" />
+
+<div class="odt-code-rich" data-linenums="true" style="counter-reset: odtline 0;"><pre><code class="language-python">
+<span class="odt-code-line"><span class="odt-code-line-content"># -*- coding=utf-8 -*-</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"># ----------------------------------</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"><span style="color:#0000ff">def</span> affiche<span style="color:#008080">(</span>chaine<span style="color:#008080">):</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">    # exibe a cadeia</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">    <span style="color:#0000ff">print</span> <span style="color:#a31515">&quot;chaine=%s&quot;</span> <span style="color:#008080">%</span> <span style="color:#008080">(</span>chaine<span style="color:#008080">)</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"># ----------------------------------</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"><span style="color:#0000ff">def</span> afficheType<span style="color:#008080">(</span>variable<span style="color:#008080">):</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">    # exibe o tipo de variável</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">    <span style="color:#0000ff">print</span> <span style="color:#a31515">&quot;type[%s]=%s&quot;</span> <span style="color:#008080">%</span> <span style="color:#008080">(</span>variable<span style="color:#008080">,</span>type<span style="color:#008080">(</span>variable<span style="color:#008080">))</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"># ----------------------------------</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"><span style="color:#0000ff">def</span> f1<span style="color:#008080">(</span>param<span style="color:#008080">):</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">    # soma 10 ao parâmetro</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">    <span style="color:#0000ff">return</span> param<span style="color:#008080">+</span>10</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"># ----------------------------------</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"><span style="color:#0000ff">def</span> f2<span style="color:#008080">():</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">    # retorna 3 valores</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">    <span style="color:#0000ff">return</span> <span style="color:#008080">(</span><span style="color:#a31515">&quot;un&quot;</span><span style="color:#008080">,</span>0<span style="color:#008080">,</span>100<span style="color:#008080">);</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"># -------------------------------- programa principal ------------------------------------</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"># isto é um comentário</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"># variável utilizada sem ter sido declarada</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">nom<span style="color:#008080">=</span><span style="color:#a31515">&quot;dupont&quot;</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"># uma saída para o ecrã</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"><span style="color:#0000ff">print</span> <span style="color:#a31515">&quot;nom=%s&quot;</span> <span style="color:#008080">%</span> <span style="color:#008080">(</span>nom<span style="color:#008080">)</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"># uma lista com elementos de tipos diferentes</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">liste<span style="color:#008080">=[</span><span style="color:#a31515">&quot;un&quot;</span><span style="color:#008080">,</span><span style="color:#a31515">&quot;deux&quot;</span><span style="color:#008080">,</span>3<span style="color:#008080">,</span>4<span style="color:#008080">]</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"># o seu número de elementos</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">n<span style="color:#008080">=</span>len<span style="color:#008080">(</span>liste<span style="color:#008080">)</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"># um ciclo</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"><span style="color:#0000ff">for</span> i <span style="color:#0000ff">in</span> range<span style="color:#008080">(</span>n<span style="color:#008080">):</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">  <span style="color:#0000ff">print</span> <span style="color:#a31515">&quot;liste[%d]=%s&quot;</span> <span style="color:#008080">%</span> <span style="color:#008080">(</span>i<span style="color:#008080">,</span>liste<span style="color:#008080">[</span>i<span style="color:#008080">])</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"># inicialização de duas variáveis com uma tupla</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"><span style="color:#008080">(</span>chaine1<span style="color:#008080">,</span>chaine2<span style="color:#008080">)=(</span><span style="color:#a31515">&quot;chaine1&quot;</span><span style="color:#008080">,</span><span style="color:#a31515">&quot;chaine2&quot;</span><span style="color:#008080">)</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"># concatenação das duas cadeias</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">chaine3<span style="color:#008080">=</span>chaine1<span style="color:#008080">+</span>chaine2</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"># exibição do resultado</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"><span style="color:#0000ff">print</span> <span style="color:#a31515">&quot;[%s,%s,%s]&quot;</span> <span style="color:#008080">%</span> <span style="color:#008080">(</span>chaine1<span style="color:#008080">,</span>chaine2<span style="color:#008080">,</span>chaine3<span style="color:#008080">)</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"># utilização de uma função</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">affiche<span style="color:#008080">(</span>chaine1<span style="color:#008080">)</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"># o tipo de uma variável pode ser conhecido</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">afficheType<span style="color:#008080">(</span>n<span style="color:#008080">)</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">afficheType<span style="color:#008080">(</span>chaine1<span style="color:#008080">)</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">afficheType<span style="color:#008080">(</span>liste<span style="color:#008080">)</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"># o tipo de uma variável pode mudar durante a execução</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">n<span style="color:#008080">=</span><span style="color:#a31515">&quot;a change&quot;</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">afficheType<span style="color:#008080">(</span>n<span style="color:#008080">)</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"># uma função pode devolver um resultado</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">res1<span style="color:#008080">=</span>f1<span style="color:#008080">(</span>4<span style="color:#008080">)</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"><span style="color:#0000ff">print</span> <span style="color:#a31515">&quot;res1=%s&quot;</span> <span style="color:#008080">%</span> <span style="color:#008080">(</span>res1<span style="color:#008080">)</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"># uma função pode devolver uma lista de valores</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"><span style="color:#008080">(</span>res1<span style="color:#008080">,</span>res2<span style="color:#008080">,</span>res3<span style="color:#008080">)=</span>f2<span style="color:#008080">()</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"><span style="color:#0000ff">print</span> <span style="color:#a31515">&quot;(res1,res2,res3)=[%s,%s,%s]&quot;</span> <span style="color:#008080">%</span> <span style="color:#008080">(</span>res1<span style="color:#008080">,</span>res2<span style="color:#008080">,</span>res3<span style="color:#008080">)</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"># esses valores poderiam ter sido armazenados numa variável</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">liste<span style="color:#008080">=</span>f2<span style="color:#008080">()</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"><span style="color:#0000ff">for</span> i <span style="color:#0000ff">in</span> range<span style="color:#008080">(</span>len<span style="color:#008080">(</span>liste<span style="color:#008080">)):</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">    <span style="color:#0000ff">print</span> <span style="color:#a31515">&quot;liste[%s]=%s&quot;</span> <span style="color:#008080">%</span> <span style="color:#008080">(</span>i<span style="color:#008080">,</span> liste<span style="color:#008080">[</span>i<span style="color:#008080">])</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"># testes</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"><span style="color:#0000ff">for</span> i <span style="color:#0000ff">in</span> range<span style="color:#008080">(</span>len<span style="color:#008080">(</span>liste<span style="color:#008080">)):</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">    # apenas apresenta as cadeias de caracteres</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">    <span style="color:#0000ff">if</span> <span style="color:#008080">(</span>type<span style="color:#008080">(</span>liste<span style="color:#008080">[</span>i<span style="color:#008080">])==</span><span style="color:#a31515">&quot;str&quot;</span><span style="color:#008080">):</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">        <span style="color:#0000ff">print</span> <span style="color:#a31515">&quot;liste[%s]=%s&quot;</span> <span style="color:#008080">%</span> <span style="color:#008080">(</span>i<span style="color:#008080">,</span>liste<span style="color:#008080">[</span>i<span style="color:#008080">])</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"># outros testes</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"><span style="color:#0000ff">for</span> i <span style="color:#0000ff">in</span> range<span style="color:#008080">(</span>len<span style="color:#008080">(</span>liste<span style="color:#008080">)):</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">    # apenas apresenta os números inteiros &gt;10</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">    <span style="color:#0000ff">if</span> <span style="color:#008080">(</span>type<span style="color:#008080">(</span>liste<span style="color:#008080">[</span>i<span style="color:#008080">])==</span><span style="color:#a31515">&quot;int&quot;</span> <span style="color:#0000ff">and</span> liste<span style="color:#008080">[</span>i<span style="color:#008080">]&gt;</span>10<span style="color:#008080">):</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">        <span style="color:#0000ff">print</span> <span style="color:#a31515">&quot;liste[%s]=%s&quot;</span> <span style="color:#008080">%</span> <span style="color:#008080">(</span>i<span style="color:#008080">,</span>liste<span style="color:#008080">[</span>i<span style="color:#008080">])</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"># um ciclo while</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">liste<span style="color:#008080">=(</span>8<span style="color:#008080">,</span>5<span style="color:#008080">,</span>0<span style="color:#008080">,-</span>2<span style="color:#008080">,</span>3<span style="color:#008080">,</span>4<span style="color:#008080">)</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">i<span style="color:#008080">=</span>0</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">somme<span style="color:#008080">=</span>0</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"><span style="color:#0000ff">while</span><span style="color:#008080">(</span>i<span style="color:#008080">&lt;</span>len<span style="color:#008080">(</span>liste<span style="color:#008080">)</span> <span style="color:#0000ff">and</span> liste<span style="color:#008080">[</span>i<span style="color:#008080">]&gt;</span>0<span style="color:#008080">):</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">    <span style="color:#0000ff">print</span> <span style="color:#a31515">&quot;liste[%s]=%s&quot;</span> <span style="color:#008080">%</span> <span style="color:#008080">(</span>i<span style="color:#008080">,</span>liste<span style="color:#008080">[</span>i<span style="color:#008080">])</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">    somme+=liste[i] #soma=soma+t[i]</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">    i+=1 #i=i+1</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"><span style="color:#0000ff">print</span> <span style="color:#a31515">&quot;somme=%s&quot;</span> <span style="color:#008080">%</span> <span style="color:#008080">(</span>somme<span style="color:#008080">)</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"># fim do programa</span></span>
+</code></pre></div>
+
+<p>Nota:</p>
+<ul>
+<li>linha 1: um comentário específico que serve para declarar o tipo de codificação do script, neste caso UTF-8. Isto depende do editor de texto utilizado. Aqui, com o Notepad++:</li>
+</ul>
+<table class="odt-table" style="border-collapse: collapse; width: 100%; margin-bottom: 1em;"><tr><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top; text-align: left;"><img src="images/10000000000000E2000000E7CF458DBC.png" width="158" height="162" style="display:inline-block; margin:4px;width:4.189cm;height:4.279cm;" class="odt-zoomable" data-zoom-src="images/10000000000000E2000000E7CF458DBC.png" /></td><td style="border: 1px solid #ddd; padding: 8px; vertical-align: top; text-align: left;">&nbsp;</td></tr></table>
+
+<ul>
+<li>linha 4: a palavra-chave <strong>def</strong> define uma função;</li>
+<li>linhas 5-6: o conteúdo da função. Está indentado à direita por uma tabulação. É esta indentação, associada ao caractere <strong>:</strong> da instrução <em>def,</em> que define o conteúdo da função. Isto aplica-se a todas as instruções com conteúdo: <em>if, else, while, for, try, except;</em></li>
+<li>linha 12: o Python gere internamente o tipo das variáveis. É possível saber o tipo de uma variável com a função <em>type(variable),</em> que devolve uma variável do tipo <em>«type</em>». A expressão <em>«%s» % (type(variável))</em> é uma cadeia de caracteres que representa o tipo da variável;</li>
+<li>linha 25: o programa principal. Este surge após a definição de todas as funções do script. O seu conteúdo não está indentado;</li>
+<li>linha 28: em Python, não se declaram variáveis. O Python distingue maiúsculas de minúsculas. A variável <em>Nom</em> é diferente da variável <em>nom</em>. Uma cadeia de caracteres pode ser colocada entre aspas &quot; ou apóstrofos &#x27;. Assim, pode escrever-se &#x27;dupont&#x27; ou &quot;<em>dupont</em>&quot;;</li>
+<li>linha 31: a expressão <em>&quot;xxxx%syyyy%szzzz&quot; % (</em><strong><em>100</em></strong><em>,</em> <strong><em>200</em></strong><em>)</em> é a cadeia de caracteres <em>&quot;xxxx100yyy200szzzz&quot;</em>, em que cada <strong>%s</strong> foi substituído por um elemento da tupla. <strong>%s</strong> é o formato de exibição das cadeias de caracteres. Existem outros formatos;</li>
+<li>linha 34: existe uma diferença entre uma <strong>tupla</strong> (1,2,3) (repare nos parênteses) e uma <strong>lista</strong> [1,2,3] (repare nos colchetes). A tupla é imutável, enquanto a lista é mutável. Em ambos os casos, o elemento n.º i é denotado por [i];</li>
+<li>linha 40: <em>range(n)</em> é a tupla (0,1,2,...,n-1);</li>
+<li>linha 74: <em>len(var)</em> é o número de elementos da coleção <em>var</em> (tupla, lista, dicionário, ...);</li>
+<li>linha 86: os outros operadores booleanos são <em>or</em> e <em>not</em>.</li>
+</ul>
+<p>Os resultados apresentados no ecrã são os seguintes:</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-0-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-0-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-0-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-0-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-0-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-0-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-0-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-0-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-0-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-0-10">10</a></span>
+<span class="normal"><a href="#__codelineno-0-11">11</a></span>
+<span class="normal"><a href="#__codelineno-0-12">12</a></span>
+<span class="normal"><a href="#__codelineno-0-13">13</a></span>
+<span class="normal"><a href="#__codelineno-0-14">14</a></span>
+<span class="normal"><a href="#__codelineno-0-15">15</a></span>
+<span class="normal"><a href="#__codelineno-0-16">16</a></span>
+<span class="normal"><a href="#__codelineno-0-17">17</a></span>
+<span class="normal"><a href="#__codelineno-0-18">18</a></span>
+<span class="normal"><a href="#__codelineno-0-19">19</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1"></a>nom=dupont
+<a id="__codelineno-0-2" name="__codelineno-0-2"></a>liste[0]=un
+<a id="__codelineno-0-3" name="__codelineno-0-3"></a>liste[1]=deux
+<a id="__codelineno-0-4" name="__codelineno-0-4"></a>liste[2]=3
+<a id="__codelineno-0-5" name="__codelineno-0-5"></a>liste[3]=4
+<a id="__codelineno-0-6" name="__codelineno-0-6"></a>[chaine1,chaine2,chaine1chaine2]
+<a id="__codelineno-0-7" name="__codelineno-0-7"></a>chaine=chaine1
+<a id="__codelineno-0-8" name="__codelineno-0-8"></a>type[4]=&lt;type &#39;int&#39;&gt;
+<a id="__codelineno-0-9" name="__codelineno-0-9"></a>type[chaine1]=&lt;type &#39;str&#39;&gt;
+<a id="__codelineno-0-10" name="__codelineno-0-10"></a>type[[&#39;un&#39;, &#39;deux&#39;, 3, 4]]=&lt;type &#39;list&#39;&gt;
+<a id="__codelineno-0-11" name="__codelineno-0-11"></a>type[a change]=&lt;type &#39;str&#39;&gt;
+<a id="__codelineno-0-12" name="__codelineno-0-12"></a>res1=14
+<a id="__codelineno-0-13" name="__codelineno-0-13"></a>(res1,res2,res3)=[un,0,100]
+<a id="__codelineno-0-14" name="__codelineno-0-14"></a>liste[0]=un
+<a id="__codelineno-0-15" name="__codelineno-0-15"></a>liste[1]=0
+<a id="__codelineno-0-16" name="__codelineno-0-16"></a>liste[2]=100
+<a id="__codelineno-0-17" name="__codelineno-0-17"></a>liste[0]=8
+<a id="__codelineno-0-18" name="__codelineno-0-18"></a>liste[1]=5
+<a id="__codelineno-0-19" name="__codelineno-0-19"></a>somme=13
+</code></pre></div></td></tr></table></div>
+<p><span id="refheading37512891295936" name="refheading37512891295936" class="odt-bookmark-anchor"></span></p>
+<h2 id="32-mudancas-de-tipos">3.2. <span style="color: #4f81bd">Mudanças de tipos</span></h2>
+<p>Aqui, estamos interessados nas alterações de tipos com dados do tipo <strong>str</strong> (cadeia de caracteres), <strong>int</strong> (inteiro), <strong>float</strong> (real) e <strong>bool</strong> (booleano).</p>
+<hr style="border:0; border-top:0.99pt solid #000000; margin:0.75em 0;" data-odt-border="top" />
+<div style="margin:0 0 0.75em 0; background-color:#e6e6e6; padding:0.35em 0.6em">O programa (bases_01b)</div>
+
+<hr style="border:0; border-top:0.99pt solid #000000; margin:0.75em 0;" data-odt-border="bottom" />
+
+<div class="odt-code-rich" data-linenums="true" style="counter-reset: odtline 0;"><pre><code class="language-markdown">
+<span class="odt-code-line"><span class="odt-code-line-content"># -*- coding=utf-8 -*-</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"># mudanças de tipo</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"># int --&gt; str, float, bool</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">x<span style="color:#008080">=</span>4</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"><span style="color:#0000ff">print</span> x<span style="color:#008080">,</span> type<span style="color:#008080">(</span>x<span style="color:#008080">)</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">x<span style="color:#008080">=</span>str<span style="color:#008080">(</span>4<span style="color:#008080">)</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"><span style="color:#0000ff">print</span> x<span style="color:#008080">,</span> type<span style="color:#008080">(</span>x<span style="color:#008080">)</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">x<span style="color:#008080">=</span>float<span style="color:#008080">(</span>4<span style="color:#008080">)</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"><span style="color:#0000ff">print</span> x<span style="color:#008080">,</span> type<span style="color:#008080">(</span>x<span style="color:#008080">)</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">x<span style="color:#008080">=</span>bool<span style="color:#008080">(</span>4<span style="color:#008080">)</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"><span style="color:#0000ff">print</span> x<span style="color:#008080">,</span> type<span style="color:#008080">(</span>x<span style="color:#008080">)</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"># bool --&gt; int, float, str</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">x<span style="color:#008080">=</span>True</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"><span style="color:#0000ff">print</span> x<span style="color:#008080">,</span> type<span style="color:#008080">(</span>x<span style="color:#008080">)</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">x<span style="color:#008080">=</span>int<span style="color:#008080">(</span>True<span style="color:#008080">)</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"><span style="color:#0000ff">print</span> x<span style="color:#008080">,</span> type<span style="color:#008080">(</span>x<span style="color:#008080">)</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">x<span style="color:#008080">=</span>float<span style="color:#008080">(</span>True<span style="color:#008080">)</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"><span style="color:#0000ff">print</span> x<span style="color:#008080">,</span> type<span style="color:#008080">(</span>x<span style="color:#008080">)</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">x<span style="color:#008080">=</span>str<span style="color:#008080">(</span>True<span style="color:#008080">)</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"><span style="color:#0000ff">print</span> x<span style="color:#008080">,</span> type<span style="color:#008080">(</span>x<span style="color:#008080">)</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"># str --&gt; int, float, bool</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">x<span style="color:#008080">=</span><span style="color:#a31515">&quot;4&quot;</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"><span style="color:#0000ff">print</span> x<span style="color:#008080">,</span> type<span style="color:#008080">(</span>x<span style="color:#008080">)</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">x<span style="color:#008080">=</span>int<span style="color:#008080">(</span><span style="color:#a31515">&quot;4&quot;</span><span style="color:#008080">)</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"><span style="color:#0000ff">print</span> x<span style="color:#008080">,</span> type<span style="color:#008080">(</span>x<span style="color:#008080">)</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">x<span style="color:#008080">=</span>float<span style="color:#008080">(</span><span style="color:#a31515">&quot;4&quot;</span><span style="color:#008080">)</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"><span style="color:#0000ff">print</span> x<span style="color:#008080">,</span> type<span style="color:#008080">(</span>x<span style="color:#008080">)</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">x<span style="color:#008080">=</span>bool<span style="color:#008080">(</span><span style="color:#a31515">&quot;4&quot;</span><span style="color:#008080">)</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"><span style="color:#0000ff">print</span> x<span style="color:#008080">,</span> type<span style="color:#008080">(</span>x<span style="color:#008080">)</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"># float → str, int, bool</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">x<span style="color:#008080">=</span>4.32</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"><span style="color:#0000ff">print</span> x<span style="color:#008080">,</span> type<span style="color:#008080">(</span>x<span style="color:#008080">)</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">x<span style="color:#008080">=</span>str<span style="color:#008080">(</span>4.32<span style="color:#008080">)</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"><span style="color:#0000ff">print</span> x<span style="color:#008080">,</span> type<span style="color:#008080">(</span>x<span style="color:#008080">)</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">x<span style="color:#008080">=</span>int<span style="color:#008080">(</span>4.32<span style="color:#008080">)</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"><span style="color:#0000ff">print</span> x<span style="color:#008080">,</span> type<span style="color:#008080">(</span>x<span style="color:#008080">)</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">x<span style="color:#008080">=</span>bool<span style="color:#008080">(</span>4.32<span style="color:#008080">)</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"><span style="color:#0000ff">print</span> x<span style="color:#008080">,</span> type<span style="color:#008080">(</span>x<span style="color:#008080">)</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"># gestão de erros de conversão de tipos</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"><span style="color:#0000ff">try</span><span style="color:#008080">:</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">    x<span style="color:#008080">=</span>int<span style="color:#008080">(</span><span style="color:#a31515">&quot;abc&quot;</span><span style="color:#008080">)</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">    <span style="color:#0000ff">print</span> x<span style="color:#008080">,</span> type<span style="color:#008080">(</span>x<span style="color:#008080">)</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"><span style="color:#0000ff">except</span> ValueError<span style="color:#008080">,</span> erreur<span style="color:#008080">:</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">    <span style="color:#0000ff">print</span> erreur</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"># casos diversos do booleano</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">x<span style="color:#008080">=</span>bool<span style="color:#008080">(</span><span style="color:#a31515">&quot;abc&quot;</span><span style="color:#008080">)</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"><span style="color:#0000ff">print</span> x<span style="color:#008080">,</span> type<span style="color:#008080">(</span>x<span style="color:#008080">)</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">x<span style="color:#008080">=</span>bool<span style="color:#008080">(</span><span style="color:#a31515">&quot;&quot;</span><span style="color:#008080">)</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"><span style="color:#0000ff">print</span> x<span style="color:#008080">,</span> type<span style="color:#008080">(</span>x<span style="color:#008080">)</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">x<span style="color:#008080">=</span>bool<span style="color:#008080">(</span>0<span style="color:#008080">)</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"><span style="color:#0000ff">print</span> x<span style="color:#008080">,</span> type<span style="color:#008080">(</span>x<span style="color:#008080">)</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">x<span style="color:#008080">=</span>None</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"><span style="color:#0000ff">print</span> x<span style="color:#008080">,</span> type<span style="color:#008080">(</span>x<span style="color:#008080">)</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">x<span style="color:#008080">=</span>bool<span style="color:#008080">(</span>None<span style="color:#008080">)</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"><span style="color:#0000ff">print</span> x<span style="color:#008080">,</span> type<span style="color:#008080">(</span>x<span style="color:#008080">)</span></span></span>
+</code></pre></div>
+
+<p>São possíveis várias conversões de tipo. Algumas podem falhar, como as das linhas 45-49, que tentam converter a cadeia «abc» num número inteiro. O erro foi tratado com uma estrutura <em>try</em> / <em>except</em>. A forma geral desta estrutura é a seguinte:</p>
+<div class="odt-code-rich" data-linenums="false" style="counter-reset: odtline 0;"><pre><code class="language-text">
+<span class="odt-code-line"><span class="odt-code-line-content"><span style="font-weight:bold">try</span>:</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">    actions</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"><span style="font-weight:bold">except</span> Exception, Message:</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">    actions</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"><span style="font-weight:bold">finally</span>:</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">    actions</span></span>
+</code></pre></div>
+
+<p>Se uma das ações do <strong>bloco «try»</strong> lançar uma exceção (indicar um erro), o controlo passa imediatamente para a cláusula <strong>«except</strong>». Se as ações do <strong>bloco «try»</strong> não lançarem nenhuma exceção, a cláusula <strong>«except»</strong> é ignorada. Os atributos <em>Exception</em> e <em>Message</em> da instrução <em>except</em> são opcionais. Quando estão presentes, <em>Exception</em> especifica o tipo de exceção interceptada pela instrução <em>except</em> e <em>Message</em> contém a mensagem de erro associada à exceção. Podem existir várias instruções <em>except</em>, caso se pretenda gerir diferentes tipos de exceção no mesmo <em>try</em>.</p>
+<p>A instrução <em>finally</em> é opcional. Se estiver presente, as ações da instrução <em>finally</em> são <strong>sempre executadas, independentemente de ter ocorrido ou não uma exceção</strong>.</p>
+<p>Voltaremos a abordar as exceções um pouco mais adiante.</p>
+<p>As linhas 52-61 mostram várias tentativas de converter dados dos tipos <em>str</em>, <em>int</em>, <em>float</em> e <em>NoneType</em> em valores booleanos. Isso é sempre possível. As regras são as seguintes:</p>
+<ul>
+<li><strong>bool(int i)</strong> tem o valor <em>False</em> se i for 0, e <em>True</em> em todos os outros casos;</li>
+<li><strong>bool(float f)</strong> é igual a <em>False</em> se f for igual a 0,0, e a <em>True</em> em todos os outros casos;</li>
+<li><strong>bool(str cadeia)</strong> vale <em>False</em> se cadeia tiver 0 caracteres, <em>True</em> em todos os outros casos;</li>
+<li><strong>bool(None)</strong> é igual a False. <strong>None</strong> é um valor especial que significa que a variável existe, mas não tem valor.</li>
+</ul>
+<p>Os resultados no ecrã são os seguintes:</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-1-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-1-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-1-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-1-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-1-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-1-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-1-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-1-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-1-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-1-10">10</a></span>
+<span class="normal"><a href="#__codelineno-1-11">11</a></span>
+<span class="normal"><a href="#__codelineno-1-12">12</a></span>
+<span class="normal"><a href="#__codelineno-1-13">13</a></span>
+<span class="normal"><a href="#__codelineno-1-14">14</a></span>
+<span class="normal"><a href="#__codelineno-1-15">15</a></span>
+<span class="normal"><a href="#__codelineno-1-16">16</a></span>
+<span class="normal"><a href="#__codelineno-1-17">17</a></span>
+<span class="normal"><a href="#__codelineno-1-18">18</a></span>
+<span class="normal"><a href="#__codelineno-1-19">19</a></span>
+<span class="normal"><a href="#__codelineno-1-20">20</a></span>
+<span class="normal"><a href="#__codelineno-1-21">21</a></span>
+<span class="normal"><a href="#__codelineno-1-22">22</a></span>
+<span class="normal"><a href="#__codelineno-1-23">23</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1"></a>4 &lt;type &#39;int&#39;&gt;
+<a id="__codelineno-1-2" name="__codelineno-1-2"></a>4 &lt;type &#39;str&#39;&gt;
+<a id="__codelineno-1-3" name="__codelineno-1-3"></a>4.0 &lt;type &#39;float&#39;&gt;
+<a id="__codelineno-1-4" name="__codelineno-1-4"></a>True &lt;type &#39;bool&#39;&gt;
+<a id="__codelineno-1-5" name="__codelineno-1-5"></a>True &lt;type &#39;bool&#39;&gt;
+<a id="__codelineno-1-6" name="__codelineno-1-6"></a>1 &lt;type &#39;int&#39;&gt;
+<a id="__codelineno-1-7" name="__codelineno-1-7"></a>1.0 &lt;type &#39;float&#39;&gt;
+<a id="__codelineno-1-8" name="__codelineno-1-8"></a>True &lt;type &#39;str&#39;&gt;
+<a id="__codelineno-1-9" name="__codelineno-1-9"></a>4 &lt;type &#39;str&#39;&gt;
+<a id="__codelineno-1-10" name="__codelineno-1-10"></a>4 &lt;type &#39;int&#39;&gt;
+<a id="__codelineno-1-11" name="__codelineno-1-11"></a>4.0 &lt;type &#39;float&#39;&gt;
+<a id="__codelineno-1-12" name="__codelineno-1-12"></a>True &lt;type &#39;bool&#39;&gt;
+<a id="__codelineno-1-13" name="__codelineno-1-13"></a>4.32 &lt;type &#39;float&#39;&gt;
+<a id="__codelineno-1-14" name="__codelineno-1-14"></a>4.32 &lt;type &#39;str&#39;&gt;
+<a id="__codelineno-1-15" name="__codelineno-1-15"></a>4 &lt;type &#39;int&#39;&gt;
+<a id="__codelineno-1-16" name="__codelineno-1-16"></a>True &lt;type &#39;bool&#39;&gt;
+<a id="__codelineno-1-17" name="__codelineno-1-17"></a>invalid literal for int() with base 10: &#39;abc&#39;
+<a id="__codelineno-1-18" name="__codelineno-1-18"></a>True &lt;type &#39;bool&#39;&gt;
+<a id="__codelineno-1-19" name="__codelineno-1-19"></a>False &lt;type &#39;bool&#39;&gt;
+<a id="__codelineno-1-20" name="__codelineno-1-20"></a>False &lt;type &#39;bool&#39;&gt;
+<a id="__codelineno-1-21" name="__codelineno-1-21"></a>None &lt;type &#39;NoneType&#39;&gt;
+<a id="__codelineno-1-22" name="__codelineno-1-22"></a>False &lt;type &#39;bool&#39;&gt;
+<a id="__codelineno-1-23" name="__codelineno-1-23"></a>False &lt;type &#39;bool&#39;&gt;
+</code></pre></div></td></tr></table></div>
+<p><span id="refheading382462423505" name="refheading382462423505" class="odt-bookmark-anchor"></span></p>
+<h2 id="33-o-ambito-das-variaveis">3.3. <span style="color: #4f81bd"><strong>O âmbito das variáveis</strong></span></h2>
+<hr style="border:0; border-top:0.99pt solid #000000; margin:0.75em 0;" data-odt-border="top" />
+<div style="margin:0 0 0.75em 0; background-color:#e6e6e6; padding:0.35em 0.6em">Programa (bases_02)</div>
+
+<hr style="border:0; border-top:0.99pt solid #000000; margin:0.75em 0;" data-odt-border="bottom" />
+
+<div class="odt-code-rich" data-linenums="true" style="counter-reset: odtline 0;"><pre><code class="language-python">
+<span class="odt-code-line"><span class="odt-code-line-content"># -*- coding=utf-8 -*-</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"># âmbito das variáveis</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"><span style="color:#0000ff">def</span> f1<span style="color:#008080">():</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">    # utiliza-se a variável global i</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">    <span style="color:#0000ff">global</span> i</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">    i<span style="color:#008080">+=</span>1</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">    j<span style="color:#008080">=</span>10</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">    <span style="color:#0000ff">print</span> <span style="color:#a31515">&quot;f1[i,j]=[%s,%s]&quot;</span> <span style="color:#008080">%</span> <span style="color:#008080">(</span>i<span style="color:#008080">,</span>j<span style="color:#008080">)</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"><span style="color:#0000ff">def</span> f2<span style="color:#008080">():</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">    # utiliza-se a variável global i</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">    <span style="color:#0000ff">global</span> i</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">    i<span style="color:#008080">+=</span>1</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">    j<span style="color:#008080">=</span>20</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">    <span style="color:#0000ff">print</span> <span style="color:#a31515">&quot;f2[i,j]=[%s,%s]&quot;</span> <span style="color:#008080">%</span> <span style="color:#008080">(</span>i<span style="color:#008080">,</span>j<span style="color:#008080">)</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"><span style="color:#0000ff">def</span> f3<span style="color:#008080">():</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">    # utilização da variável local i</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">    i<span style="color:#008080">=</span>1</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">    j<span style="color:#008080">=</span>30</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">    <span style="color:#0000ff">print</span> <span style="color:#a31515">&quot;f3[i,j]=[%s,%s]&quot;</span> <span style="color:#008080">%</span> <span style="color:#008080">(</span>i<span style="color:#008080">,</span>j<span style="color:#008080">)</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">  </span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"># testes</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">i<span style="color:#008080">=</span>0</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">j=0 # estas duas variáveis só são conhecidas por uma função f</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">    # a menos que esta as declare explicitamente através da instrução global</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">    # que pretende utilizá-las</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">f1<span style="color:#008080">()</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">f2<span style="color:#008080">()</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">f3<span style="color:#008080">()</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"><span style="color:#0000ff">print</span> <span style="color:#a31515">&quot;test[i,j]=[%s,%s]&quot;</span> <span style="color:#008080">%</span> <span style="color:#008080">(</span>i<span style="color:#008080">,</span>j<span style="color:#008080">)</span></span></span>
+</code></pre></div>
+
+<p>Resultados</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-2-1">1</a></span>
+<span class="normal"><a href="#__codelineno-2-2">2</a></span>
+<span class="normal"><a href="#__codelineno-2-3">3</a></span>
+<span class="normal"><a href="#__codelineno-2-4">4</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1"></a>f1[i,j]=[1,10]
+<a id="__codelineno-2-2" name="__codelineno-2-2"></a>f2[i,j]=[2,20]
+<a id="__codelineno-2-3" name="__codelineno-2-3"></a>f3[i,j]=[1,30]
+<a id="__codelineno-2-4" name="__codelineno-2-4"></a>test[i,j]=[2,0]
+</code></pre></div></td></tr></table></div>
+<p>Notas:</p>
+<ul>
+<li>o script mostra a utilização da variável i, declarada como global nas funções f1 e f2. Neste caso, o programa principal e as funções f1 e f2 partilham a mesma variável i.</li>
+</ul>
+<p><span id="refheading382482423505" name="refheading382482423505" class="odt-bookmark-anchor"></span></p>
+<h2 id="34-listas-tuplas-e-dicionarios">3.4. <span style="color: #4f81bd">Listas, tuplas e dicionários</span></h2>
+<p><span id="refheading382502423505" name="refheading382502423505" class="odt-bookmark-anchor"></span></p>
+<h3 id="341-listas-unidimensionais">3.4.1. <span style="color: #4f81bd">Listas unidimensionais</span></h3>
+<hr style="border:0; border-top:0.99pt solid #000000; margin:0.75em 0;" data-odt-border="top" />
+<div style="margin:0 0 0.75em 0; background-color:#e6e6e6; padding:0.35em 0.6em">Programa (bases_03)</div>
+
+<hr style="border:0; border-top:0.99pt solid #000000; margin:0.75em 0;" data-odt-border="bottom" />
+
+<div class="odt-code-rich" data-linenums="true" style="counter-reset: odtline 0;"><pre><code class="language-vbscript">
+<span class="odt-code-line"><span class="odt-code-line-content"># -*- coding=utf-8 -*-</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"># listas unidimensionais</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"># inicialização</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">list1<span style="color:#008080">=[</span>0<span style="color:#008080">,</span>1<span style="color:#008080">,</span>2<span style="color:#008080">,</span>3<span style="color:#008080">,</span>4<span style="color:#008080">,</span>5<span style="color:#008080">]</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"># iteração - 1</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"><span style="color:#0000ff">print</span> <span style="color:#a31515">&quot;list1 a %s elements&quot;</span> <span style="color:#008080">%</span> <span style="color:#008080">(</span>len<span style="color:#008080">(</span>list1<span style="color:#008080">))</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"><span style="color:#0000ff">for</span> i <span style="color:#0000ff">in</span> range<span style="color:#008080">(</span>len<span style="color:#008080">(</span>list1<span style="color:#008080">)):</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">    <span style="color:#0000ff">print</span> <span style="color:#a31515">&quot;list1[%s]=%s&quot;</span> <span style="color:#008080">%</span> <span style="color:#008080">(</span>i<span style="color:#008080">,</span> list1<span style="color:#008080">[</span>i<span style="color:#008080">])</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">list1<span style="color:#008080">[</span>1<span style="color:#008080">]=</span>10<span style="color:#008080">;</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"># iteração - 2</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"><span style="color:#0000ff">print</span> <span style="color:#a31515">&quot;list1 a %s elements&quot;</span> <span style="color:#008080">%</span> <span style="color:#008080">(</span>len<span style="color:#008080">(</span>list1<span style="color:#008080">))</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"><span style="color:#0000ff">for</span> element <span style="color:#0000ff">in</span> list1<span style="color:#008080">:</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">    <span style="color:#0000ff">print</span> element</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"># adição de dois elementos</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">list1<span style="color:#008080">[</span>len<span style="color:#008080">(</span>list1<span style="color:#008080">):]=[</span>10<span style="color:#008080">,</span>11<span style="color:#008080">]</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"><span style="color:#0000ff">print</span> <span style="color:#008080">(</span><span style="color:#a31515">&quot;%s&quot;</span><span style="color:#008080">)</span> <span style="color:#008080">%</span> <span style="color:#008080">(</span>list1<span style="color:#008080">)</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"># eliminação dos dois últimos elementos</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">list1<span style="color:#008080">[</span>len<span style="color:#008080">(</span>list1<span style="color:#008080">)-</span>2<span style="color:#008080">:]=[]</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"><span style="color:#0000ff">print</span> <span style="color:#008080">(</span><span style="color:#a31515">&quot;%s&quot;</span><span style="color:#008080">)</span> <span style="color:#008080">%</span> <span style="color:#008080">(</span>list1<span style="color:#008080">)</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"># adição de um tuplo ao início da lista</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">list1<span style="color:#008080">[:</span>0<span style="color:#008080">]=[-</span>10<span style="color:#008080">,</span> <span style="color:#008080">-</span>11<span style="color:#008080">,</span> <span style="color:#008080">-</span>12<span style="color:#008080">]</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"><span style="color:#0000ff">print</span> <span style="color:#008080">(</span><span style="color:#a31515">&quot;%s&quot;</span><span style="color:#008080">)</span> <span style="color:#008080">%</span> <span style="color:#008080">(</span>list1<span style="color:#008080">)</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"># inserção de dois elementos a meio da lista</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">list1<span style="color:#008080">[</span>3<span style="color:#008080">:</span>3<span style="color:#008080">]=[</span>100<span style="color:#008080">,</span>101<span style="color:#008080">]</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"><span style="color:#0000ff">print</span> <span style="color:#008080">(</span><span style="color:#a31515">&quot;%s&quot;</span><span style="color:#008080">)</span> <span style="color:#008080">%</span> <span style="color:#008080">(</span>list1<span style="color:#008080">)</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"># remoção de dois elementos no meio da lista</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">list1<span style="color:#008080">[</span>3<span style="color:#008080">:</span>4<span style="color:#008080">]=[]</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"><span style="color:#0000ff">print</span> <span style="color:#008080">(</span><span style="color:#a31515">&quot;%s&quot;</span><span style="color:#008080">)</span> <span style="color:#008080">%</span> <span style="color:#008080">(</span>list1<span style="color:#008080">)</span></span></span>
+</code></pre></div>
+
+<p>Notas:</p>
+<ul>
+<li>a notação matriz[i:j] designa os elementos <strong>de i</strong> a <strong>j-1</strong> da matriz;</li>
+<li>a notação [i:] designa os elementos <strong>i</strong> e <strong>seguintes</strong> da matriz;</li>
+<li>a notação [:i] designa os elementos <strong>de 0</strong> a <strong>i-1</strong> da matriz;</li>
+<li>linha 20: <em>print (%s) % (list1)</em> apresenta a cadeia de caracteres: «<em>[ list1[0], list1[2], ..., list1[n-1]]</em>».</li>
+</ul>
+<p>Resultados</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-3-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-3-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-3-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-3-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-3-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-3-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-3-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-3-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-3-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-3-10">10</a></span>
+<span class="normal"><a href="#__codelineno-3-11">11</a></span>
+<span class="normal"><a href="#__codelineno-3-12">12</a></span>
+<span class="normal"><a href="#__codelineno-3-13">13</a></span>
+<span class="normal"><a href="#__codelineno-3-14">14</a></span>
+<span class="normal"><a href="#__codelineno-3-15">15</a></span>
+<span class="normal"><a href="#__codelineno-3-16">16</a></span>
+<span class="normal"><a href="#__codelineno-3-17">17</a></span>
+<span class="normal"><a href="#__codelineno-3-18">18</a></span>
+<span class="normal"><a href="#__codelineno-3-19">19</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1"></a>list1 a 6 elements
+<a id="__codelineno-3-2" name="__codelineno-3-2"></a>list1[0]=0
+<a id="__codelineno-3-3" name="__codelineno-3-3"></a>list1[1]=1
+<a id="__codelineno-3-4" name="__codelineno-3-4"></a>list1[2]=2
+<a id="__codelineno-3-5" name="__codelineno-3-5"></a>list1[3]=3
+<a id="__codelineno-3-6" name="__codelineno-3-6"></a>list1[4]=4
+<a id="__codelineno-3-7" name="__codelineno-3-7"></a>list1[5]=5
+<a id="__codelineno-3-8" name="__codelineno-3-8"></a>list1 a 6 elements
+<a id="__codelineno-3-9" name="__codelineno-3-9"></a>0
+<a id="__codelineno-3-10" name="__codelineno-3-10"></a>10
+<a id="__codelineno-3-11" name="__codelineno-3-11"></a>2
+<a id="__codelineno-3-12" name="__codelineno-3-12"></a>3
+<a id="__codelineno-3-13" name="__codelineno-3-13"></a>4
+<a id="__codelineno-3-14" name="__codelineno-3-14"></a>5
+<a id="__codelineno-3-15" name="__codelineno-3-15"></a>[0, 10, 2, 3, 4, 5, 10, 11]
+<a id="__codelineno-3-16" name="__codelineno-3-16"></a>[0, 10, 2, 3, 4, 5]
+<a id="__codelineno-3-17" name="__codelineno-3-17"></a>[-10, -11, -12, 0, 10, 2, 3, 4, 5]
+<a id="__codelineno-3-18" name="__codelineno-3-18"></a>[-10, -11, -12, 100, 101, 0, 10, 2, 3, 4, 5]
+<a id="__codelineno-3-19" name="__codelineno-3-19"></a>[-10, -11, -12, 101, 0, 10, 2, 3, 4, 5]
+</code></pre></div></td></tr></table></div>
+<p>O código anterior pode ser escrito de forma diferente (bases_03b) utilizando determinados métodos das listas:</p>
+<div class="odt-code-rich" data-linenums="true" style="counter-reset: odtline 0;"><pre><code class="language-vbscript">
+<span class="odt-code-line"><span class="odt-code-line-content"># -*- coding=utf-8 -*-</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"># listas unidimensionais</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"># inicialização</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">list1<span style="color:#008080">=[</span>0<span style="color:#008080">,</span>1<span style="color:#008080">,</span>2<span style="color:#008080">,</span>3<span style="color:#008080">,</span>4<span style="color:#008080">,</span>5<span style="color:#008080">]</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"># percurso - 1</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"><span style="color:#0000ff">print</span> <span style="color:#a31515">&quot;list1 a %s elements&quot;</span> <span style="color:#008080">%</span> <span style="color:#008080">(</span>len<span style="color:#008080">(</span>list1<span style="color:#008080">))</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"><span style="color:#0000ff">for</span> i <span style="color:#0000ff">in</span> range<span style="color:#008080">(</span>len<span style="color:#008080">(</span>list1<span style="color:#008080">)):</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">    <span style="color:#0000ff">print</span> <span style="color:#a31515">&quot;list1[%s]=%s&quot;</span> <span style="color:#008080">%</span> <span style="color:#008080">(</span>i<span style="color:#008080">,</span> list1<span style="color:#008080">[</span>i<span style="color:#008080">])</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">list1<span style="color:#008080">[</span>1<span style="color:#008080">]=</span>10</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"># percurso - 2</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"><span style="color:#0000ff">print</span> <span style="color:#a31515">&quot;list1 a %s elements&quot;</span> <span style="color:#008080">%</span> <span style="color:#008080">(</span>len<span style="color:#008080">(</span>list1<span style="color:#008080">))</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"><span style="color:#0000ff">for</span> element <span style="color:#0000ff">in</span> list1<span style="color:#008080">:</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">    <span style="color:#0000ff">print</span> element</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"># adição de dois elementos</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">list1<span style="color:#0000ff">.</span>extend<span style="color:#008080">([</span>10<span style="color:#008080">,</span>11<span style="color:#008080">])</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"><span style="color:#0000ff">print</span> <span style="color:#008080">(</span><span style="color:#a31515">&quot;%s&quot;</span><span style="color:#008080">)</span> <span style="color:#008080">%</span> <span style="color:#008080">(</span>list1<span style="color:#008080">)</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"># eliminação dos dois últimos elementos</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"><span style="color:#0000ff">del</span> list1<span style="color:#008080">[</span>len<span style="color:#008080">(</span>list1<span style="color:#008080">)-</span>2<span style="color:#008080">:]</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"><span style="color:#0000ff">print</span> <span style="color:#008080">(</span><span style="color:#a31515">&quot;%s&quot;</span><span style="color:#008080">)</span> <span style="color:#008080">%</span> <span style="color:#008080">(</span>list1<span style="color:#008080">)</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"># adição de um tuplo no início da lista</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"><span style="color:#0000ff">for</span> i <span style="color:#0000ff">in</span> <span style="color:#008080">(-</span>12<span style="color:#008080">,</span> <span style="color:#008080">-</span>11<span style="color:#008080">,</span> <span style="color:#008080">-</span>10<span style="color:#008080">):</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">    list1<span style="color:#0000ff">.</span>insert<span style="color:#008080">(</span>0<span style="color:#008080">,</span>i<span style="color:#008080">)</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"><span style="color:#0000ff">print</span> <span style="color:#008080">(</span><span style="color:#a31515">&quot;%s&quot;</span><span style="color:#008080">)</span> <span style="color:#008080">%</span> <span style="color:#008080">(</span>list1<span style="color:#008080">)</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"># inserção no meio da lista</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"><span style="color:#0000ff">for</span> i <span style="color:#0000ff">in</span> <span style="color:#008080">(</span>101<span style="color:#008080">,</span>100<span style="color:#008080">):</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">    list1<span style="color:#0000ff">.</span>insert<span style="color:#008080">(</span>3<span style="color:#008080">,</span>i<span style="color:#008080">)</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"><span style="color:#0000ff">print</span> <span style="color:#008080">(</span><span style="color:#a31515">&quot;%s&quot;</span><span style="color:#008080">)</span> <span style="color:#008080">%</span> <span style="color:#008080">(</span>list1<span style="color:#008080">)</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"># remoção a meio da lista</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"><span style="color:#0000ff">del</span> list1<span style="color:#008080">[</span>3<span style="color:#008080">:</span>4<span style="color:#008080">]</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"><span style="color:#0000ff">print</span> <span style="color:#008080">(</span><span style="color:#a31515">&quot;%s&quot;</span><span style="color:#008080">)</span> <span style="color:#008080">%</span> <span style="color:#008080">(</span>list1<span style="color:#008080">)</span></span></span>
+</code></pre></div>
+
+<p>Os resultados obtidos são os mesmos que com a versão anterior.</p>
+<p><span id="refheading382522423505" name="refheading382522423505" class="odt-bookmark-anchor"></span></p>
+<h3 id="342-o-dicionario">3.4.2. <span style="color: #4f81bd">O dicionário</span></h3>
+<hr style="border:0; border-top:0.99pt solid #000000; margin:0.75em 0;" data-odt-border="top" />
+<div style="margin:0 0 0.75em 0; background-color:#e6e6e6; padding:0.35em 0.6em">O programa (bases_04)</div>
+
+<hr style="border:0; border-top:0.99pt solid #000000; margin:0.75em 0;" data-odt-border="bottom" />
+
+<div class="odt-code-rich" data-linenums="true" style="counter-reset: odtline 0;"><pre><code class="language-python">
+<span class="odt-code-line"><span class="odt-code-line-content"># -*- coding=utf-8 -*-</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"><span style="color:#0000ff">def</span> existe<span style="color:#008080">(</span>conjoints<span style="color:#008080">,</span>mari<span style="color:#008080">):</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">    # verifica se a chave «mari» existe no dicionário «conjuges»</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">    <span style="color:#0000ff">if</span><span style="color:#008080">(</span>conjoints<span style="color:#0000ff">.</span>has_key<span style="color:#008080">(</span>mari<span style="color:#008080">)):</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">        <span style="color:#0000ff">print</span> <span style="color:#a31515">&quot;La cle [%s] existe associee a la valeur [%s]&quot;</span> <span style="color:#008080">%</span> <span style="color:#008080">(</span>mari<span style="color:#008080">,</span> conjoints<span style="color:#008080">[</span>mari<span style="color:#008080">])</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">    <span style="color:#0000ff">else</span><span style="color:#008080">:</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">        <span style="color:#0000ff">print</span> <span style="color:#a31515">&quot;La cle [%s] n&#x27;existe pas&quot;</span> <span style="color:#008080">%</span> <span style="color:#008080">(</span>mari<span style="color:#008080">)</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"># ----------------------------- Principal</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"># dicionários</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">conjoints<span style="color:#008080">={</span><span style="color:#a31515">&quot;Pierre&quot;</span><span style="color:#008080">:</span><span style="color:#a31515">&quot;Gisele&quot;</span><span style="color:#008080">,</span> <span style="color:#a31515">&quot;Paul&quot;</span><span style="color:#008080">:</span><span style="color:#a31515">&quot;Virginie&quot;</span><span style="color:#008080">,</span> <span style="color:#a31515">&quot;Jacques&quot;</span><span style="color:#008080">:</span><span style="color:#a31515">&quot;Lucette&quot;</span><span style="color:#008080">,</span><span style="color:#a31515">&quot;Jean&quot;</span><span style="color:#008080">:</span><span style="color:#a31515">&quot;&quot;</span><span style="color:#008080">}</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"># percurso - 1</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"><span style="color:#0000ff">print</span> <span style="color:#a31515">&quot;Nombre d&#x27;elements du dictionnaire : %s &quot;</span> <span style="color:#008080">%</span> <span style="color:#008080">(</span>len<span style="color:#008080">(</span>conjoints<span style="color:#008080">))</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"><span style="color:#0000ff">for</span> <span style="color:#008080">(</span>cle<span style="color:#008080">,</span>valeur<span style="color:#008080">)</span> <span style="color:#0000ff">in</span> conjoints<span style="color:#0000ff">.</span>items<span style="color:#008080">():</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">    <span style="color:#0000ff">print</span> <span style="color:#a31515">&quot;conjoints[%s]=%s&quot;</span> <span style="color:#008080">%</span> <span style="color:#008080">(</span>cle<span style="color:#008080">,</span>valeur<span style="color:#008080">)</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"># lista das chaves do dicionário</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"><span style="color:#0000ff">print</span> <span style="color:#a31515">&quot;liste des cles-------------&quot;</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">cles<span style="color:#008080">=</span>conjoints<span style="color:#0000ff">.</span>keys<span style="color:#008080">()</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"><span style="color:#0000ff">print</span> <span style="color:#008080">(</span><span style="color:#a31515">&quot;%s&quot;</span><span style="color:#008080">)</span> <span style="color:#008080">%</span> <span style="color:#008080">(</span>cles<span style="color:#008080">)</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"># lista de valores do dicionário</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"><span style="color:#0000ff">print</span> <span style="color:#a31515">&quot;liste des valeurs------------&quot;</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">valeurs<span style="color:#008080">=</span>conjoints<span style="color:#0000ff">.</span>values<span style="color:#008080">()</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"><span style="color:#0000ff">print</span> <span style="color:#008080">(</span><span style="color:#a31515">&quot;%s&quot;</span><span style="color:#008080">)</span> <span style="color:#008080">%</span> <span style="color:#008080">(</span>valeurs<span style="color:#008080">)</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"># pesquisa de uma chave</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">existe<span style="color:#008080">(</span>conjoints<span style="color:#008080">,</span><span style="color:#a31515">&quot;Jacques&quot;</span><span style="color:#008080">)</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">existe<span style="color:#008080">(</span>conjoints<span style="color:#008080">,</span><span style="color:#a31515">&quot;Lucette&quot;</span><span style="color:#008080">)</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">existe<span style="color:#008080">(</span>conjoints<span style="color:#008080">,</span><span style="color:#a31515">&quot;Jean&quot;</span><span style="color:#008080">)</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"># eliminação de uma chave-valor</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"><span style="color:#0000ff">del</span> <span style="color:#008080">(</span>conjoints<span style="color:#008080">[</span><span style="color:#a31515">&quot;Jean&quot;</span><span style="color:#008080">])</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"><span style="color:#0000ff">print</span> <span style="color:#a31515">&quot;Nombre d&#x27;elements du dictionnaire : %s &quot;</span> <span style="color:#008080">%</span> <span style="color:#008080">(</span>len<span style="color:#008080">(</span>conjoints<span style="color:#008080">))</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"><span style="color:#0000ff">print</span> <span style="color:#008080">(</span><span style="color:#a31515">&quot;%s&quot;</span><span style="color:#008080">)</span> <span style="color:#008080">%</span> <span style="color:#008080">(</span>conjoints<span style="color:#008080">)</span></span></span>
+</code></pre></div>
+
+<p>Notas:</p>
+<ul>
+<li>linha 17: <em>conjoints.items()</em> devolve a lista de pares (chave, valor) do dicionário <em>como conjuntos;</em></li>
+<li>linha 22: <em>conjoints.keys()</em> devolve as chaves do dicionário <em>«conjoints»;</em></li>
+<li>linha 27: <em>conjoints.values()</em> devolve os valores do dicionário <em>«conjoints»;</em></li>
+<li>linha 7: <em>conjoints.has_key(mari)</em> devolve <em>True</em> se a chave <em>mari</em> existir no dicionário <em>conjoints</em>, <em>False</em> caso contrário;</li>
+<li>linha 38: um dicionário pode ser apresentado numa única linha.</li>
+</ul>
+<hr style="border:0; border-top:0.99pt solid #000000; margin:0.75em 0;" data-odt-border="top" />
+<div style="margin:0 0 0.75em 0; background-color:#e6e6e6; padding:0.35em 0.6em">Os resultados</div>
+
+<hr style="border:0; border-top:0.99pt solid #000000; margin:0.75em 0;" data-odt-border="bottom" />
+
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-4-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-4-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-4-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-4-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-4-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-4-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-4-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-4-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-4-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-4-10">10</a></span>
+<span class="normal"><a href="#__codelineno-4-11">11</a></span>
+<span class="normal"><a href="#__codelineno-4-12">12</a></span>
+<span class="normal"><a href="#__codelineno-4-13">13</a></span>
+<span class="normal"><a href="#__codelineno-4-14">14</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1"></a>Nombre d&#39;elements du dictionnaire : 4
+<a id="__codelineno-4-2" name="__codelineno-4-2"></a>conjoints[Paul]=Virginie
+<a id="__codelineno-4-3" name="__codelineno-4-3"></a>conjoints[Jean]=
+<a id="__codelineno-4-4" name="__codelineno-4-4"></a>conjoints[Pierre]=Gisele
+<a id="__codelineno-4-5" name="__codelineno-4-5"></a>conjoints[Jacques]=Lucette
+<a id="__codelineno-4-6" name="__codelineno-4-6"></a>liste des cles-------------
+<a id="__codelineno-4-7" name="__codelineno-4-7"></a>[&#39;Paul&#39;, &#39;Jean&#39;, &#39;Pierre&#39;, &#39;Jacques&#39;]
+<a id="__codelineno-4-8" name="__codelineno-4-8"></a>liste des valeurs------------
+<a id="__codelineno-4-9" name="__codelineno-4-9"></a>[&#39;Virginie&#39;, &#39;&#39;, &#39;Gisele&#39;, &#39;Lucette&#39;]
+<a id="__codelineno-4-10" name="__codelineno-4-10"></a>La cle [Jacques] existe associee a la valeur [Lucette]
+<a id="__codelineno-4-11" name="__codelineno-4-11"></a>La cle [Lucette] n&#39;existe pas
+<a id="__codelineno-4-12" name="__codelineno-4-12"></a>La cle [Jean] existe associee a la valeur []
+<a id="__codelineno-4-13" name="__codelineno-4-13"></a>Nombre d&#39;elements du dictionnaire : 3
+<a id="__codelineno-4-14" name="__codelineno-4-14"></a>{&#39;Paul&#39;: &#39;Virginie&#39;, &#39;Pierre&#39;: &#39;Gisele&#39;, &#39;Jacques&#39;: &#39;Lucette&#39;}
+</code></pre></div></td></tr></table></div>
+<p><span id="refheading382542423505" name="refheading382542423505" class="odt-bookmark-anchor"></span></p>
+<h3 id="343-os-tuplos">3.4.3. <span style="color: #4f81bd">Os tuplos</span></h3>
+<hr style="border:0; border-top:0.99pt solid #000000; margin:0.75em 0;" data-odt-border="top" />
+<div style="margin:0 0 0.75em 0; background-color:#e6e6e6; padding:0.35em 0.6em">Programa (bases_05)</div>
+
+<hr style="border:0; border-top:0.99pt solid #000000; margin:0.75em 0;" data-odt-border="bottom" />
+
+<div class="odt-code-rich" data-linenums="true" style="counter-reset: odtline 0;"><pre><code class="language-markdown">
+<span class="odt-code-line"><span class="odt-code-line-content"># -*- coding=utf-8 -*-</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"># tuplos</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"># inicialização</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">tab1<span style="color:#008080">=(</span>0<span style="color:#008080">,</span>1<span style="color:#008080">,</span>2<span style="color:#008080">,</span>3<span style="color:#008080">,</span>4<span style="color:#008080">,</span>5<span style="color:#008080">)</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"># iteração - 1</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"><span style="color:#0000ff">print</span> <span style="color:#a31515">&quot;tab1 a %s elements&quot;</span> <span style="color:#008080">%</span> <span style="color:#008080">(</span>len<span style="color:#008080">(</span>tab1<span style="color:#008080">))</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"><span style="color:#0000ff">for</span> i <span style="color:#0000ff">in</span> range<span style="color:#008080">(</span>len<span style="color:#008080">(</span>tab1<span style="color:#008080">)):</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">    <span style="color:#0000ff">print</span> <span style="color:#a31515">&quot;tab1[%s]=%s&quot;</span> <span style="color:#008080">%</span> <span style="color:#008080">(</span>i<span style="color:#008080">,</span> tab1<span style="color:#008080">[</span>i<span style="color:#008080">])</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"># iteração - 2</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"><span style="color:#0000ff">print</span> <span style="color:#a31515">&quot;tab1 a %s elements&quot;</span> <span style="color:#008080">%</span> <span style="color:#008080">(</span>len<span style="color:#008080">(</span>tab1<span style="color:#008080">))</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"><span style="color:#0000ff">for</span> element <span style="color:#0000ff">in</span> tab1<span style="color:#008080">:</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">    <span style="color:#0000ff">print</span> element</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"># alteração de um elemento</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">tab1<span style="color:#008080">[</span>0<span style="color:#008080">]=-</span>1</span></span>
+</code></pre></div>
+
+<p><em><span style="color: #008080">    </span></em></p>
+<hr style="border:0; border-top:0.99pt solid #000000; margin:0.75em 0;" data-odt-border="top" />
+<div style="margin:0 0 0.75em 0; background-color:#e6e6e6; padding:0.35em 0.6em">Os resultados</div>
+
+<hr style="border:0; border-top:0.99pt solid #000000; margin:0.75em 0;" data-odt-border="bottom" />
+
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-5-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-5-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-5-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-5-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-5-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-5-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-5-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-5-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-5-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-5-10">10</a></span>
+<span class="normal"><a href="#__codelineno-5-11">11</a></span>
+<span class="normal"><a href="#__codelineno-5-12">12</a></span>
+<span class="normal"><a href="#__codelineno-5-13">13</a></span>
+<span class="normal"><a href="#__codelineno-5-14">14</a></span>
+<span class="normal"><a href="#__codelineno-5-15">15</a></span>
+<span class="normal"><a href="#__codelineno-5-16">16</a></span>
+<span class="normal"><a href="#__codelineno-5-17">17</a></span>
+<span class="normal"><a href="#__codelineno-5-18">18</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1"></a>tab1 a 6 elements
+<a id="__codelineno-5-2" name="__codelineno-5-2"></a>tab1[0]=0
+<a id="__codelineno-5-3" name="__codelineno-5-3"></a>tab1[1]=1
+<a id="__codelineno-5-4" name="__codelineno-5-4"></a>tab1[2]=2
+<a id="__codelineno-5-5" name="__codelineno-5-5"></a>tab1[3]=3
+<a id="__codelineno-5-6" name="__codelineno-5-6"></a>tab1[4]=4
+<a id="__codelineno-5-7" name="__codelineno-5-7"></a>tab1[5]=5
+<a id="__codelineno-5-8" name="__codelineno-5-8"></a>tab1 a 6 elements
+<a id="__codelineno-5-9" name="__codelineno-5-9"></a>0
+<a id="__codelineno-5-10" name="__codelineno-5-10"></a>1
+<a id="__codelineno-5-11" name="__codelineno-5-11"></a>2
+<a id="__codelineno-5-12" name="__codelineno-5-12"></a>3
+<a id="__codelineno-5-13" name="__codelineno-5-13"></a>4
+<a id="__codelineno-5-14" name="__codelineno-5-14"></a>5
+<a id="__codelineno-5-15" name="__codelineno-5-15"></a>Traceback (most recent call last):
+<a id="__codelineno-5-16" name="__codelineno-5-16"></a>  File &quot;exemple_05.py&quot;, line 18, in &lt;module&gt;
+<a id="__codelineno-5-17" name="__codelineno-5-17"></a>    tab1[0]=-1
+<a id="__codelineno-5-18" name="__codelineno-5-18"></a>TypeError: &#39;tuple&#39; object does not support item assignment
+</code></pre></div></td></tr></table></div>
+<p>Notas:</p>
+<ul>
+<li>linhas 15-18 dos resultados: mostram que um tuplo não pode ser alterado.</li>
+</ul>
+<p><span id="refheading382562423505" name="refheading382562423505" class="odt-bookmark-anchor"></span></p>
+<h3 id="344-listas-multidimensionais">3.4.4. <span style="color: #4f81bd">Listas multidimensionais</span></h3>
+<hr style="border:0; border-top:0.99pt solid #000000; margin:0.75em 0;" data-odt-border="top" />
+<div style="margin:0 0 0.75em 0; background-color:#e6e6e6; padding:0.35em 0.6em">Programa (bases_06)</div>
+
+<hr style="border:0; border-top:0.99pt solid #000000; margin:0.75em 0;" data-odt-border="bottom" />
+
+<div class="odt-code-rich" data-linenums="true" style="counter-reset: odtline 0;"><pre><code class="language-vbscript">
+<span class="odt-code-line"><span class="odt-code-line-content"># -*- coding=utf-8 -*-</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"># listas multidimensionais</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"># inicialização</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">multi<span style="color:#008080">=[[</span>0<span style="color:#008080">,</span>1<span style="color:#008080">,</span>2<span style="color:#008080">],</span> <span style="color:#008080">[</span>10<span style="color:#008080">,</span>11<span style="color:#008080">,</span>12<span style="color:#008080">,</span>13<span style="color:#008080">],</span> <span style="color:#008080">[</span>20<span style="color:#008080">,</span>21<span style="color:#008080">,</span>22<span style="color:#008080">,</span>23<span style="color:#008080">,</span>24<span style="color:#008080">]]</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"># percurso</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"><span style="color:#0000ff">for</span> i1 <span style="color:#0000ff">in</span> range<span style="color:#008080">(</span>len<span style="color:#008080">(</span>multi<span style="color:#008080">)):</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">    <span style="color:#0000ff">for</span> i2 <span style="color:#0000ff">in</span> range<span style="color:#008080">(</span>len<span style="color:#008080">(</span>multi<span style="color:#008080">[</span>i1<span style="color:#008080">])):</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">        <span style="color:#0000ff">print</span> <span style="color:#a31515">&quot;multi[%s][%s]=%s&quot;</span> <span style="color:#008080">%</span> <span style="color:#008080">(</span>i1<span style="color:#008080">,</span>i2<span style="color:#008080">,</span>multi<span style="color:#008080">[</span>i1<span style="color:#008080">][</span>i2<span style="color:#008080">])</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"># dicionários multidimensionais</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"># inicialização</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">multi<span style="color:#008080">={</span><span style="color:#a31515">&quot;zero&quot;</span><span style="color:#008080">:[</span>0<span style="color:#008080">,</span>1<span style="color:#008080">],</span> <span style="color:#a31515">&quot;un&quot;</span><span style="color:#008080">:[</span>10<span style="color:#008080">,</span>11<span style="color:#008080">,</span>12<span style="color:#008080">,</span>13<span style="color:#008080">],</span> <span style="color:#a31515">&quot;deux&quot;</span><span style="color:#008080">:[</span>20<span style="color:#008080">,</span>21<span style="color:#008080">,</span>22<span style="color:#008080">,</span>23<span style="color:#008080">,</span>24<span style="color:#008080">]}</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"># navegação</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"><span style="color:#0000ff">for</span> <span style="color:#008080">(</span>cle<span style="color:#008080">,</span>valeur<span style="color:#008080">)</span> <span style="color:#0000ff">in</span> multi<span style="color:#0000ff">.</span>items<span style="color:#008080">():</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">    <span style="color:#0000ff">for</span> i2 <span style="color:#0000ff">in</span> range<span style="color:#008080">(</span>len<span style="color:#008080">(</span>multi<span style="color:#008080">[</span>cle<span style="color:#008080">])):</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">        <span style="color:#0000ff">print</span> <span style="color:#a31515">&quot;multi[%s][%s]=%s&quot;</span> <span style="color:#008080">%</span> <span style="color:#008080">(</span>cle<span style="color:#008080">,</span>i2<span style="color:#008080">,</span>multi<span style="color:#008080">[</span>cle<span style="color:#008080">][</span>i2<span style="color:#008080">])</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"></span></span>
+</code></pre></div>
+
+<hr style="border:0; border-top:0.99pt solid #000000; margin:0.75em 0;" data-odt-border="top" />
+<div style="margin:0 0 0.75em 0; background-color:#e6e6e6; padding:0.35em 0.6em">Resultados</div>
+
+<hr style="border:0; border-top:0.99pt solid #000000; margin:0.75em 0;" data-odt-border="bottom" />
+
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-6-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-6-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-6-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-6-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-6-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-6-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-6-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-6-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-6-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-6-10">10</a></span>
+<span class="normal"><a href="#__codelineno-6-11">11</a></span>
+<span class="normal"><a href="#__codelineno-6-12">12</a></span>
+<span class="normal"><a href="#__codelineno-6-13">13</a></span>
+<span class="normal"><a href="#__codelineno-6-14">14</a></span>
+<span class="normal"><a href="#__codelineno-6-15">15</a></span>
+<span class="normal"><a href="#__codelineno-6-16">16</a></span>
+<span class="normal"><a href="#__codelineno-6-17">17</a></span>
+<span class="normal"><a href="#__codelineno-6-18">18</a></span>
+<span class="normal"><a href="#__codelineno-6-19">19</a></span>
+<span class="normal"><a href="#__codelineno-6-20">20</a></span>
+<span class="normal"><a href="#__codelineno-6-21">21</a></span>
+<span class="normal"><a href="#__codelineno-6-22">22</a></span>
+<span class="normal"><a href="#__codelineno-6-23">23</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1"></a>multi[0][0]=0
+<a id="__codelineno-6-2" name="__codelineno-6-2"></a>multi[0][1]=1
+<a id="__codelineno-6-3" name="__codelineno-6-3"></a>multi[0][2]=2
+<a id="__codelineno-6-4" name="__codelineno-6-4"></a>multi[1][0]=10
+<a id="__codelineno-6-5" name="__codelineno-6-5"></a>multi[1][1]=11
+<a id="__codelineno-6-6" name="__codelineno-6-6"></a>multi[1][2]=12
+<a id="__codelineno-6-7" name="__codelineno-6-7"></a>multi[1][3]=13
+<a id="__codelineno-6-8" name="__codelineno-6-8"></a>multi[2][0]=20
+<a id="__codelineno-6-9" name="__codelineno-6-9"></a>multi[2][1]=21
+<a id="__codelineno-6-10" name="__codelineno-6-10"></a>multi[2][2]=22
+<a id="__codelineno-6-11" name="__codelineno-6-11"></a>multi[2][3]=23
+<a id="__codelineno-6-12" name="__codelineno-6-12"></a>multi[2][4]=24
+<a id="__codelineno-6-13" name="__codelineno-6-13"></a>multi[zero][0]=0
+<a id="__codelineno-6-14" name="__codelineno-6-14"></a>multi[zero][1]=1
+<a id="__codelineno-6-15" name="__codelineno-6-15"></a>multi[un][0]=10
+<a id="__codelineno-6-16" name="__codelineno-6-16"></a>multi[un][1]=11
+<a id="__codelineno-6-17" name="__codelineno-6-17"></a>multi[un][2]=12
+<a id="__codelineno-6-18" name="__codelineno-6-18"></a>multi[un][3]=13
+<a id="__codelineno-6-19" name="__codelineno-6-19"></a>multi[deux][0]=20
+<a id="__codelineno-6-20" name="__codelineno-6-20"></a>multi[deux][1]=21
+<a id="__codelineno-6-21" name="__codelineno-6-21"></a>multi[deux][2]=22
+<a id="__codelineno-6-22" name="__codelineno-6-22"></a>multi[deux][3]=23
+<a id="__codelineno-6-23" name="__codelineno-6-23"></a>multi[deux][4]=24
+</code></pre></div></td></tr></table></div>
+<p><span id="refheading382582423505" name="refheading382582423505" class="odt-bookmark-anchor"></span></p>
+<h3 id="345-ligacoes-entre-cadeias-e-listas">3.4.5. <span style="color: #4f81bd">Ligações entre cadeias e listas</span></h3>
+<hr style="border:0; border-top:0.99pt solid #000000; margin:0.75em 0;" data-odt-border="top" />
+<div style="margin:0 0 0.75em 0; background-color:#e6e6e6; padding:0.35em 0.6em">Programa (bases_07)</div>
+
+<hr style="border:0; border-top:0.99pt solid #000000; margin:0.75em 0;" data-odt-border="bottom" />
+
+<div class="odt-code-rich" data-linenums="true" style="counter-reset: odtline 0;"><pre><code class="language-markdown">
+<span class="odt-code-line"><span class="odt-code-line-content"># -*- coding=Utf-8 -*-</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"># conversão de cadeia de caracteres em lista</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">chaine<span style="color:#008080">=</span><span style="color:#a31515">&#x27;1:2:3:4&#x27;</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">tab<span style="color:#008080">=</span>chaine<span style="color:#0000ff">.</span>split<span style="color:#008080">(</span><span style="color:#a31515">&#x27;:&#x27;</span><span style="color:#008080">)</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"><span style="color:#0000ff">print</span> type<span style="color:#008080">(</span>tab<span style="color:#008080">)</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"># exibição de lista</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"><span style="color:#0000ff">print</span> <span style="color:#a31515">&quot;tab a %s elements&quot;</span> <span style="color:#008080">%</span> <span style="color:#008080">(</span>len<span style="color:#008080">(</span>tab<span style="color:#008080">))</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"><span style="color:#0000ff">print</span> <span style="color:#008080">(</span><span style="color:#a31515">&quot;%s&quot;</span><span style="color:#008080">)</span> <span style="color:#008080">%</span> <span style="color:#008080">(</span>tab<span style="color:#008080">)</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"># da lista para cadeia</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">chaine2<span style="color:#008080">=</span><span style="color:#a31515">&quot;:&quot;</span><span style="color:#0000ff">.</span>join<span style="color:#008080">(</span>tab<span style="color:#008080">)</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"><span style="color:#0000ff">print</span> <span style="color:#a31515">&quot;chaine2=%s&quot;</span> <span style="color:#008080">%</span> <span style="color:#008080">(</span>chaine2<span style="color:#008080">)</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"># vamos adicionar um campo vazio</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">chaine<span style="color:#008080">+=</span><span style="color:#a31515">&quot;:&quot;</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"><span style="color:#0000ff">print</span> <span style="color:#a31515">&quot;chaine=%s&quot;</span> <span style="color:#008080">%</span> <span style="color:#008080">(</span>chaine<span style="color:#008080">)</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">tab<span style="color:#008080">=</span>chaine<span style="color:#0000ff">.</span>split<span style="color:#008080">(</span><span style="color:#a31515">&quot;:&quot;</span><span style="color:#008080">)</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"># exibição da lista</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"><span style="color:#0000ff">print</span> <span style="color:#a31515">&quot;tab a %s elements&quot;</span> <span style="color:#008080">%</span> <span style="color:#008080">(</span>len<span style="color:#008080">(</span>tab<span style="color:#008080">))</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"><span style="color:#0000ff">print</span> <span style="color:#008080">(</span><span style="color:#a31515">&quot;%s&quot;</span><span style="color:#008080">)</span> <span style="color:#008080">%</span> <span style="color:#008080">(</span>tab<span style="color:#008080">)</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"># vamos adicionar novamente um campo vazio</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">chaine<span style="color:#008080">+=</span><span style="color:#a31515">&quot;:&quot;</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"><span style="color:#0000ff">print</span> <span style="color:#a31515">&quot;chaine=%s&quot;</span> <span style="color:#008080">%</span> <span style="color:#008080">(</span>chaine<span style="color:#008080">)</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">tab<span style="color:#008080">=</span>chaine<span style="color:#0000ff">.</span>split<span style="color:#008080">(</span><span style="color:#a31515">&quot;:&quot;</span><span style="color:#008080">)</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"># exibição da lista</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"><span style="color:#0000ff">print</span> <span style="color:#a31515">&quot;tab a %s elements&quot;</span> <span style="color:#008080">%</span> <span style="color:#008080">(</span>len<span style="color:#008080">(</span>tab<span style="color:#008080">))</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"><span style="color:#0000ff">print</span> <span style="color:#008080">(</span><span style="color:#a31515">&quot;%s&quot;</span><span style="color:#008080">)</span> <span style="color:#008080">%</span> <span style="color:#008080">(</span>tab<span style="color:#008080">)</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"></span></span>
+</code></pre></div>
+
+<p>Notas:</p>
+<ul>
+<li>linha 5: o método <em>chaine.split(separador)</em> divide a cadeia de caracteres <em>chaine</em> em elementos separados por <em>séparateur</em> e apresenta-os sob a forma de uma lista. Assim, a expressão <em>&#x27;1:2:3:4&#x27;.split(&quot;:&quot;)</em> tem como valor a lista <em>(&#x27;1&#x27;,&#x27;2&#x27;,&#x27;3&#x27;,&#x27;4&#x27;);</em></li>
+<li>linha 13: <em>&#x27;separateur&#x27;.join(liste)</em> tem como valor a cadeia de caracteres <em>&#x27;lista[0]+separador+lista[1]+separador+...&#x27;.</em></li>
+</ul>
+<hr style="border:0; border-top:0.99pt solid #000000; margin:0.75em 0;" data-odt-border="top" />
+<div style="margin:0 0 0.75em 0; background-color:#e6e6e6; padding:0.35em 0.6em">Resultados</div>
+
+<hr style="border:0; border-top:0.99pt solid #000000; margin:0.75em 0;" data-odt-border="bottom" />
+
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-7-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-7-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-7-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-7-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-7-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-7-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-7-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-7-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-7-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-7-10">10</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1"></a>&lt;type &#39;list&#39;&gt;
+<a id="__codelineno-7-2" name="__codelineno-7-2"></a>tab a 4 elements
+<a id="__codelineno-7-3" name="__codelineno-7-3"></a>[&#39;1&#39;, &#39;2&#39;, &#39;3&#39;, &#39;4&#39;]
+<a id="__codelineno-7-4" name="__codelineno-7-4"></a>chaine2=1:2:3:4
+<a id="__codelineno-7-5" name="__codelineno-7-5"></a>chaine=1:2:3:4:
+<a id="__codelineno-7-6" name="__codelineno-7-6"></a>tab a 5 elements
+<a id="__codelineno-7-7" name="__codelineno-7-7"></a>[&#39;1&#39;, &#39;2&#39;, &#39;3&#39;, &#39;4&#39;, &#39;&#39;]
+<a id="__codelineno-7-8" name="__codelineno-7-8"></a>chaine=1:2:3:4::
+<a id="__codelineno-7-9" name="__codelineno-7-9"></a>tab a 6 elements
+<a id="__codelineno-7-10" name="__codelineno-7-10"></a>[&#39;1&#39;, &#39;2&#39;, &#39;3&#39;, &#39;4&#39;, &#39;&#39;, &#39;&#39;]
+</code></pre></div></td></tr></table></div>
+<p><span id="refheading382602423505" name="refheading382602423505" class="odt-bookmark-anchor"></span></p>
+<h2 id="35-as-expressoes-regulares">3.5. <span style="color: #4f81bd">As expressões regulares</span></h2>
+<hr style="border:0; border-top:0.99pt solid #000000; margin:0.75em 0;" data-odt-border="top" />
+<div style="margin:0 0 0.75em 0; background-color:#e6e6e6; padding:0.35em 0.6em">Programa (bases_09)</div>
+
+<hr style="border:0; border-top:0.99pt solid #000000; margin:0.75em 0;" data-odt-border="bottom" />
+
+<div class="odt-code-rich" data-linenums="true" style="counter-reset: odtline 0;"><pre><code class="language-python">
+<span class="odt-code-line"><span class="odt-code-line-content"># -*- coding=utf-8 -*-</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"><span style="color:#0000ff">import</span> re</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"># --------------------------------------------------------------------------</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"><span style="color:#0000ff">def</span> compare<span style="color:#008080">(</span>modele<span style="color:#008080">,</span>chaine<span style="color:#008080">):</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">    # compara a cadeia «cadeia» com o modelo «modelo»</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">    # exibição dos resultados</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">    <span style="color:#0000ff">print</span> <span style="color:#a31515">&quot;\nResultats(%s,%s)&quot;</span> <span style="color:#008080">%</span> <span style="color:#008080">(</span>chaine<span style="color:#008080">,</span>modele<span style="color:#008080">)</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">    match<span style="color:#008080">=</span>re<span style="color:#0000ff">.</span>match<span style="color:#008080">(</span>modele<span style="color:#008080">,</span>chaine<span style="color:#008080">)</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">    <span style="color:#0000ff">if</span> match<span style="color:#008080">:</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">        <span style="color:#0000ff">print</span> match<span style="color:#0000ff">.</span>groups<span style="color:#008080">()</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">    <span style="color:#0000ff">else</span><span style="color:#008080">:</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">        <span style="color:#0000ff">print</span> <span style="color:#a31515">&quot;La chaine [%s] ne correspond pas au modele [%s]&quot;</span> <span style="color:#008080">%</span> <span style="color:#008080">(</span>chaine<span style="color:#008080">,</span>modele<span style="color:#008080">)</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"># expressões regulares em Python</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"># recuperar os diferentes campos de uma cadeia</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"># o padrão: uma sequência de números rodeada por caracteres quaisquer</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"># pretende-se recuperar apenas a sequência de números</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">modele<span style="color:#008080">=</span><span style="color:#a31515">r&quot;^.*?(\d+).*?$&quot;</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"># comparamos a cadeia com o padrão</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">compare<span style="color:#008080">(</span>modele<span style="color:#008080">,</span><span style="color:#a31515">&quot;xyz1234abcd&quot;</span><span style="color:#008080">)</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">compare<span style="color:#008080">(</span>modele<span style="color:#008080">,</span><span style="color:#a31515">&quot;12 34&quot;</span><span style="color:#008080">)</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">compare<span style="color:#008080">(</span>modele<span style="color:#008080">,</span><span style="color:#a31515">&quot;abcd&quot;</span><span style="color:#008080">)</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"># o padrão: uma sequência de números rodeada por caracteres quaisquer</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"># pretende-se a sequência de números, bem como os campos que a precedem e a seguem</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">modele<span style="color:#008080">=</span><span style="color:#a31515">r&quot;^(.*?)(\d+)(.*?)$&quot;</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"># comparamos a cadeia de caracteres com o modelo</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">compare<span style="color:#008080">(</span>modele<span style="color:#008080">,</span><span style="color:#a31515">&quot;xyz1234abcd&quot;</span><span style="color:#008080">)</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">compare<span style="color:#008080">(</span>modele<span style="color:#008080">,</span><span style="color:#a31515">&quot;12 34&quot;</span><span style="color:#008080">)</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">compare<span style="color:#008080">(</span>modele<span style="color:#008080">,</span><span style="color:#a31515">&quot;abcd&quot;</span><span style="color:#008080">)</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"># o modelo — uma data no formato dd/mm/aa</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">modele<span style="color:#008080">=</span><span style="color:#a31515">r&quot;^\s*(\d\d)\/(\d\d)\/(\d\d)\s*$&quot;</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">compare<span style="color:#008080">(</span>modele<span style="color:#008080">,</span><span style="color:#a31515">&quot;10/05/97&quot;</span><span style="color:#008080">)</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">compare<span style="color:#008080">(</span>modele<span style="color:#008080">,</span><span style="color:#a31515">&quot; 04/04/01 &quot;</span><span style="color:#008080">)</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">compare<span style="color:#008080">(</span>modele<span style="color:#008080">,</span><span style="color:#a31515">&quot;5/1/01&quot;</span><span style="color:#008080">)</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"># o modelo — um número decimal</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">modele<span style="color:#008080">=</span><span style="color:#a31515">r&quot;^\s*([+|-]?)\s*(\d+\.\d*|\.\d+|\d+)\s*$&quot;</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">compare<span style="color:#008080">(</span>modele<span style="color:#008080">,</span><span style="color:#a31515">&quot;187.8&quot;</span><span style="color:#008080">)</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">compare<span style="color:#008080">(</span>modele<span style="color:#008080">,</span><span style="color:#a31515">&quot;-0.6&quot;</span><span style="color:#008080">)</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">compare<span style="color:#008080">(</span>modele<span style="color:#008080">,</span><span style="color:#a31515">&quot;4&quot;</span><span style="color:#008080">)</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">compare<span style="color:#008080">(</span>modele<span style="color:#008080">,</span><span style="color:#a31515">&quot;.6&quot;</span><span style="color:#008080">)</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">compare<span style="color:#008080">(</span>modele<span style="color:#008080">,</span><span style="color:#a31515">&quot;4.&quot;</span><span style="color:#008080">)</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">compare<span style="color:#008080">(</span>modele<span style="color:#008080">,</span><span style="color:#a31515">&quot; + 4&quot;</span><span style="color:#008080">)</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"># fim</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"></span></span>
+</code></pre></div>
+
+<p>Notas:</p>
+<ul>
+<li>repare no módulo importado na linha 3. É este que contém as funções de gestão das expressões regulares;</li>
+<li>linha 10: a comparação de uma cadeia de caracteres com uma expressão regular (padrão) devolve o valor booleano <em>True</em> se a cadeia corresponder ao padrão, e <em>False</em> caso contrário;</li>
+<li>linha 12: <em>match.groups()</em> é uma tupla cujos elementos são as partes da cadeia que correspondem aos elementos da expressão regular entre parênteses. No padrão:</li>
+<li><em>^.*?(\d+).*?</em>, <em>match.groups</em>() será uma tupla com um elemento;</li>
+<li><em>^(.*?)(\d+)(.*?)$</em>,  <em>match.groups</em>() será uma tupla de 3 elementos.</li>
+</ul>
+<hr style="border:0; border-top:0.99pt solid #000000; margin:0.75em 0;" data-odt-border="top" />
+<div style="margin:0 0 0.75em 0; background-color:#e6e6e6; padding:0.35em 0.6em">Resultados</div>
+
+<hr style="border:0; border-top:0.99pt solid #000000; margin:0.75em 0;" data-odt-border="bottom" />
+
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-8-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-8-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-8-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-8-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-8-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-8-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-8-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-8-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-8-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-8-10">10</a></span>
+<span class="normal"><a href="#__codelineno-8-11">11</a></span>
+<span class="normal"><a href="#__codelineno-8-12">12</a></span>
+<span class="normal"><a href="#__codelineno-8-13">13</a></span>
+<span class="normal"><a href="#__codelineno-8-14">14</a></span>
+<span class="normal"><a href="#__codelineno-8-15">15</a></span>
+<span class="normal"><a href="#__codelineno-8-16">16</a></span>
+<span class="normal"><a href="#__codelineno-8-17">17</a></span>
+<span class="normal"><a href="#__codelineno-8-18">18</a></span>
+<span class="normal"><a href="#__codelineno-8-19">19</a></span>
+<span class="normal"><a href="#__codelineno-8-20">20</a></span>
+<span class="normal"><a href="#__codelineno-8-21">21</a></span>
+<span class="normal"><a href="#__codelineno-8-22">22</a></span>
+<span class="normal"><a href="#__codelineno-8-23">23</a></span>
+<span class="normal"><a href="#__codelineno-8-24">24</a></span>
+<span class="normal"><a href="#__codelineno-8-25">25</a></span>
+<span class="normal"><a href="#__codelineno-8-26">26</a></span>
+<span class="normal"><a href="#__codelineno-8-27">27</a></span>
+<span class="normal"><a href="#__codelineno-8-28">28</a></span>
+<span class="normal"><a href="#__codelineno-8-29">29</a></span>
+<span class="normal"><a href="#__codelineno-8-30">30</a></span>
+<span class="normal"><a href="#__codelineno-8-31">31</a></span>
+<span class="normal"><a href="#__codelineno-8-32">32</a></span>
+<span class="normal"><a href="#__codelineno-8-33">33</a></span>
+<span class="normal"><a href="#__codelineno-8-34">34</a></span>
+<span class="normal"><a href="#__codelineno-8-35">35</a></span>
+<span class="normal"><a href="#__codelineno-8-36">36</a></span>
+<span class="normal"><a href="#__codelineno-8-37">37</a></span>
+<span class="normal"><a href="#__codelineno-8-38">38</a></span>
+<span class="normal"><a href="#__codelineno-8-39">39</a></span>
+<span class="normal"><a href="#__codelineno-8-40">40</a></span>
+<span class="normal"><a href="#__codelineno-8-41">41</a></span>
+<span class="normal"><a href="#__codelineno-8-42">42</a></span>
+<span class="normal"><a href="#__codelineno-8-43">43</a></span>
+<span class="normal"><a href="#__codelineno-8-44">44</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1"></a>Resultats(xyz1234abcd,^.*?(\d+).*?$)
+<a id="__codelineno-8-2" name="__codelineno-8-2"></a>(&#39;1234&#39;,)
+<a id="__codelineno-8-3" name="__codelineno-8-3"></a>
+<a id="__codelineno-8-4" name="__codelineno-8-4"></a>Resultats(12 34,^.*?(\d+).*?$)
+<a id="__codelineno-8-5" name="__codelineno-8-5"></a>(&#39;12&#39;,)
+<a id="__codelineno-8-6" name="__codelineno-8-6"></a>
+<a id="__codelineno-8-7" name="__codelineno-8-7"></a>Resultats(abcd,^.*?(\d+).*?$)
+<a id="__codelineno-8-8" name="__codelineno-8-8"></a>La chaine [abcd] ne correspond pas au modele [^.*?(\d+).*?$]
+<a id="__codelineno-8-9" name="__codelineno-8-9"></a>
+<a id="__codelineno-8-10" name="__codelineno-8-10"></a>Resultats(xyz1234abcd,^(.*?)(\d+)(.*?)$)
+<a id="__codelineno-8-11" name="__codelineno-8-11"></a>(&#39;xyz&#39;, &#39;1234&#39;, &#39;abcd&#39;)
+<a id="__codelineno-8-12" name="__codelineno-8-12"></a>
+<a id="__codelineno-8-13" name="__codelineno-8-13"></a>Resultats(12 34,^(.*?)(\d+)(.*?)$)
+<a id="__codelineno-8-14" name="__codelineno-8-14"></a>(&#39;&#39;, &#39;12&#39;, &#39; 34&#39;)
+<a id="__codelineno-8-15" name="__codelineno-8-15"></a>
+<a id="__codelineno-8-16" name="__codelineno-8-16"></a>Resultats(abcd,^(.*?)(\d+)(.*?)$)
+<a id="__codelineno-8-17" name="__codelineno-8-17"></a>La chaine [abcd] ne correspond pas au modele [^(.*?)(\d+)(.*?)$]
+<a id="__codelineno-8-18" name="__codelineno-8-18"></a>
+<a id="__codelineno-8-19" name="__codelineno-8-19"></a>Resultats(10/05/97,^\s*(\d\d)\/(\d\d)\/(\d\d)\s*$)
+<a id="__codelineno-8-20" name="__codelineno-8-20"></a>(&#39;10&#39;, &#39;05&#39;, &#39;97&#39;)
+<a id="__codelineno-8-21" name="__codelineno-8-21"></a>
+<a id="__codelineno-8-22" name="__codelineno-8-22"></a>Resultats( 04/04/01 ,^\s*(\d\d)\/(\d\d)\/(\d\d)\s*$)
+<a id="__codelineno-8-23" name="__codelineno-8-23"></a>(&#39;04&#39;, &#39;04&#39;, &#39;01&#39;)
+<a id="__codelineno-8-24" name="__codelineno-8-24"></a>
+<a id="__codelineno-8-25" name="__codelineno-8-25"></a>Resultats(5/1/01,^\s*(\d\d)\/(\d\d)\/(\d\d)\s*$)
+<a id="__codelineno-8-26" name="__codelineno-8-26"></a>La chaine [5/1/01] ne correspond pas au modele [^\s*(\d\d)\/(\d\d)\/(\d\d)\s*$]
+<a id="__codelineno-8-27" name="__codelineno-8-27"></a>
+<a id="__codelineno-8-28" name="__codelineno-8-28"></a>Resultats(187.8,^\s*([+|-]?)\s*(\d+\.\d*|\.\d+|\d+)\s*$)
+<a id="__codelineno-8-29" name="__codelineno-8-29"></a>(&#39;&#39;, &#39;187.8&#39;)
+<a id="__codelineno-8-30" name="__codelineno-8-30"></a>
+<a id="__codelineno-8-31" name="__codelineno-8-31"></a>Resultats(-0.6,^\s*([+|-]?)\s*(\d+\.\d*|\.\d+|\d+)\s*$)
+<a id="__codelineno-8-32" name="__codelineno-8-32"></a>(&#39;-&#39;, &#39;0.6&#39;)
+<a id="__codelineno-8-33" name="__codelineno-8-33"></a>
+<a id="__codelineno-8-34" name="__codelineno-8-34"></a>Resultats(4,^\s*([+|-]?)\s*(\d+\.\d*|\.\d+|\d+)\s*$)
+<a id="__codelineno-8-35" name="__codelineno-8-35"></a>(&#39;&#39;, &#39;4&#39;)
+<a id="__codelineno-8-36" name="__codelineno-8-36"></a>
+<a id="__codelineno-8-37" name="__codelineno-8-37"></a>Resultats(.6,^\s*([+|-]?)\s*(\d+\.\d*|\.\d+|\d+)\s*$)
+<a id="__codelineno-8-38" name="__codelineno-8-38"></a>(&#39;&#39;, &#39;.6&#39;)
+<a id="__codelineno-8-39" name="__codelineno-8-39"></a>
+<a id="__codelineno-8-40" name="__codelineno-8-40"></a>Resultats(4.,^\s*([+|-]?)\s*(\d+\.\d*|\.\d+|\d+)\s*$)
+<a id="__codelineno-8-41" name="__codelineno-8-41"></a>(&#39;&#39;, &#39;4.&#39;)
+<a id="__codelineno-8-42" name="__codelineno-8-42"></a>
+<a id="__codelineno-8-43" name="__codelineno-8-43"></a>Resultats( + 4,^\s*([+|-]?)\s*(\d+\.\d*|\.\d+|\d+)\s*$)
+<a id="__codelineno-8-44" name="__codelineno-8-44"></a>(&#39;+&#39;, &#39;4&#39;)
+</code></pre></div></td></tr></table></div>
+<p><span id="refheading382622423505" name="refheading382622423505" class="odt-bookmark-anchor"></span></p>
+<h2 id="36-modo-de-passagem-de-parametros-das-funcoes">3.6. <span style="color: #4f81bd"><strong>Modo de passagem de parâmetros das funções</strong></span></h2>
+<hr style="border:0; border-top:0.99pt solid #000000; margin:0.75em 0;" data-odt-border="top" />
+<div style="margin:0 0 0.75em 0; background-color:#e6e6e6; padding:0.35em 0.6em">Programa (bases_10)</div>
+
+<hr style="border:0; border-top:0.99pt solid #000000; margin:0.75em 0;" data-odt-border="bottom" />
+
+<div class="odt-code-rich" data-linenums="true" style="counter-reset: odtline 0;"><pre><code class="language-python">
+<span class="odt-code-line"><span class="odt-code-line-content"># -*- coding=utf-8 -*-</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"><span style="color:#0000ff">def</span> f1<span style="color:#008080">(</span>a<span style="color:#008080">):</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">    a<span style="color:#008080">=</span>2</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"><span style="color:#0000ff">def</span> f2<span style="color:#008080">(</span>a<span style="color:#008080">,</span>b<span style="color:#008080">):</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">    a<span style="color:#008080">=</span>2</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">    b<span style="color:#008080">=</span>3</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">    <span style="color:#0000ff">return</span> <span style="color:#008080">(</span>a<span style="color:#008080">,</span>b<span style="color:#008080">)</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">  </span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"># ------------------------ principal</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">x<span style="color:#008080">=</span>1</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">f1<span style="color:#008080">(</span>x<span style="color:#008080">)</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"><span style="color:#0000ff">print</span> <span style="color:#a31515">&quot;x=%s&quot;</span> <span style="color:#008080">%</span> <span style="color:#008080">(</span>x<span style="color:#008080">)</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"><span style="color:#008080">(</span>x<span style="color:#008080">,</span>y<span style="color:#008080">)=(-</span>1<span style="color:#008080">,-</span>1<span style="color:#008080">)</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"><span style="color:#008080">(</span>x<span style="color:#008080">,</span>y<span style="color:#008080">)=</span>f2<span style="color:#008080">(</span>x<span style="color:#008080">,</span>y<span style="color:#008080">)</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"><span style="color:#0000ff">print</span> <span style="color:#a31515">&quot;x=%s, y=%s&quot;</span> <span style="color:#008080">%</span> <span style="color:#008080">(</span>x<span style="color:#008080">,</span>y<span style="color:#008080">)</span></span></span>
+</code></pre></div>
+
+<hr style="border:0; border-top:0.99pt solid #000000; margin:0.75em 0;" data-odt-border="top" />
+<div style="margin:0 0 0.75em 0; background-color:#e6e6e6; padding:0.35em 0.6em">Resultados</div>
+
+<hr style="border:0; border-top:0.99pt solid #000000; margin:0.75em 0;" data-odt-border="bottom" />
+
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-9-1">1</a></span>
+<span class="normal"><a href="#__codelineno-9-2">2</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1"></a>x=1
+<a id="__codelineno-9-2" name="__codelineno-9-2"></a>x=2, y=3
+</code></pre></div></td></tr></table></div>
+<p>Notas:</p>
+<ul>
+<li>tudo é um objeto em Python. Alguns objetos são ditos «imutáveis»: não podem ser alterados. É o caso dos números, das cadeias de caracteres e das tuplas. Quando os objetos Python são passados como parâmetros para funções, são as suas referências que são passadas, a menos que esses objetos sejam «imutáveis», caso em que é o valor do objeto que é passado;</li>
+<li>as funções <em>f1</em> (linha 3) e <em>f2</em> (linha 6) pretendem ilustrar a passagem de um parâmetro de saída. Pretende-se que o parâmetro efetivo de uma função seja alterado pela função;</li>
+<li>linhas 3-4: a função <em>f1</em> altera o seu parâmetro formal a. Pretende-se saber se o parâmetro efetivo também será alterado.</li>
+<li>linhas 12-13: o parâmetro efetivo é <em>x=1</em>. O resultado da linha 1 mostra que o parâmetro efetivo não é alterado. Assim, o parâmetro efetivo <strong>x</strong> e o parâmetro formal <strong>a</strong> são <strong>dois objetos diferentes;</strong></li>
+<li>linhas 6-9: a função <em>f2</em> altera os seus parâmetros formais <strong>a</strong> e <strong>b</strong> e devolve-os como resultados;</li>
+<li>linhas 15-16: passam-se para <em>a função f2</em> os parâmetros efetivos (x, y) e o resultado da função <em>f2</em> é atribuído a (x, y). A linha 2 dos resultados mostra que os parâmetros efetivos (x, y) foram alterados.</li>
+</ul>
+<p>Conclui-se que, quando objetos «imutáveis» são parâmetros de saída, estes têm de fazer parte dos resultados devolvidos pela função.</p>
+<p><span id="refheading382642423505" name="refheading382642423505" class="odt-bookmark-anchor"></span></p>
+<h2 id="37-os-ficheiros-de-texto">3.7. <span style="color: #4f81bd">Os ficheiros de texto</span></h2>
+<hr style="border:0; border-top:0.99pt solid #000000; margin:0.75em 0;" data-odt-border="top" />
+<div style="margin:0 0 0.75em 0; background-color:#e6e6e6; padding:0.35em 0.6em">Programa (bases_11)</div>
+
+<hr style="border:0; border-top:0.99pt solid #000000; margin:0.75em 0;" data-odt-border="bottom" />
+
+<div class="odt-code-rich" data-linenums="true" style="counter-reset: odtline 0;"><pre><code class="language-python">
+<span class="odt-code-line"><span class="odt-code-line-content"># -*- coding=utf-8 -*-</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"><span style="color:#0000ff">import</span> sys</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"># processamento sequencial de um ficheiro de texto</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"># este é um conjunto de linhas com o formato login:pwd:uid:gid:infos:dir:shell</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"># cada linha é inserida num dicionário com o formato login =&gt; [uid,gid,infos,dir,shell]</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"># --------------------------------------------------------------------------</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"><span style="color:#0000ff">def</span> afficheInfos<span style="color:#008080">(</span>dico<span style="color:#008080">,</span>cle<span style="color:#008080">):</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">    # exibe o valor associado à chave no dicionário «dico», caso exista</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">    valeur<span style="color:#008080">=</span>None</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">    <span style="color:#0000ff">if</span> dico<span style="color:#0000ff">.</span>has_key<span style="color:#008080">(</span>cle<span style="color:#008080">):</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">        valeur<span style="color:#008080">=</span>dico<span style="color:#008080">[</span>cle<span style="color:#008080">]</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">    <span style="color:#0000ff">if</span> <span style="color:#a31515">&#x27;list&#x27;</span> <span style="color:#0000ff">in</span> str<span style="color:#008080">(</span>type<span style="color:#008080">(</span>valeur<span style="color:#008080">)):</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">        <span style="color:#0000ff">print</span> <span style="color:#a31515">&quot;[{0},{1}]&quot;</span><span style="color:#0000ff">.</span>format<span style="color:#008080">(</span>cle<span style="color:#008080">,</span><span style="color:#a31515">&quot;:&quot;</span><span style="color:#0000ff">.</span>join<span style="color:#008080">(</span>valeur<span style="color:#008080">))</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">    <span style="color:#0000ff">else</span><span style="color:#008080">:</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">        # a chave não é uma chave do dicionário «dico»</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">        <span style="color:#0000ff">print</span> <span style="color:#a31515">&quot;la cle [{0}] n&#x27;existe pas&quot;</span><span style="color:#0000ff">.</span>format<span style="color:#008080">(</span>cle<span style="color:#008080">)</span>           </span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"><span style="color:#0000ff">def</span> cutNewLineChar<span style="color:#008080">(</span>ligne<span style="color:#008080">):</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">    # remove-se o marcador de fim de linha, caso exista</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">    l<span style="color:#008080">=</span>len<span style="color:#008080">(</span>ligne<span style="color:#008080">);</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">    <span style="color:#0000ff">while</span><span style="color:#008080">(</span>ligne<span style="color:#008080">[</span>l<span style="color:#008080">-</span>1<span style="color:#008080">]==</span><span style="color:#a31515">&quot;\n&quot;</span> <span style="color:#0000ff">or</span> ligne<span style="color:#008080">[</span>l<span style="color:#008080">-</span>1<span style="color:#008080">]==</span><span style="color:#a31515">&quot;\r&quot;</span><span style="color:#008080">):</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">        l<span style="color:#008080">-=</span>1</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">    <span style="color:#0000ff">return</span><span style="color:#008080">(</span>ligne<span style="color:#008080">[</span>0<span style="color:#008080">:</span>l<span style="color:#008080">]);</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">    </span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"># define-se o nome do ficheiro</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">INFOS<span style="color:#008080">=</span><span style="color:#a31515">&quot;infos.txt&quot;</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"># abre-se o ficheiro em modo de criação</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"><span style="color:#0000ff">try</span><span style="color:#008080">:</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">    fic<span style="color:#008080">=</span>open<span style="color:#008080">(</span>INFOS<span style="color:#008080">,</span><span style="color:#a31515">&quot;w&quot;</span><span style="color:#008080">)</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"><span style="color:#0000ff">except</span><span style="color:#008080">:</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">    <span style="color:#0000ff">print</span> <span style="color:#a31515">&quot;Erreur d&#x27;ouverture du fichier INFOS en écriture\n&quot;</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">    sys<span style="color:#0000ff">.</span>exit<span style="color:#008080">()</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"># gera-se um conteúdo arbitrário</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"><span style="color:#0000ff">for</span> i <span style="color:#0000ff">in</span> range<span style="color:#008080">(</span>1<span style="color:#008080">,</span>101<span style="color:#008080">):</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">    ligne<span style="color:#008080">=</span><span style="color:#a31515">&quot;login%s:pwd%s:uid%s:gid%s:infos%s:dir%s:shell%s&quot;</span> <span style="color:#008080">%</span> <span style="color:#008080">(</span>i<span style="color:#008080">,</span>i<span style="color:#008080">,</span>i<span style="color:#008080">,</span>i<span style="color:#008080">,</span>i<span style="color:#008080">,</span>i<span style="color:#008080">,</span>i<span style="color:#008080">)</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">    fic<span style="color:#0000ff">.</span>write<span style="color:#008080">(</span>ligne<span style="color:#008080">+</span><span style="color:#a31515">&quot;\n&quot;</span><span style="color:#008080">)</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"># fecha-se o ficheiro</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">fic<span style="color:#0000ff">.</span>close<span style="color:#008080">()</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"># abre-se o ficheiro para leitura</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"><span style="color:#0000ff">try</span><span style="color:#008080">:</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">    fic<span style="color:#008080">=</span>open<span style="color:#008080">(</span>INFOS<span style="color:#008080">,</span><span style="color:#a31515">&quot;r&quot;</span><span style="color:#008080">)</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"><span style="color:#0000ff">except</span><span style="color:#008080">:</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">    <span style="color:#0000ff">print</span> <span style="color:#a31515">&quot;Erreur d&#x27;ouverture du fichier INFOS en écriture\n&quot;</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">    sys<span style="color:#0000ff">.</span>exit<span style="color:#008080">()</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"># dicionário vazio no início</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">dico<span style="color:#008080">={}</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"># leitura de linha  </span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">ligne<span style="color:#008080">=</span>fic<span style="color:#0000ff">.</span>readline<span style="color:#008080">()</span>  </span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"><span style="color:#0000ff">while</span><span style="color:#008080">(</span>ligne<span style="color:#008080">!=</span><span style="color:#a31515">&#x27;&#x27;</span><span style="color:#008080">):</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">    # remove-se o caractere de fim de linha</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">    ligne<span style="color:#008080">=</span>cutNewLineChar<span style="color:#008080">(</span>ligne<span style="color:#008080">)</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">  </span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">    # coloca-se a linha numa tabela</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">    infos<span style="color:#008080">=</span>ligne<span style="color:#0000ff">.</span>split<span style="color:#008080">(</span><span style="color:#a31515">&quot;:&quot;</span><span style="color:#008080">)</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">  </span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">    # recupera-se o nome de utilizador</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">    login<span style="color:#008080">=</span>infos<span style="color:#008080">[</span>0<span style="color:#008080">]</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">  </span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">    # removem-se os dois primeiros elementos [login,pwd]</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">    infos<span style="color:#008080">[</span>0<span style="color:#008080">:</span>2<span style="color:#008080">]=[]</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">  </span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">    # cria-se uma entrada no dicionário</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">    dico<span style="color:#008080">[</span>login<span style="color:#008080">]=</span>infos</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">  </span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">    # leitura da linha  </span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">    ligne<span style="color:#008080">=</span>fic<span style="color:#0000ff">.</span>readline<span style="color:#008080">()</span>  </span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"># fecha-se o ficheiro</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">fic<span style="color:#0000ff">.</span>close<span style="color:#008080">()</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content"># processamento do dicionário</span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">afficheInfos<span style="color:#008080">(</span>dico<span style="color:#008080">,</span><span style="color:#a31515">&quot;login10&quot;</span><span style="color:#008080">)</span></span></span>
+<span class="odt-code-line"><span class="odt-code-line-content">afficheInfos<span style="color:#008080">(</span>dico<span style="color:#008080">,</span><span style="color:#a31515">&quot;X&quot;</span><span style="color:#008080">)</span></span></span>
+</code></pre></div>
+
+<p>Notas:</p>
+<ul>
+<li>linha 37: para terminar o script a meio do código.</li>
+</ul>
+<hr style="border:0; border-top:0.99pt solid #000000; margin:0.75em 0;" data-odt-border="top" />
+<div style="margin:0 0 0.75em 0; background-color:#e6e6e6; padding:0.35em 0.6em">Resultados</div>
+
+<hr style="border:0; border-top:0.99pt solid #000000; margin:0.75em 0;" data-odt-border="bottom" />
+<p>O ficheiro infos.txt:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>login0:pwd0:uid0:gid0:infos0:dir0:shell0
+<a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a>login1:pwd1:uid1:gid1:infos1:dir1:shell1
+<a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a>login2:pwd2:uid2:gid2:infos2:dir2:shell2
+<a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a>...
+<a id="__codelineno-10-5" name="__codelineno-10-5" href="#__codelineno-10-5"></a>login98:pwd98:uid98:gid98:infos98:dir98:shell98
+<a id="__codelineno-10-6" name="__codelineno-10-6" href="#__codelineno-10-6"></a>login99:pwd99:uid99:gid99:infos99:dir99:shell99
+</code></pre></div>
+<p>Resultados no ecrã:</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-11-1">1</a></span>
+<span class="normal"><a href="#__codelineno-11-2">2</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1"></a>[login10,uid10:gid10:infos10:dir10:shell10]
+<a id="__codelineno-11-2" name="__codelineno-11-2"></a>la cle [X] n&#39;existe pas
+</code></pre></div></td></tr></table></div>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner">
+
+      <div>
+        <a href="https://stahe.github.io" target="_blank">
+          https://stahe.github.io
+        </a>
+        <br>
+        Este tutorial, escrito por <strong>Serge Tahé</strong>, é disponibilizado ao público sob os termos da
+<em>Licença Creative Commons Atribuição – Não comercial –
+Partilha Igual 3.0 Unported</em>.
+      </div>
+
+    </div>
+  </div>
+
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": ".", "features": ["navigation.sections", "navigation.indexes", "navigation.expand", "toc.integrate", "navigation.top"], "search": "assets/javascripts/workers/search.7a47a382.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="assets/javascripts/bundle.e71a0d61.min.js"></script>
+      
+        <script src="javascripts/focus.js"></script>
+      
+    
+  </body>
+</html>
